@@ -24,9 +24,6 @@ def utc_now() -> datetime:
 class Task(BaseModel):
     """
     A reproducible evaluation task.
-
-    A Task describes what the target agent is expected to do.
-    It does not represent one specific execution.
     """
 
     model_config = ConfigDict(extra="forbid")
@@ -36,7 +33,6 @@ class Task(BaseModel):
     description: str = Field(min_length=1)
 
     input: Any
-
     expected_output: Any | None = None
 
     metadata: dict[str, Any] = Field(default_factory=dict)
@@ -52,7 +48,6 @@ class TraceEvent(BaseModel):
     timestamp: datetime = Field(default_factory=utc_now)
 
     event_type: EventType
-
     name: str
 
     data: dict[str, Any] = Field(default_factory=dict)
@@ -119,3 +114,24 @@ class Run(BaseModel):
         self.output = output
         self.error = error
         self.finished_at = utc_now()
+
+
+class EvaluationResult(BaseModel):
+    """
+    Result produced by evaluating one agent run.
+    """
+
+    model_config = ConfigDict(extra="forbid")
+
+    task_id: str = Field(min_length=1)
+    run_id: str = Field(min_length=1)
+
+    passed: bool
+
+    score: float = Field(ge=0.0, le=1.0)
+
+    reason: str = Field(min_length=1)
+
+    metrics: dict[str, float] = Field(default_factory=dict)
+
+    evaluator: str = Field(min_length=1)
