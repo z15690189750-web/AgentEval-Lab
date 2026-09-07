@@ -35,6 +35,8 @@ class Task(BaseModel):
     input: Any
     expected_output: Any | None = None
 
+    expected_schema: dict[str, Any] | None = None
+
     metadata: dict[str, Any] = Field(default_factory=dict)
 
 
