@@ -18,6 +18,7 @@ EventType = Literal[
 
 def utc_now() -> datetime:
     """Return the current UTC time."""
+
     return datetime.now(timezone.utc)
 
 
@@ -98,6 +99,8 @@ class Run(BaseModel):
     started_at: datetime = Field(default_factory=utc_now)
     finished_at: datetime | None = None
 
+    duration_ms: float | None = None
+
     output: Any | None = None
 
     trace: Trace = Field(default_factory=Trace)
@@ -118,6 +121,10 @@ class Run(BaseModel):
         self.output = output
         self.error = error
         self.finished_at = utc_now()
+
+        self.duration_ms = (
+            self.finished_at - self.started_at
+        ).total_seconds() * 1000
 
 
 class EvaluationResult(BaseModel):
