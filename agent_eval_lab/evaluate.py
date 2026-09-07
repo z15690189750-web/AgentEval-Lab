@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Any
-
 from agent_eval_lab.core.models import EvaluationResult, Run, Task
 
 
@@ -161,4 +159,89 @@ def evaluate_schema(task: Task, run: Run) -> EvaluationResult:
         score=1.0,
         reason="Output matches the expected schema.",
         evaluator="schema",
+    )
+
+
+def evaluate_trace(task: Task, run: Run) -> EvaluationResult:
+    """
+    Evaluate whether the agent followed the required tool-use constraints.
+
+    The evaluator checks:
+
+    1. The agent execution succeeded.
+    2. Required tools were called.
+    3. Forbidden tools were not called.
+    4. The number of tool calls is recorded.
+
+    Tool names are read from trace events with event_type="tool_call".
+    """
+
+    if run.status != "success":
+        return EvaluationResult(
+            task_id=task.id,
+            run_id=run.id,
+            passed=False,
+            score=0.0,
+            reason="Agent execution did not succeed.",
+            evaluator="trace",
+        )
+
+    tool_calls = [
+        event.name
+        for event in run.trace.events
+        if event.event_type == "tool_call"
+    ]
+
+    required_tools = set(task.required_tools)
+    forbidden_tools = set(task.forbidden_tools)
+    actual_tools = set(tool_calls)
+
+    missing_tools = sorted(required_tools - actual_tools)
+    forbidden_called = sorted(forbidden_tools & actual_tools)
+
+    metrics = {
+        "tool_call_count": float(len(tool_calls)),
+        "required_tool_count": float(len(required_tools)),
+        "missing_tool_count": float(len(missing_tools)),
+        "forbidden_tool_count": float(len(forbidden_called)),
+    }
+
+    if missing_tools:
+        return EvaluationResult(
+            task_id=task.id,
+            run_id=run.id,
+            passed=False,
+            score=0.0,
+            reason=(
+                "Required tools were not called: "
+                + ", ".join(missing_tools)
+                + "."
+            ),
+            metrics=metrics,
+            evaluator="trace",
+        )
+
+    if forbidden_called:
+        return EvaluationResult(
+            task_id=task.id,
+            run_id=run.id,
+            passed=False,
+            score=0.0,
+            reason=(
+                "Forbidden tools were called: "
+                + ", ".join(forbidden_called)
+                + "."
+            ),
+            metrics=metrics,
+            evaluator="trace",
+        )
+
+    return EvaluationResult(
+        task_id=task.id,
+        run_id=run.id,
+        passed=True,
+        score=1.0,
+        reason="Tool-use trace satisfies the task constraints.",
+        metrics=metrics,
+        evaluator="trace",
     )

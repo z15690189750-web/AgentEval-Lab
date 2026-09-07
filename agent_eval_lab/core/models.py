@@ -34,8 +34,10 @@ class Task(BaseModel):
 
     input: Any
     expected_output: Any | None = None
-
     expected_schema: dict[str, Any] | None = None
+
+    required_tools: list[str] = Field(default_factory=list)
+    forbidden_tools: list[str] = Field(default_factory=list)
 
     metadata: dict[str, Any] = Field(default_factory=dict)
 
