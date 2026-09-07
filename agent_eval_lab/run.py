@@ -17,6 +17,7 @@ class Adapter:
 
     def run(self, task: Task) -> Any:
         """Execute the target agent with the task input."""
+
         return self.agent(task.input)
 
 
@@ -26,11 +27,19 @@ class Runner:
     def __init__(self, adapter: Adapter) -> None:
         self.adapter = adapter
 
-    def run(self, task: Task) -> Run:
-        """Execute one task and return its Run record."""
+    def run(
+        self,
+        task: Task,
+        run_id: str | None = None,
+    ) -> Run:
+        """
+        Execute one task and return its Run record.
+
+        A custom run_id can be supplied for repeated experiments.
+        """
 
         run = Run(
-            id=f"run-{task.id}",
+            id=run_id or f"run-{task.id}",
             task_id=task.id,
         )
 
