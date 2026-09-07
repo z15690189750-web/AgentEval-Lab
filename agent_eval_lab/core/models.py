@@ -146,3 +146,54 @@ class EvaluationResult(BaseModel):
     metrics: dict[str, float] = Field(default_factory=dict)
 
     evaluator: str = Field(min_length=1)
+
+
+class ExperimentResult(BaseModel):
+    """
+    Complete result of one evaluation experiment.
+
+    An experiment contains the raw execution runs, the evaluation
+    results derived from those runs, and the aggregate metrics
+    calculated from them.
+
+    This model is a data boundary only. It does not execute agents,
+    evaluate runs, calculate metrics, or perform regression analysis.
+    """
+
+    model_config = ConfigDict(extra="forbid")
+
+    id: str = Field(min_length=1)
+    name: str = Field(min_length=1)
+
+    benchmark_name: str = Field(min_length=1)
+
+    created_at: datetime = Field(default_factory=utc_now)
+
+    runs: list[Run] = Field(default_factory=list)
+
+    evaluations: list[EvaluationResult] = Field(
+        default_factory=list
+    )
+
+    metrics: dict[str, float] = Field(default_factory=dict)
+
+    metadata: dict[str, Any] = Field(default_factory=dict)
+
+    def __init__(self, **data: Any) -> None:
+        super().__init__(**data)
+
+        run_ids = [run.id for run in self.runs]
+
+        if len(run_ids) != len(set(run_ids)):
+            raise ValueError(
+                "Experiment run IDs must be unique."
+            )
+
+        run_id_set = set(run_ids)
+
+        for evaluation in self.evaluations:
+            if evaluation.run_id not in run_id_set:
+                raise ValueError(
+                    "Every evaluation must reference a run "
+                    "contained in the experiment."
+                )
