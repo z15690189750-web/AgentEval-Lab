@@ -2,8 +2,10 @@ import pytest
 
 from agent_eval_lab.core.models import ExperimentResult
 from agent_eval_lab.regression import (
+    MetricConfig,
     RegressionComparator,
     RegressionResult,
+    RegressionSummary,
 )
 
 
@@ -160,7 +162,91 @@ def test_lower_is_better_improvement_is_not_regression() -> None:
     assert result.regressed is False
 
 
-def test_rejects_negative_threshold() -> None:
+def test_metric_config_rejects_empty_name() -> None:
+    with pytest.raises(
+        ValueError,
+        match="Metric name must not be empty",
+    ):
+        MetricConfig(name="")
+
+
+def test_metric_config_rejects_negative_threshold() -> None:
+    with pytest.raises(
+        ValueError,
+        match="threshold must be non-negative",
+    ):
+        MetricConfig(
+            name="task_success_rate",
+            threshold=-0.01,
+        )
+
+
+def test_compare_all_handles_different_metric_directions() -> None:
+    baseline = make_experiment(
+        "baseline",
+        {
+            "task_success_rate": 0.90,
+            "average_score": 0.90,
+            "failure_rate": 0.10,
+            "average_latency_ms": 200.0,
+        },
+    )
+
+    current = make_experiment(
+        "current",
+        {
+            "task_success_rate": 0.85,
+            "average_score": 0.94,
+            "failure_rate": 0.15,
+            "average_latency_ms": 180.0,
+        },
+    )
+
+    summary = RegressionComparator().compare_all(
+        baseline=baseline,
+        current=current,
+        metrics=[
+            MetricConfig(
+                name="task_success_rate",
+                threshold=0.02,
+                higher_is_better=True,
+            ),
+            MetricConfig(
+                name="average_score",
+                threshold=0.02,
+                higher_is_better=True,
+            ),
+            MetricConfig(
+                name="failure_rate",
+                threshold=0.01,
+                higher_is_better=False,
+            ),
+            MetricConfig(
+                name="average_latency_ms",
+                threshold=10.0,
+                higher_is_better=False,
+            ),
+        ],
+    )
+
+    assert isinstance(summary, RegressionSummary)
+
+    assert len(summary.results) == 4
+
+    assert summary.regressed is True
+
+    assert summary.regressed_metrics == (
+        "task_success_rate",
+        "failure_rate",
+    )
+
+    assert summary.improved_metrics == (
+        "average_score",
+        "average_latency_ms",
+    )
+
+
+def test_compare_all_rejects_empty_metric_configuration() -> None:
     baseline = make_experiment(
         "baseline",
         {
@@ -171,47 +257,22 @@ def test_rejects_negative_threshold() -> None:
     current = make_experiment(
         "current",
         {
-            "task_success_rate": 0.85,
+            "task_success_rate": 0.90,
         },
     )
 
     with pytest.raises(
         ValueError,
-        match="threshold must be non-negative",
+        match="At least one metric configuration",
     ):
-        RegressionComparator().compare(
+        RegressionComparator().compare_all(
             baseline=baseline,
             current=current,
-            metric="task_success_rate",
-            threshold=-0.01,
+            metrics=[],
         )
 
 
-def test_rejects_missing_baseline_metric() -> None:
-    baseline = make_experiment(
-        "baseline",
-        {},
-    )
-
-    current = make_experiment(
-        "current",
-        {
-            "task_success_rate": 0.85,
-        },
-    )
-
-    with pytest.raises(
-        KeyError,
-        match="not found in baseline",
-    ):
-        RegressionComparator().compare(
-            baseline=baseline,
-            current=current,
-            metric="task_success_rate",
-        )
-
-
-def test_rejects_missing_current_metric() -> None:
+def test_compare_all_rejects_missing_metric() -> None:
     baseline = make_experiment(
         "baseline",
         {
@@ -221,15 +282,55 @@ def test_rejects_missing_current_metric() -> None:
 
     current = make_experiment(
         "current",
-        {},
+        {
+            "task_success_rate": 0.90,
+        },
     )
 
     with pytest.raises(
         KeyError,
-        match="not found in current",
+        match="Metric 'average_score' not found in baseline",
     ):
-        RegressionComparator().compare(
+        RegressionComparator().compare_all(
             baseline=baseline,
             current=current,
-            metric="task_success_rate",
+            metrics=[
+                MetricConfig(
+                    name="average_score",
+                ),
+            ],
         )
+
+
+def test_regression_summary_reports_no_regression() -> None:
+    baseline = make_experiment(
+        "baseline",
+        {
+            "task_success_rate": 0.90,
+        },
+    )
+
+    current = make_experiment(
+        "current",
+        {
+            "task_success_rate": 0.92,
+        },
+    )
+
+    summary = RegressionComparator().compare_all(
+        baseline=baseline,
+        current=current,
+        metrics=[
+            MetricConfig(
+                name="task_success_rate",
+                threshold=0.01,
+                higher_is_better=True,
+            ),
+        ],
+    )
+
+    assert summary.regressed is False
+    assert summary.regressed_metrics == ()
+    assert summary.improved_metrics == (
+        "task_success_rate",
+    )

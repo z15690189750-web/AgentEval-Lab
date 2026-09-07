@@ -6,12 +6,33 @@ from agent_eval_lab.core.models import ExperimentResult
 
 
 @dataclass(frozen=True)
+class MetricConfig:
+    """
+    Configuration for comparing one experiment metric.
+
+    ``higher_is_better`` defines the direction of improvement.
+    ``threshold`` defines the minimum change required to classify
+    a change as a regression.
+    """
+
+    name: str
+    threshold: float = 0.0
+    higher_is_better: bool = True
+
+    def __post_init__(self) -> None:
+        if not self.name.strip():
+            raise ValueError("Metric name must not be empty.")
+
+        if self.threshold < 0:
+            raise ValueError(
+                "threshold must be non-negative."
+            )
+
+
+@dataclass(frozen=True)
 class RegressionResult:
     """
     Comparison result for one metric.
-
-    A regression is determined by comparing the baseline and
-    current metric values against a configured threshold.
     """
 
     metric: str
@@ -23,13 +44,63 @@ class RegressionResult:
     regressed: bool
 
 
+@dataclass(frozen=True)
+class RegressionSummary:
+    """
+    Aggregate result of comparing multiple metrics.
+    """
+
+    results: tuple[RegressionResult, ...]
+
+    @property
+    def regressed(self) -> bool:
+        """Return whether any metric regressed."""
+
+        return any(
+            result.regressed
+            for result in self.results
+        )
+
+    @property
+    def regressed_metrics(self) -> tuple[str, ...]:
+        """Return names of all regressed metrics."""
+
+        return tuple(
+            result.metric
+            for result in self.results
+            if result.regressed
+        )
+
+    @property
+    def improved_metrics(self) -> tuple[str, ...]:
+        """
+        Return names of metrics that improved according to
+        their configured direction.
+        """
+
+        return tuple(
+            result.metric
+            for result in self.results
+            if (
+                result.delta > 0
+                and result.higher_is_better
+            )
+            or (
+                result.delta < 0
+                and not result.higher_is_better
+            )
+        )
+
+
 class RegressionComparator:
     """
-    Compare metrics between a baseline and current experiment.
+    Compare metrics between baseline and current experiments.
 
     The comparator performs deterministic threshold-based
-    regression detection. It does not execute agents,
-    evaluate runs, or calculate experiment metrics.
+    regression detection.
+
+    It does not execute agents, evaluate runs, or calculate
+    experiment metrics.
     """
 
     def compare(
@@ -43,9 +114,6 @@ class RegressionComparator:
         """
         Compare one metric between two experiments.
 
-        ``threshold`` represents the minimum change that counts
-        as a regression.
-
         For higher-is-better metrics:
 
             current < baseline - threshold
@@ -57,43 +125,89 @@ class RegressionComparator:
                 -> regression
         """
 
-        if threshold < 0:
+        config = MetricConfig(
+            name=metric,
+            threshold=threshold,
+            higher_is_better=higher_is_better,
+        )
+
+        return self._compare_metric(
+            baseline=baseline,
+            current=current,
+            config=config,
+        )
+
+    def compare_all(
+        self,
+        baseline: ExperimentResult,
+        current: ExperimentResult,
+        metrics: list[MetricConfig] | tuple[MetricConfig, ...],
+    ) -> RegressionSummary:
+        """
+        Compare all configured metrics.
+
+        Metrics are evaluated independently using their own
+        direction and threshold configuration.
+        """
+
+        if not metrics:
             raise ValueError(
-                "threshold must be non-negative."
+                "At least one metric configuration is required."
             )
 
-        if metric not in baseline.metrics:
+        results = tuple(
+            self._compare_metric(
+                baseline=baseline,
+                current=current,
+                config=config,
+            )
+            for config in metrics
+        )
+
+        return RegressionSummary(
+            results=results,
+        )
+
+    def _compare_metric(
+        self,
+        baseline: ExperimentResult,
+        current: ExperimentResult,
+        config: MetricConfig,
+    ) -> RegressionResult:
+        """Compare one configured metric."""
+
+        if config.name not in baseline.metrics:
             raise KeyError(
-                f"Metric '{metric}' not found in baseline."
+                f"Metric '{config.name}' not found in baseline."
             )
 
-        if metric not in current.metrics:
+        if config.name not in current.metrics:
             raise KeyError(
-                f"Metric '{metric}' not found in current."
+                f"Metric '{config.name}' not found in current."
             )
 
-        baseline_value = baseline.metrics[metric]
-        current_value = current.metrics[metric]
+        baseline_value = baseline.metrics[config.name]
+        current_value = current.metrics[config.name]
 
         delta = current_value - baseline_value
 
-        if higher_is_better:
+        if config.higher_is_better:
             regressed = (
                 current_value
-                < baseline_value - threshold
+                < baseline_value - config.threshold
             )
         else:
             regressed = (
                 current_value
-                > baseline_value + threshold
+                > baseline_value + config.threshold
             )
 
         return RegressionResult(
-            metric=metric,
+            metric=config.name,
             baseline=baseline_value,
             current=current_value,
             delta=delta,
-            threshold=threshold,
-            higher_is_better=higher_is_better,
+            threshold=config.threshold,
+            higher_is_better=config.higher_is_better,
             regressed=regressed,
         )
