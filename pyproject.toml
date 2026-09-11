@@ -19,6 +19,14 @@ dev = [
 [project.scripts]
 agent-eval = "agent_eval_lab.cli:main"
 
+[tool.setuptools.packages.find]
+include = ["agent_eval_lab*"]
+exclude = [
+    "tests*",
+    "experiments*",
+    "reports*",
+]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["."]
