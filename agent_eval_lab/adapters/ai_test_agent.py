@@ -1,4 +1,3 @@
-
 from __future__ import annotations
 
 import json
@@ -7,18 +6,19 @@ import tempfile
 from pathlib import Path
 from typing import Any
 
-from agent_eval_lab.core.models import Run, Task
+from agent_eval_lab.core.models import Task
 
 
 class AITestAgentAdapter:
     """
-    Adapt the AI Test Agent CLI to the AgentEval Lab Runner.
+    Adapt the AI Test Agent CLI to AgentEval Lab.
 
-    One complete AI Test Agent CLI invocation is treated as one
-    AgentEval Lab Run.
+    The adapter invokes the real AI Test Agent and returns its
+    target-agent output together with evidence that can be mapped
+    into the AgentEval Lab trace.
 
-    The AI Test Agent remains an independent project. This adapter
-    communicates with it only through its public CLI and JSON report.
+    The adapter does not create Run objects.
+    Runner owns the Run lifecycle.
     """
 
     def __init__(
@@ -39,70 +39,44 @@ class AITestAgentAdapter:
             )
 
         self.executable = executable
-        self.cwd = (
-            Path(cwd)
-            if cwd is not None
-            else None
-        )
+        self.cwd = Path(cwd) if cwd is not None else None
         self.timeout = timeout
 
     def run(
         self,
         task: Task,
-        run_id: str | None = None,
-    ) -> Run:
+    ) -> dict[str, Any]:
         """
         Execute the AI Test Agent for one evaluation task.
 
-        Expected task.input structure:
+        The returned dictionary preserves the complete raw target-agent
+        report and process-level evidence.
 
-            {
-                "spec": "path/to/spec.md",
-                "base_url": "http://127.0.0.1:8000",
-                "mock": true
-            }
+        It also contains ``trace_events`` describing evidence that
+        AgentEval Lab can attach to its execution trace.
 
-        ``spec`` and ``base_url`` are required.
-        ``mock`` is optional and defaults to False.
-
-        The complete AI Test Agent JSON report is preserved
-        in Run.output.
+        These events represent observed target-agent evidence only.
+        They do not invent semantic tool calls.
         """
 
         config = self._parse_input(task)
 
-        run = Run(
-            id=run_id or f"run-{task.id}",
-            task_id=task.id,
-        )
+        with tempfile.TemporaryDirectory(
+            prefix="agent-eval-",
+        ) as temp_dir:
+            report_path = (
+                Path(temp_dir)
+                / "agent-report.json"
+            )
 
-        run.trace.add_event(
-            event_type="agent_start",
-            name="ai_test_agent_started",
-            data={
-                "executable": self.executable,
-                "spec": str(config["spec"]),
-                "base_url": config["base_url"],
-                "mock": config["mock"],
-            },
-        )
+            command = self._build_command(
+                spec=config["spec"],
+                base_url=config["base_url"],
+                mock=config["mock"],
+                report_path=report_path,
+            )
 
-        try:
-            with tempfile.TemporaryDirectory(
-                prefix="agent-eval-",
-            ) as temp_dir:
-                report_path = (
-                    Path(temp_dir)
-                    / "agent-report.json"
-                )
-
-                command = self._build_command(
-                    spec=config["spec"],
-                    base_url=config["base_url"],
-                    mock=config["mock"],
-                    report_path=report_path,
-                )
-
+            try:
                 completed = subprocess.run(
                     command,
                     cwd=self.cwd,
@@ -113,97 +87,39 @@ class AITestAgentAdapter:
                     timeout=self.timeout,
                     check=False,
                 )
-
-                report = self._load_report(
-                    report_path,
-                )
-
-                self._add_execution_events(
-                    run=run,
-                    report=report,
-                )
-
-                output = {
-                    "report": report,
-                    "stdout": completed.stdout,
-                    "stderr": completed.stderr,
-                    "exit_code": completed.returncode,
-                }
-
-                run.trace.add_event(
-                    event_type="agent_end",
-                    name="ai_test_agent_finished",
-                    data={
-                        "exit_code": completed.returncode,
-                        "generated_tests": len(
-                            report.get(
-                                "generated_tests",
-                                [],
-                            )
-                        ),
-                        "executions": len(
-                            report.get(
-                                "executions",
-                                [],
-                            )
-                        ),
-                    },
-                )
-
-                if completed.returncode == 0:
-                    run.finish(
-                        status="success",
-                        output=output,
-                    )
-                else:
-                    run.finish(
-                        status="error",
-                        output=output,
-                        error=(
-                            "AI Test Agent exited with "
-                            f"code {completed.returncode}."
-                        ),
-                    )
-
-        except subprocess.TimeoutExpired as exc:
-            run.trace.add_event(
-                event_type="error",
-                name="ai_test_agent_timeout",
-                data={
-                    "timeout_seconds": self.timeout,
-                    "error": str(exc),
-                },
-            )
-
-            run.finish(
-                status="error",
-                error=(
+            except subprocess.TimeoutExpired as exc:
+                raise RuntimeError(
                     "AI Test Agent timed out after "
                     f"{self.timeout} seconds."
-                ),
+                ) from exc
+            except OSError as exc:
+                raise RuntimeError(
+                    f"Failed to execute AI Test Agent: {exc}"
+                ) from exc
+
+            report = self._load_report(report_path)
+
+            self._validate_report(report)
+
+            output = {
+                "report": report,
+                "stdout": completed.stdout,
+                "stderr": completed.stderr,
+                "exit_code": completed.returncode,
+                "executable": self.executable,
+                "spec": str(config["spec"]),
+                "base_url": config["base_url"],
+                "mock": config["mock"],
+            }
+
+            output["trace_events"] = self._build_trace_events(
+                report=report,
+                stdout=completed.stdout,
+                stderr=completed.stderr,
+                exit_code=completed.returncode,
             )
 
-        except (
-            FileNotFoundError,
-            json.JSONDecodeError,
-            OSError,
-            ValueError,
-        ) as exc:
-            run.trace.add_event(
-                event_type="error",
-                name="ai_test_agent_error",
-                data={
-                    "error": str(exc),
-                    "error_type": type(exc).__name__,
-                },
-            )
-
-            run.finish(
-                status="error",
-                error=str(exc),
-            )
-
-        return run
+            return output
 
     def _build_command(
         self,
@@ -221,9 +137,7 @@ class AITestAgentAdapter:
             "--base-url",
             base_url,
             "--report",
-            str(
-                report_path.with_suffix(".md")
-            ),
+            str(report_path.with_suffix(".md")),
             "--json-report",
             str(report_path),
         ]
@@ -237,7 +151,7 @@ class AITestAgentAdapter:
     def _parse_input(
         task: Task,
     ) -> dict[str, Any]:
-        """Validate and normalize Task input."""
+        """Validate and normalize task input."""
 
         if not isinstance(task.input, dict):
             raise ValueError(
@@ -283,7 +197,7 @@ class AITestAgentAdapter:
     def _load_report(
         report_path: Path,
     ) -> dict[str, Any]:
-        """Load and validate the AI Test Agent JSON report."""
+        """Load the AI Test Agent JSON report."""
 
         if not report_path.exists():
             raise FileNotFoundError(
@@ -303,20 +217,28 @@ class AITestAgentAdapter:
                 "a top-level object."
             )
 
-        if "generated_tests" not in data:
+        return data
+
+    @staticmethod
+    def _validate_report(
+        report: dict[str, Any],
+    ) -> None:
+        """Validate the minimum report contract required by the adapter."""
+
+        if "generated_tests" not in report:
             raise ValueError(
                 "AI Test Agent report is missing "
                 "'generated_tests'."
             )
 
-        if "executions" not in data:
+        if "executions" not in report:
             raise ValueError(
                 "AI Test Agent report is missing "
                 "'executions'."
             )
 
         if not isinstance(
-            data["generated_tests"],
+            report["generated_tests"],
             list,
         ):
             raise ValueError(
@@ -325,7 +247,7 @@ class AITestAgentAdapter:
             )
 
         if not isinstance(
-            data["executions"],
+            report["executions"],
             list,
         ):
             raise ValueError(
@@ -333,51 +255,95 @@ class AITestAgentAdapter:
                 "'executions' must be a list."
             )
 
-        return data
-
     @staticmethod
-    def _add_execution_events(
+    def _build_trace_events(
         *,
-        run: Run,
         report: dict[str, Any],
-    ) -> None:
+        stdout: str,
+        stderr: str,
+        exit_code: int,
+    ) -> list[dict[str, Any]]:
         """
-        Preserve target-agent execution information in the trace.
+        Convert real AI Test Agent evidence into trace events.
 
-        The execution records remain raw data inside Run.output.
-        TraceEvent is used only as a lightweight observation layer,
-        so target-agent execution records are represented as
-        ``message`` events rather than introducing a new event type.
+        The mapping is deliberately conservative:
+
+        - each target execution becomes a ``message`` event;
+        - target errors become ``error`` events;
+        - process completion becomes an ``agent_end`` event.
+
+        We do not label API-test executions as tool calls because the
+        AI Test Agent report does not establish that semantic contract.
         """
 
-        for execution in report["executions"]:
+        events: list[dict[str, Any]] = []
+
+        executions = report.get("executions", [])
+
+        for index, execution in enumerate(
+            executions,
+            start=1,
+        ):
             if not isinstance(execution, dict):
                 continue
 
-            run.trace.add_event(
-                event_type="message",
-                name=str(
-                    execution.get(
-                        "test_name",
-                        "unknown_test",
-                    )
-                ),
-                data={
-                    "trace_id": execution.get(
-                        "trace_id"
-                    ),
-                    "status": execution.get(
-                        "status"
-                    ),
-                    "duration_seconds": execution.get(
-                        "duration_seconds"
-                    ),
-                    "exit_code": execution.get(
-                        "exit_code"
-                    ),
-                    "http_status_code": execution.get(
-                        "http_status_code"
-                    ),
-                },
+            data = {
+                "source": "ai_test_agent",
+                "evidence_type": "test_execution",
+                "index": index,
+            }
+
+            for key in (
+                "trace_id",
+                "test_name",
+                "status",
+                "exit_code",
+                "http_status_code",
+                "duration_seconds",
+            ):
+                if key in execution:
+                    data[key] = execution[key]
+
+            events.append(
+                {
+                    "event_type": "message",
+                    "name": "ai_test_agent_execution",
+                    "data": data,
+                }
             )
 
+            error = execution.get("error")
+
+            if error:
+                events.append(
+                    {
+                        "event_type": "error",
+                        "name": "ai_test_agent_execution_error",
+                        "data": {
+                            "source": "ai_test_agent",
+                            "evidence_type": "test_execution",
+                            "index": index,
+                            "error": str(error),
+                        },
+                    }
+                )
+
+        events.append(
+            {
+                "event_type": "message",
+                "name": "ai_test_agent_process_result",
+                "data": {
+                    "source": "ai_test_agent",
+                    "evidence_type": "process_result",
+                    "exit_code": exit_code,
+                    "generated_tests": len(
+                        report.get("generated_tests", [])
+                    ),
+                    "executions": len(executions),
+                    "stdout_present": bool(stdout),
+                    "stderr_present": bool(stderr),
+                },
+            }
+        )
+
+        return events

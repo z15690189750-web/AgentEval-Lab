@@ -1,4 +1,3 @@
-
 from __future__ import annotations
 
 import json
@@ -66,12 +65,7 @@ def write_fake_executable(
     report: dict,
     exit_code: int = 0,
 ) -> Path:
-    """
-    Create a Windows .cmd fake executable.
-
-    The command invokes the current Python interpreter so the
-    tests behave consistently on Windows.
-    """
+    """Create a Windows .cmd fake AI Test Agent executable."""
 
     script_path = tmp_path / "fake_ai_test_agent.py"
 
@@ -112,7 +106,7 @@ def write_fake_executable(
 def test_adapter_executes_target_agent(
     tmp_path: Path,
 ) -> None:
-    """Adapter should execute the target agent and return a successful Run."""
+    """Adapter should execute the target agent and return raw output."""
 
     executable = write_fake_executable(
         tmp_path,
@@ -123,22 +117,17 @@ def test_adapter_executes_target_agent(
         executable=str(executable),
     )
 
-    run = adapter.run(make_task())
+    output = adapter.run(make_task())
 
-    assert run.status == "success"
-    assert run.error is None
+    assert isinstance(output, dict)
 
-    assert isinstance(run.output, dict)
+    assert output["report"]["spec"] == "login.md"
+    assert len(output["report"]["generated_tests"]) == 1
+    assert len(output["report"]["executions"]) == 1
 
-    assert run.output["report"]["spec"] == "login.md"
-    assert len(run.output["report"]["generated_tests"]) == 1
-    assert len(run.output["report"]["executions"]) == 1
-
-    assert run.output["exit_code"] == 0
-
-    assert run.trace.events
-    assert run.trace.events[0].event_type == "agent_start"
-    assert run.trace.events[-1].event_type == "agent_end"
+    assert output["exit_code"] == 0
+    assert output["stdout"] == ""
+    assert output["stderr"] == ""
 
 
 def test_adapter_preserves_raw_report_evidence(
@@ -157,22 +146,18 @@ def test_adapter_preserves_raw_report_evidence(
         executable=str(executable),
     )
 
-    run = adapter.run(make_task())
+    output = adapter.run(make_task())
 
-    assert run.status == "success"
-
-    assert run.output["report"] == report
-
-    assert run.output["stdout"] == ""
-    assert run.output["stderr"] == ""
-
-    assert run.output["exit_code"] == 0
+    assert output["report"] == report
+    assert output["stdout"] == ""
+    assert output["stderr"] == ""
+    assert output["exit_code"] == 0
 
 
-def test_adapter_records_execution_events(
+def test_adapter_preserves_execution_evidence(
     tmp_path: Path,
 ) -> None:
-    """Adapter should preserve target execution information in the trace."""
+    """Adapter should preserve execution records from the report."""
 
     report = make_report()
 
@@ -200,31 +185,25 @@ def test_adapter_records_execution_events(
         executable=str(executable),
     )
 
-    run = adapter.run(make_task())
+    output = adapter.run(make_task())
 
-    assert run.status == "success"
+    executions = output["report"]["executions"]
 
-    message_events = [
-        event
-        for event in run.trace.events
-        if event.event_type == "message"
-    ]
+    assert len(executions) == 2
 
-    assert len(message_events) == 2
+    assert executions[0]["trace_id"] == "trace-001"
+    assert executions[0]["status"] == "passed"
 
-    assert message_events[0].data["trace_id"] == "trace-001"
-    assert message_events[0].data["status"] == "passed"
-
-    assert message_events[1].data["trace_id"] == "trace-002"
-    assert message_events[1].data["status"] == "failed"
-    assert message_events[1].data["exit_code"] == 1
-    assert message_events[1].data["http_status_code"] == 401
+    assert executions[1]["trace_id"] == "trace-002"
+    assert executions[1]["status"] == "failed"
+    assert executions[1]["exit_code"] == 1
+    assert executions[1]["http_status_code"] == 401
 
 
 def test_adapter_builds_expected_command(
     tmp_path: Path,
 ) -> None:
-    """Adapter should build the expected AI Test Agent CLI command."""
+    """Adapter should build the expected CLI command."""
 
     adapter = AITestAgentAdapter(
         executable="ai-test-agent",
@@ -366,15 +345,14 @@ def test_adapter_rejects_invalid_mock_value() -> None:
         adapter.run(task)
 
 
-def test_adapter_handles_nonzero_exit_code(
+def test_adapter_preserves_nonzero_exit_code(
     tmp_path: Path,
 ) -> None:
     """
-    A non-zero target-agent exit should produce an error Run.
+    A non-zero target-agent exit code remains target-agent evidence.
 
-    The subprocess itself completed normally and produced a
-    valid report, so the adapter records agent_end rather than
-    an adapter error trace event.
+    The adapter's responsibility is to invoke the process and return
+    its raw result. Runner owns the AgentEval Lab Run status.
     """
 
     report = make_report()
@@ -389,29 +367,16 @@ def test_adapter_handles_nonzero_exit_code(
         executable=str(executable),
     )
 
-    run = adapter.run(make_task())
+    output = adapter.run(make_task())
 
-    assert run.status == "error"
-    assert run.error == "AI Test Agent exited with code 1."
-
-    assert run.output is not None
-    assert run.output["exit_code"] == 1
-    assert run.output["report"] == report
-
-    assert run.trace.events
-    assert run.trace.events[0].event_type == "agent_start"
-    assert run.trace.events[-1].event_type == "agent_end"
-
-    assert not any(
-        event.event_type == "error"
-        for event in run.trace.events
-    )
+    assert output["exit_code"] == 1
+    assert output["report"] == report
 
 
 def test_adapter_handles_timeout(
     tmp_path: Path,
 ) -> None:
-    """Adapter should convert subprocess timeout into Run error."""
+    """Adapter should raise RuntimeError when subprocess times out."""
 
     script_path = tmp_path / "slow_ai_test_agent.py"
 
@@ -440,34 +405,22 @@ time.sleep(10)
         timeout=0.1,
     )
 
-    run = adapter.run(make_task())
-
-    assert run.status == "error"
-    assert run.error is not None
-    assert "timed out" in run.error.lower()
-
-    assert run.trace.events
-    assert run.trace.events[0].event_type == "agent_start"
-
-    assert any(
-        event.event_type == "error"
-        for event in run.trace.events
-    )
-
-    assert run.trace.events[-1].event_type == "error"
+    with pytest.raises(
+        RuntimeError,
+        match="timed out",
+    ):
+        adapter.run(make_task())
 
 
 def test_adapter_handles_missing_report(
     tmp_path: Path,
 ) -> None:
-    """Missing JSON report should produce an adapter error."""
+    """Missing JSON report should raise FileNotFoundError."""
 
     script_path = tmp_path / "no_report.py"
 
     script_path.write_text(
-        """
-raise SystemExit(0)
-""".strip(),
+        "raise SystemExit(0)",
         encoding="utf-8",
     )
 
@@ -486,27 +439,17 @@ raise SystemExit(0)
         executable=str(executable_path),
     )
 
-    run = adapter.run(make_task())
-
-    assert run.status == "error"
-    assert run.error is not None
-    assert "report" in run.error.lower()
-
-    assert run.trace.events
-    assert run.trace.events[0].event_type == "agent_start"
-
-    assert any(
-        event.event_type == "error"
-        for event in run.trace.events
-    )
-
-    assert run.trace.events[-1].event_type == "error"
+    with pytest.raises(
+        FileNotFoundError,
+        match="report",
+    ):
+        adapter.run(make_task())
 
 
 def test_adapter_handles_invalid_report(
     tmp_path: Path,
 ) -> None:
-    """Malformed JSON report should produce an adapter error."""
+    """Malformed JSON report should raise JSONDecodeError."""
 
     script_path = tmp_path / "invalid_report.py"
 
@@ -543,26 +486,16 @@ raise SystemExit(0)
         executable=str(executable_path),
     )
 
-    run = adapter.run(make_task())
-
-    assert run.status == "error"
-    assert run.error is not None
-
-    assert run.trace.events
-    assert run.trace.events[0].event_type == "agent_start"
-
-    assert any(
-        event.event_type == "error"
-        for event in run.trace.events
-    )
-
-    assert run.trace.events[-1].event_type == "error"
+    with pytest.raises(
+        json.JSONDecodeError,
+    ):
+        adapter.run(make_task())
 
 
 def test_adapter_rejects_invalid_report_structure(
     tmp_path: Path,
 ) -> None:
-    """A JSON report with invalid top-level structure should fail."""
+    """Invalid report structure should raise ValueError."""
 
     report = {
         "spec": "login.md",
@@ -580,21 +513,11 @@ def test_adapter_rejects_invalid_report_structure(
         executable=str(executable),
     )
 
-    run = adapter.run(make_task())
-
-    assert run.status == "error"
-    assert run.error is not None
-    assert "generated_tests" in run.error
-
-    assert run.trace.events
-    assert run.trace.events[0].event_type == "agent_start"
-
-    assert any(
-        event.event_type == "error"
-        for event in run.trace.events
-    )
-
-    assert run.trace.events[-1].event_type == "error"
+    with pytest.raises(
+        ValueError,
+        match="generated_tests",
+    ):
+        adapter.run(make_task())
 
 
 def test_adapter_preserves_stderr(
@@ -645,25 +568,17 @@ raise SystemExit(0)
         executable=str(executable_path),
     )
 
-    run = adapter.run(make_task())
+    output = adapter.run(make_task())
 
-    assert run.status == "success"
-    assert run.error is None
-    assert run.output is not None
-
-    assert "target stderr" in run.output["stderr"]
-
-    assert run.output["exit_code"] == 0
-
-    assert run.trace.events
-    assert run.trace.events[0].event_type == "agent_start"
-    assert run.trace.events[-1].event_type == "agent_end"
+    assert "target stderr" in output["stderr"]
+    assert output["exit_code"] == 0
+    assert output["report"] == report
 
 
 def test_adapter_uses_custom_working_directory(
     tmp_path: Path,
 ) -> None:
-    """Adapter should pass a custom working directory to subprocess."""
+    """Adapter should pass a custom working directory."""
 
     report = make_report()
 
@@ -680,10 +595,10 @@ def test_adapter_uses_custom_working_directory(
         cwd=working_directory,
     )
 
-    run = adapter.run(make_task())
+    output = adapter.run(make_task())
 
-    assert run.status == "success"
-    assert run.error is None
+    assert output["report"] == report
+    assert output["exit_code"] == 0
 
 
 def test_adapter_uses_custom_timeout(
@@ -718,36 +633,33 @@ time.sleep(1)
         timeout=0.1,
     )
 
-    run = adapter.run(make_task())
-
-    assert run.status == "error"
-    assert run.error is not None
-    assert "timed out" in run.error.lower()
+    with pytest.raises(
+        RuntimeError,
+        match="timed out",
+    ):
+        adapter.run(make_task())
 
 
 def test_adapter_rejects_nonexistent_executable(
     tmp_path: Path,
 ) -> None:
-    """Adapter should convert missing executable errors into Run errors."""
+    """Adapter should raise RuntimeError for a missing executable."""
 
     adapter = AITestAgentAdapter(
         executable=str(tmp_path / "does-not-exist.cmd"),
     )
 
-    run = adapter.run(make_task())
-
-    assert run.status == "error"
-    assert run.error is not None
-
-    assert run.trace.events
-    assert run.trace.events[0].event_type == "agent_start"
-    assert run.trace.events[-1].event_type == "error"
+    with pytest.raises(
+        RuntimeError,
+        match="Failed to execute",
+    ):
+        adapter.run(make_task())
 
 
 def test_adapter_report_contains_generated_tests_and_executions(
     tmp_path: Path,
 ) -> None:
-    """Adapter should expose both generated tests and executions."""
+    """Adapter should expose generated tests and executions."""
 
     report = make_report()
 
@@ -781,11 +693,9 @@ def test_adapter_report_contains_generated_tests_and_executions(
         executable=str(executable),
     )
 
-    run = adapter.run(make_task())
+    output = adapter.run(make_task())
 
-    assert run.status == "success"
-
-    stored_report = run.output["report"]
+    stored_report = output["report"]
 
     assert len(stored_report["generated_tests"]) == 2
     assert len(stored_report["executions"]) == 2
@@ -805,8 +715,6 @@ def test_adapter_output_is_json_serializable(
         executable=str(executable),
     )
 
-    run = adapter.run(make_task())
+    output = adapter.run(make_task())
 
-    json.dumps(run.output)
-
-    assert run.status == "success"
+    json.dumps(output)

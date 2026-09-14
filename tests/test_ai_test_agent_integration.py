@@ -1,11 +1,13 @@
-
 from __future__ import annotations
 
 import importlib.util
 from pathlib import Path
 
-from agent_eval_lab.adapters.ai_test_agent import AITestAgentAdapter
+from agent_eval_lab.adapters.ai_test_agent import (
+    AITestAgentAdapter,
+)
 from agent_eval_lab.core.models import Task
+from agent_eval_lab.run import Runner
 
 
 AI_TEST_AGENT_ROOT = Path(
@@ -27,13 +29,7 @@ LOCAL_API_MODULE = (
 
 
 def load_local_api_server():
-    """
-    Load the LocalAPIServer directly from the AI Test Agent
-    project's existing test fixture.
-
-    The fixture is intentionally loaded by file path instead
-    of copying it into AgentEval Lab.
-    """
+    """Load the AI Test Agent's existing local API fixture."""
 
     if not LOCAL_API_MODULE.exists():
         raise FileNotFoundError(
@@ -59,13 +55,11 @@ def load_local_api_server():
 
 def test_ai_test_agent_real_e2e() -> None:
     """
-    Run the real AI Test Agent against the real local API.
+    Verify the real integration boundary.
 
-    This test verifies the integration boundary between
-    AgentEval Lab and the independent AI Test Agent project.
-
-    The AI Test Agent is executed through its public CLI.
-    No fake executable, fake report, or mocked subprocess is used.
+    AI Test Agent is invoked through its public CLI.
+    Adapter returns raw target-agent output.
+    Runner creates the AgentEval Lab Run.
     """
 
     LocalAPIServer = load_local_api_server()
@@ -95,19 +89,26 @@ def test_ai_test_agent_real_e2e() -> None:
             timeout=60.0,
         )
 
-        run = adapter.run(task)
+        runner = Runner(adapter)
+        run = runner.run(
+            task,
+            run_id="ai-test-agent-login-e2e-run",
+        )
 
     finally:
         server.stop()
 
     assert run.status == "success"
-    assert run.output is not None
+    assert run.error is None
+
     assert isinstance(run.output, dict)
 
     assert "report" in run.output
     assert "stdout" in run.output
     assert "stderr" in run.output
     assert "exit_code" in run.output
+
+    assert run.output["exit_code"] == 0
 
     report = run.output["report"]
 
@@ -131,11 +132,10 @@ def test_ai_test_agent_real_e2e() -> None:
 
     assert run.trace.events
 
-    event_names = [
-        event.name
+    event_types = [
+        event.event_type
         for event in run.trace.events
     ]
 
-    assert "ai_test_agent_started" in event_names
-    assert "ai_test_agent_finished" in event_names
-
+    assert event_types[0] == "agent_start"
+    assert event_types[-1] == "agent_end"

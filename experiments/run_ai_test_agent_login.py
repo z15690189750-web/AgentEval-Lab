@@ -1,233 +1,176 @@
 from __future__ import annotations
 
 import argparse
-import importlib.util
-import json
+from http.server import BaseHTTPRequestHandler, HTTPServer
 from pathlib import Path
+from threading import Thread
+from time import sleep
+from urllib.parse import parse_qs, urlparse
 
 from agent_eval_lab.adapters.ai_test_agent import AITestAgentAdapter
-from agent_eval_lab.core.models import ExperimentResult
+from agent_eval_lab.benchmark import Benchmark
+from agent_eval_lab.core.models import Task
+from agent_eval_lab.evaluate import (
+    evaluate_execution_outcome,
+    evaluate_generation_completeness,
+    evaluate_schema,
+)
 from agent_eval_lab.evaluation_pipeline import EvaluationPipeline
 from agent_eval_lab.experiment import Experiment
-from agent_eval_lab.evaluate import evaluate_schema
 from agent_eval_lab.repeated_runner import RepeatedRunner
-from benchmarks.ai_test_agent_login import (
-    create_ai_test_agent_login_benchmark,
-)
+from agent_eval_lab.run import Runner
 
-
-PROJECT_ROOT = Path(__file__).resolve().parents[1]
 
 AI_TEST_AGENT_ROOT = Path(
     r"E:\code\1\AI-Agent-Portfolio\AI-Test-Agent1"
 )
 
-LOCAL_API_MODULE = (
-    AI_TEST_AGENT_ROOT
-    / "tests"
-    / "support"
-    / "local_api.py"
-)
-
-REPORTS_DIR = PROJECT_ROOT / "reports"
+LOGIN_SPEC = AI_TEST_AGENT_ROOT / "examples" / "login.md"
 
 
-def load_local_api_server():
-    """Load the AI Test Agent's existing local API fixture."""
+class LocalAPIHandler(BaseHTTPRequestHandler):
+    """Minimal local API used by the real AI Test Agent E2E experiment."""
 
-    if not LOCAL_API_MODULE.exists():
-        raise FileNotFoundError(
-            f"AI Test Agent local API fixture not found: "
-            f"{LOCAL_API_MODULE}"
+    def do_GET(self) -> None:
+        parsed = urlparse(self.path)
+
+        if parsed.path == "/health":
+            self._send_response(200, "ok")
+            return
+
+        if parsed.path == "/users":
+            self._send_response(200, "users")
+            return
+
+        if parsed.path == "/server-error":
+            self._send_response(500, "internal server error")
+            return
+
+        if parsed.path == "/slow":
+            sleep(11)
+            self._send_response(200, "slow response")
+            return
+
+        self._send_response(404, "not found")
+
+    def do_POST(self) -> None:
+        parsed = urlparse(self.path)
+
+        if parsed.path != "/login":
+            self._send_response(404, "not found")
+            return
+
+        content_length = int(
+            self.headers.get(
+                "Content-Length",
+                "0",
+            )
         )
 
-    spec = importlib.util.spec_from_file_location(
-        "ai_test_agent_local_api",
-        LOCAL_API_MODULE,
-    )
+        body = self.rfile.read(
+            content_length
+        ).decode("utf-8")
 
-    if spec is None or spec.loader is None:
-        raise ImportError(
-            "Unable to load AI Test Agent local API fixture."
+        parameters = parse_qs(body)
+
+        username = parameters.get("username")
+        password = parameters.get("password")
+
+        if not username or not password:
+            self._send_response(
+                400,
+                "missing credentials",
+            )
+            return
+
+        self._send_response(
+            200,
+            "login success",
         )
 
-    module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
+    def log_message(
+        self,
+        format: str,
+        *args,
+    ) -> None:
+        """Keep experiment output focused on evaluation results."""
 
-    return module.LocalAPIServer
+    def _send_response(
+        self,
+        status_code: int,
+        body: str,
+    ) -> None:
+        encoded_body = body.encode("utf-8")
+
+        try:
+            self.send_response(status_code)
+
+            self.send_header(
+                "Content-Type",
+                "text/plain; charset=utf-8",
+            )
+
+            self.send_header(
+                "Content-Length",
+                str(len(encoded_body)),
+            )
+
+            self.end_headers()
+
+            self.wfile.write(encoded_body)
+
+        except (
+            BrokenPipeError,
+            ConnectionResetError,
+        ):
+            pass
 
 
-def save_experiment(
-    result: ExperimentResult,
-    path: Path,
-) -> None:
-    """Persist a complete experiment result as JSON."""
+class LocalAPIServer:
+    """Start and stop an ephemeral local HTTP server for the experiment."""
 
-    path.parent.mkdir(
-        parents=True,
-        exist_ok=True,
-    )
-
-    path.write_text(
-        result.model_dump_json(
-            indent=2,
-        ),
-        encoding="utf-8",
-    )
-
-
-def build_markdown_report(
-    result: ExperimentResult,
-) -> str:
-    """Build a human-readable experiment report."""
-
-    lines = [
-        f"# Experiment: {result.name}",
-        "",
-        f"- ID: `{result.id}`",
-        f"- Benchmark: `{result.benchmark_name}`",
-        f"- Runs: {len(result.runs)}",
-        f"- Evaluations: {len(result.evaluations)}",
-        "",
-        "## Metrics",
-        "",
-        "| Metric | Value |",
-        "|---|---:|",
-    ]
-
-    for name, value in result.metrics.items():
-        lines.append(
-            f"| `{name}` | {value:.4f} |"
+    def __init__(self) -> None:
+        self.server = HTTPServer(
+            ("127.0.0.1", 0),
+            LocalAPIHandler,
         )
 
-    lines.extend(
-        [
-            "",
-            "## Runs",
-            "",
-        ]
-    )
-
-    for run in result.runs:
-        lines.extend(
-            [
-                f"### {run.id}",
-                "",
-                f"- Task: `{run.task_id}`",
-                f"- Status: `{run.status}`",
-                (
-                    f"- Duration: "
-                    f"{run.duration_ms:.2f} ms"
-                    if run.duration_ms is not None
-                    else "- Duration: unavailable"
-                ),
-                (
-                    f"- Error: `{run.error}`"
-                    if run.error
-                    else "- Error: none"
-                ),
-                "",
-            ]
+        self.thread = Thread(
+            target=self.server.serve_forever,
+            daemon=True,
         )
 
-    lines.extend(
-        [
-            "## Evaluations",
-            "",
-        ]
-    )
+    @property
+    def base_url(self) -> str:
+        """Return the dynamically assigned server base URL."""
 
-    for evaluation in result.evaluations:
-        lines.extend(
-            [
-                f"### {evaluation.evaluator}",
-                "",
-                f"- Task: `{evaluation.task_id}`",
-                f"- Run: `{evaluation.run_id}`",
-                f"- Passed: `{evaluation.passed}`",
-                f"- Score: `{evaluation.score:.4f}`",
-                f"- Reason: {evaluation.reason}",
-                "",
-            ]
-        )
+        host, port = self.server.server_address
 
-    return "\n".join(lines)
+        return f"http://{host}:{port}"
 
+    def start(self) -> None:
+        """Start serving requests in a background thread."""
 
-def save_markdown_report(
-    result: ExperimentResult,
-    path: Path,
-) -> None:
-    """Persist the experiment report as Markdown."""
+        self.thread.start()
 
-    path.parent.mkdir(
-        parents=True,
-        exist_ok=True,
-    )
+    def stop(self) -> None:
+        """Stop the server and wait briefly for the thread to exit."""
 
-    path.write_text(
-        build_markdown_report(result),
-        encoding="utf-8",
-    )
+        self.server.shutdown()
+        self.server.server_close()
+        self.thread.join(timeout=2)
 
+    def __enter__(self) -> LocalAPIServer:
+        self.start()
+        return self
 
-def run_experiment(
-    experiment_id: str,
-    experiment_name: str,
-    repetitions: int,
-) -> ExperimentResult:
-    """
-    Run one real AI Test Agent evaluation experiment.
-
-    The experiment uses the existing AI Test Agent CLI and
-    local API fixture.
-    """
-
-    if repetitions < 1:
-        raise ValueError(
-            "repetitions must be at least 1."
-        )
-
-    LocalAPIServer = load_local_api_server()
-
-    server = LocalAPIServer()
-    server.start()
-
-    try:
-        benchmark = create_ai_test_agent_login_benchmark(
-            server.base_url,
-        )
-
-        adapter = AITestAgentAdapter(
-            executable="ai-test-agent",
-            cwd=AI_TEST_AGENT_ROOT,
-            timeout=60.0,
-        )
-
-        repeated_runner = RepeatedRunner(
-            runner=adapter,
-        )
-
-        evaluation_pipeline = EvaluationPipeline(
-            evaluators=(
-                evaluate_schema,
-            ),
-        )
-
-        experiment = Experiment(
-            repeated_runner=repeated_runner,
-            evaluation_pipeline=evaluation_pipeline,
-        )
-
-        return experiment.run(
-            benchmark=benchmark,
-            repetitions=repetitions,
-            experiment_id=experiment_id,
-            experiment_name=experiment_name,
-        )
-
-    finally:
-        server.stop()
+    def __exit__(
+        self,
+        exc_type,
+        exc_value,
+        traceback,
+    ) -> None:
+        self.stop()
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -235,20 +178,21 @@ def build_parser() -> argparse.ArgumentParser:
 
     parser = argparse.ArgumentParser(
         description=(
-            "Run the real AI Test Agent evaluation experiment."
+            "Run a real AgentEval Lab evaluation experiment "
+            "against the AI Test Agent."
         )
     )
 
     parser.add_argument(
         "--id",
         required=True,
-        help="Unique experiment ID.",
+        help="Experiment ID.",
     )
 
     parser.add_argument(
         "--name",
         required=True,
-        help="Human-readable experiment name.",
+        help="Experiment name.",
     )
 
     parser.add_argument(
@@ -262,7 +206,7 @@ def build_parser() -> argparse.ArgumentParser:
         "--output",
         type=Path,
         required=True,
-        help="Path to the experiment JSON report.",
+        help="Path to the JSON experiment result.",
     )
 
     parser.add_argument(
@@ -274,48 +218,186 @@ def build_parser() -> argparse.ArgumentParser:
     return parser
 
 
+def create_benchmark(base_url: str) -> Benchmark:
+    """Create the real AI Test Agent login benchmark."""
+
+    if not base_url.strip():
+        raise ValueError("base_url must not be empty.")
+
+    if not LOGIN_SPEC.exists():
+        raise FileNotFoundError(
+            f"AI Test Agent login specification not found: {LOGIN_SPEC}"
+        )
+
+    task = Task(
+        id="ai-test-agent-login-e2e",
+        name="AI Test Agent login API E2E",
+        description=(
+            "Evaluate the AI Test Agent's ability to generate and execute "
+            "API tests from the login API specification."
+        ),
+        input={
+            "spec": str(LOGIN_SPEC),
+            "base_url": base_url,
+            "mock": True,
+        },
+        expected_schema={
+            "required": [
+                "report",
+                "stdout",
+                "stderr",
+                "exit_code",
+            ],
+            "types": {
+                "report": "dict",
+                "stdout": "str",
+                "stderr": "str",
+                "exit_code": "int",
+            },
+        },
+    )
+
+    return Benchmark(
+        name="ai-test-agent-login",
+        tasks=(task,),
+    )
+
+
+def write_markdown(
+    path: Path,
+    result,
+) -> None:
+    """Write a human-readable experiment report."""
+
+    markdown = [
+        "# AgentEval Experiment Report",
+        "",
+        f"**Experiment:** `{result.name}`",
+        f"**ID:** `{result.id}`",
+        f"**Benchmark:** `{result.benchmark_name}`",
+        "",
+        "## Metrics",
+        "",
+        "| Metric | Value |",
+        "|---|---:|",
+    ]
+
+    for name, value in result.metrics.items():
+        markdown.append(
+            f"| {name} | {value} |"
+        )
+
+    markdown.extend(
+        [
+            "",
+            "## Evaluations",
+            "",
+            "| Run | Evaluator | Passed | Score | Reason |",
+            "|---|---|---|---:|---|",
+        ]
+    )
+
+    for evaluation in result.evaluations:
+        reason = evaluation.reason.replace(
+            "|",
+            "\\|",
+        )
+
+        markdown.append(
+            f"| `{evaluation.run_id}` "
+            f"| `{evaluation.evaluator}` "
+            f"| {evaluation.passed} "
+            f"| {evaluation.score} "
+            f"| {reason} |"
+        )
+
+    path.write_text(
+        "\n".join(markdown) + "\n",
+        encoding="utf-8",
+    )
+
+
+def run_experiment(args: argparse.Namespace) -> None:
+    """Run the complete real evaluation experiment."""
+
+    args.output.parent.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
+
+    if args.markdown is not None:
+        args.markdown.parent.mkdir(
+            parents=True,
+            exist_ok=True,
+        )
+
+    with LocalAPIServer() as server:
+        benchmark = create_benchmark(
+            server.base_url
+        )
+
+        adapter = AITestAgentAdapter(
+            executable="ai-test-agent",
+            cwd=AI_TEST_AGENT_ROOT,
+            timeout=60.0,
+        )
+
+        runner = RepeatedRunner(
+            runner=Runner(adapter),
+        )
+
+        evaluation_pipeline = EvaluationPipeline(
+            evaluators=[
+                evaluate_schema,
+                evaluate_execution_outcome,
+                evaluate_generation_completeness,
+            ],
+        )
+
+        experiment = Experiment(
+            repeated_runner=runner,
+            evaluation_pipeline=evaluation_pipeline,
+        )
+
+        result = experiment.run(
+            benchmark=benchmark,
+            repetitions=args.repetitions,
+            experiment_id=args.id,
+            experiment_name=args.name,
+        )
+
+    args.output.write_text(
+        result.model_dump_json(
+            indent=2,
+        ),
+        encoding="utf-8",
+    )
+
+    if args.markdown is not None:
+        write_markdown(
+            path=args.markdown,
+            result=result,
+        )
+
+    print(
+        result.model_dump_json(
+            indent=2,
+        )
+    )
+
+
 def main() -> None:
-    """Run and persist one evaluation experiment."""
+    """Run the experiment CLI."""
 
     parser = build_parser()
     args = parser.parse_args()
 
-    result = run_experiment(
-        experiment_id=args.id,
-        experiment_name=args.name,
-        repetitions=args.repetitions,
-    )
-
-    save_experiment(
-        result,
-        args.output,
-    )
-
-    if args.markdown is not None:
-        save_markdown_report(
-            result,
-            args.markdown,
+    if args.repetitions < 1:
+        parser.error(
+            "--repetitions must be at least 1."
         )
 
-    print(
-        json.dumps(
-            {
-                "experiment": result.name,
-                "benchmark": result.benchmark_name,
-                "runs": len(result.runs),
-                "evaluations": len(result.evaluations),
-                "metrics": result.metrics,
-                "json_report": str(args.output),
-                "markdown_report": (
-                    str(args.markdown)
-                    if args.markdown is not None
-                    else None
-                ),
-            },
-            indent=2,
-            ensure_ascii=False,
-        )
-    )
+    run_experiment(args)
 
 
 if __name__ == "__main__":
