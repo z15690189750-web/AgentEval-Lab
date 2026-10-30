@@ -211,3 +211,49 @@ class RegressionComparator:
             higher_is_better=config.higher_is_better,
             regressed=regressed,
         )
+
+
+class EvaluatorCoverageMismatch(ValueError):
+    """
+    Raised when two experiments were not evaluated by the same evaluators.
+
+    task_success_rate and average_score are computed from the evaluation
+    results, so adding or removing an evaluator changes the denominator and
+    can turn a genuine failure into a perfect score, or invent a regression
+    that never happened.
+    """
+
+
+def evaluator_names(
+    experiment: ExperimentResult,
+) -> tuple[str, ...]:
+    """Return the sorted evaluator names used by one experiment."""
+
+    return tuple(
+        sorted({result.evaluator for result in experiment.evaluations})
+    )
+
+
+def check_evaluator_parity(
+    baseline: ExperimentResult,
+    current: ExperimentResult,
+) -> None:
+    """Raise unless both experiments used the same evaluator set."""
+
+    baseline_names = evaluator_names(baseline)
+    current_names = evaluator_names(current)
+
+    if baseline_names == current_names:
+        return
+
+    missing = sorted(set(baseline_names) - set(current_names))
+    added = sorted(set(current_names) - set(baseline_names))
+
+    raise EvaluatorCoverageMismatch(
+        "Experiments are not comparable: baseline evaluators "
+        f"{list(baseline_names)} vs current evaluators "
+        f"{list(current_names)} "
+        f"(missing in current: {missing}; added in current: {added}). "
+        "Metrics are computed per evaluation result, so a different "
+        "evaluator set can fake or hide a regression."
+    )

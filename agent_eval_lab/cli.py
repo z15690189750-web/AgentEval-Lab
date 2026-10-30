@@ -5,7 +5,11 @@ import sys
 from pathlib import Path
 
 from agent_eval_lab.experiment_io import load_experiment
-from agent_eval_lab.regression import MetricConfig, RegressionComparator
+from agent_eval_lab.regression import (
+    MetricConfig,
+    RegressionComparator,
+    check_evaluator_parity,
+)
 from agent_eval_lab.report import RegressionReporter
 
 
@@ -109,6 +113,15 @@ def build_parser() -> argparse.ArgumentParser:
     )
 
     compare_parser.add_argument(
+        "--require-comparable",
+        action="store_true",
+        help=(
+            "Refuse to compare when the baseline and current experiments "
+            "were not evaluated by the same evaluators."
+        ),
+    )
+
+    compare_parser.add_argument(
         "--failure-threshold",
         type=float,
         default=0.0,
@@ -163,6 +176,9 @@ def compare_experiments(
             "Baseline and current experiments must use "
             "the same benchmark."
         )
+
+    if getattr(args, "require_comparable", False):
+        check_evaluator_parity(baseline, current)
 
     comparator = RegressionComparator()
 

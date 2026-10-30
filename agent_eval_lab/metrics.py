@@ -90,3 +90,55 @@ def average_latency_ms(
         return 0.0
 
     return mean(durations)
+
+
+def task_average_score(
+    results: list[EvaluationResult],
+) -> float:
+    """
+    Return the average of per-run mean scores.
+
+    Each run contributes exactly one value, so a run evaluated by three
+    evaluators does not outweigh a run evaluated by one.
+    """
+
+    if not results:
+        return 0.0
+
+    scores_by_run: dict[str, list[float]] = {}
+
+    for result in results:
+        scores_by_run.setdefault(
+            result.run_id,
+            [],
+        ).append(result.score)
+
+    return mean(
+        mean(scores)
+        for scores in scores_by_run.values()
+    )
+
+
+def evaluation_failure_rate(
+    results: list[EvaluationResult],
+) -> float:
+    """
+    Return the proportion of evaluated runs with at least one failed check.
+
+    Unlike ``failure_rate`` this measures evaluation verdicts, not
+    execution errors, so it answers "did the agent do the job" rather than
+    "did the run crash".
+    """
+
+    if not results:
+        return 0.0
+
+    failed_by_run: dict[str, bool] = {}
+
+    for result in results:
+        failed_by_run[result.run_id] = (
+            failed_by_run.get(result.run_id, False)
+            or not result.passed
+        )
+
+    return sum(failed_by_run.values()) / len(failed_by_run)

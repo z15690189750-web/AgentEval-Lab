@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import importlib.util
+import os
+import sys
 from pathlib import Path
 
 from agent_eval_lab.adapters.ai_test_agent import (
@@ -10,9 +12,35 @@ from agent_eval_lab.core.models import Task
 from agent_eval_lab.run import Runner
 
 
-AI_TEST_AGENT_ROOT = Path(
-    r"E:\code\1\AI-Agent-Portfolio\AI-Test-Agent1"
-)
+def resolve_ai_test_agent_root() -> Path:
+    """Locate AI Test Agent without hardcoding an absolute path."""
+
+    configured = os.getenv("AI_TEST_AGENT_ROOT")
+
+    if configured:
+        return Path(configured)
+
+    workspace_root = Path(__file__).resolve().parents[2]
+
+    return workspace_root / "AI-Test-Agent1"
+
+
+def resolve_executable() -> str:
+    """Prefer the console script next to the running interpreter."""
+
+    candidate = Path(sys.executable).with_name(
+        "ai-test-agent.exe"
+        if os.name == "nt"
+        else "ai-test-agent"
+    )
+
+    if candidate.exists():
+        return str(candidate)
+
+    return "ai-test-agent"
+
+
+AI_TEST_AGENT_ROOT = resolve_ai_test_agent_root()
 
 LOGIN_SPEC = (
     AI_TEST_AGENT_ROOT
@@ -84,7 +112,7 @@ def test_ai_test_agent_real_e2e() -> None:
         )
 
         adapter = AITestAgentAdapter(
-            executable="ai-test-agent",
+            executable=resolve_executable(),
             cwd=AI_TEST_AGENT_ROOT,
             timeout=60.0,
         )

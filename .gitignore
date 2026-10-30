@@ -1,4 +1,4 @@
-# Python
+﻿# Python
 __pycache__/
 *.py[cod]
 *$py.class
@@ -30,8 +30,11 @@ Thumbs.db
 .env
 
 # Generated reports
-reports/
+reports/*
+!reports/reexp-002.json
+!reports/reexp-002.md
 *.jsonl
 
 # Local experiment outputs
 experiments/results/
+*.bak

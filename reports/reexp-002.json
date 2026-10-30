@@ -1,0 +1,3161 @@
+{
+  "id": "reexp-002",
+  "name": "Hardened re-run 002",
+  "benchmark_name": "ai-test-agent-login",
+  "created_at": "2026-10-30T08:47:45.892786Z",
+  "runs": [
+    {
+      "id": "run-ai-test-agent-login-e2e-001",
+      "task_id": "ai-test-agent-login-e2e",
+      "status": "success",
+      "started_at": "2026-10-30T08:47:27.243254Z",
+      "finished_at": "2026-10-30T08:47:33.171301Z",
+      "duration_ms": 5928.0470000000005,
+      "output": {
+        "report": {
+          "spec": {
+            "name": "login",
+            "method": "POST",
+            "path": "/login",
+            "parameters": [
+              {
+                "name": "username",
+                "type": "string",
+                "required": true
+              },
+              {
+                "name": "password",
+                "type": "string",
+                "required": true
+              },
+              {
+                "name": "age",
+                "type": "integer",
+                "required": false
+              }
+            ]
+          },
+          "test_cases": [
+            {
+              "name": "login_normal",
+              "scenario_type": "normal",
+              "target_parameter": null,
+              "method": "POST",
+              "path": "/login",
+              "description": "Send a valid request using valid parameter values.",
+              "parameters": [
+                {
+                  "name": "username",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "password",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "age",
+                  "type": "integer",
+                  "required": false
+                }
+              ]
+            },
+            {
+              "name": "login_missing_username",
+              "scenario_type": "missing",
+              "target_parameter": "username",
+              "method": "POST",
+              "path": "/login",
+              "description": "Send a request without required parameter 'username'.",
+              "parameters": [
+                {
+                  "name": "username",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "password",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "age",
+                  "type": "integer",
+                  "required": false
+                }
+              ]
+            },
+            {
+              "name": "login_wrong_type_username",
+              "scenario_type": "wrong_type",
+              "target_parameter": "username",
+              "method": "POST",
+              "path": "/login",
+              "description": "Send a request with an invalid type for parameter 'username'.",
+              "parameters": [
+                {
+                  "name": "username",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "password",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "age",
+                  "type": "integer",
+                  "required": false
+                }
+              ]
+            },
+            {
+              "name": "login_empty_username",
+              "scenario_type": "empty",
+              "target_parameter": "username",
+              "method": "POST",
+              "path": "/login",
+              "description": "Send an empty string for parameter 'username'.",
+              "parameters": [
+                {
+                  "name": "username",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "password",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "age",
+                  "type": "integer",
+                  "required": false
+                }
+              ]
+            },
+            {
+              "name": "login_boundary_username",
+              "scenario_type": "boundary",
+              "target_parameter": "username",
+              "method": "POST",
+              "path": "/login",
+              "description": "Test string boundary values for parameter 'username'.",
+              "parameters": [
+                {
+                  "name": "username",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "password",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "age",
+                  "type": "integer",
+                  "required": false
+                }
+              ]
+            },
+            {
+              "name": "login_missing_password",
+              "scenario_type": "missing",
+              "target_parameter": "password",
+              "method": "POST",
+              "path": "/login",
+              "description": "Send a request without required parameter 'password'.",
+              "parameters": [
+                {
+                  "name": "username",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "password",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "age",
+                  "type": "integer",
+                  "required": false
+                }
+              ]
+            },
+            {
+              "name": "login_wrong_type_password",
+              "scenario_type": "wrong_type",
+              "target_parameter": "password",
+              "method": "POST",
+              "path": "/login",
+              "description": "Send a request with an invalid type for parameter 'password'.",
+              "parameters": [
+                {
+                  "name": "username",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "password",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "age",
+                  "type": "integer",
+                  "required": false
+                }
+              ]
+            },
+            {
+              "name": "login_empty_password",
+              "scenario_type": "empty",
+              "target_parameter": "password",
+              "method": "POST",
+              "path": "/login",
+              "description": "Send an empty string for parameter 'password'.",
+              "parameters": [
+                {
+                  "name": "username",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "password",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "age",
+                  "type": "integer",
+                  "required": false
+                }
+              ]
+            },
+            {
+              "name": "login_boundary_password",
+              "scenario_type": "boundary",
+              "target_parameter": "password",
+              "method": "POST",
+              "path": "/login",
+              "description": "Test string boundary values for parameter 'password'.",
+              "parameters": [
+                {
+                  "name": "username",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "password",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "age",
+                  "type": "integer",
+                  "required": false
+                }
+              ]
+            },
+            {
+              "name": "login_wrong_type_age",
+              "scenario_type": "wrong_type",
+              "target_parameter": "age",
+              "method": "POST",
+              "path": "/login",
+              "description": "Send a request with an invalid type for parameter 'age'.",
+              "parameters": [
+                {
+                  "name": "username",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "password",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "age",
+                  "type": "integer",
+                  "required": false
+                }
+              ]
+            },
+            {
+              "name": "login_boundary_age",
+              "scenario_type": "boundary",
+              "target_parameter": "age",
+              "method": "POST",
+              "path": "/login",
+              "description": "Test integer boundary values for parameter 'age'.",
+              "parameters": [
+                {
+                  "name": "username",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "password",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "age",
+                  "type": "integer",
+                  "required": false
+                }
+              ]
+            }
+          ],
+          "generated_tests": [
+            {
+              "name": "login_normal",
+              "method": "POST",
+              "path": "/login",
+              "scenario_type": "normal",
+              "request_parameters": {
+                "username": "test",
+                "password": "test",
+                "age": 18
+              },
+              "expected_status_code": 200,
+              "assertions": [
+                "status_code == 200"
+              ]
+            },
+            {
+              "name": "login_missing_username",
+              "method": "POST",
+              "path": "/login",
+              "scenario_type": "missing",
+              "request_parameters": {
+                "password": "test",
+                "age": 18
+              },
+              "expected_status_code": 200,
+              "assertions": [
+                "status_code == 200"
+              ]
+            },
+            {
+              "name": "login_wrong_type_username",
+              "method": "POST",
+              "path": "/login",
+              "scenario_type": "wrong_type",
+              "request_parameters": {
+                "username": 12345,
+                "password": "test",
+                "age": 18
+              },
+              "expected_status_code": 200,
+              "assertions": [
+                "status_code == 200"
+              ]
+            },
+            {
+              "name": "login_empty_username",
+              "method": "POST",
+              "path": "/login",
+              "scenario_type": "empty",
+              "request_parameters": {
+                "username": "",
+                "password": "test",
+                "age": 18
+              },
+              "expected_status_code": 200,
+              "assertions": [
+                "status_code == 200"
+              ]
+            },
+            {
+              "name": "login_boundary_username",
+              "method": "POST",
+              "path": "/login",
+              "scenario_type": "boundary",
+              "request_parameters": {
+                "username": "",
+                "password": "test",
+                "age": 18
+              },
+              "expected_status_code": 200,
+              "assertions": [
+                "status_code == 200"
+              ]
+            },
+            {
+              "name": "login_missing_password",
+              "method": "POST",
+              "path": "/login",
+              "scenario_type": "missing",
+              "request_parameters": {
+                "username": "test",
+                "age": 18
+              },
+              "expected_status_code": 200,
+              "assertions": [
+                "status_code == 200"
+              ]
+            },
+            {
+              "name": "login_wrong_type_password",
+              "method": "POST",
+              "path": "/login",
+              "scenario_type": "wrong_type",
+              "request_parameters": {
+                "username": "test",
+                "password": 12345,
+                "age": 18
+              },
+              "expected_status_code": 200,
+              "assertions": [
+                "status_code == 200"
+              ]
+            },
+            {
+              "name": "login_empty_password",
+              "method": "POST",
+              "path": "/login",
+              "scenario_type": "empty",
+              "request_parameters": {
+                "username": "test",
+                "password": "",
+                "age": 18
+              },
+              "expected_status_code": 200,
+              "assertions": [
+                "status_code == 200"
+              ]
+            },
+            {
+              "name": "login_boundary_password",
+              "method": "POST",
+              "path": "/login",
+              "scenario_type": "boundary",
+              "request_parameters": {
+                "username": "test",
+                "password": "",
+                "age": 18
+              },
+              "expected_status_code": 200,
+              "assertions": [
+                "status_code == 200"
+              ]
+            },
+            {
+              "name": "login_wrong_type_age",
+              "method": "POST",
+              "path": "/login",
+              "scenario_type": "wrong_type",
+              "request_parameters": {
+                "username": "test",
+                "password": "test",
+                "age": "not-a-number"
+              },
+              "expected_status_code": 200,
+              "assertions": [
+                "status_code == 200"
+              ]
+            },
+            {
+              "name": "login_boundary_age",
+              "method": "POST",
+              "path": "/login",
+              "scenario_type": "boundary",
+              "request_parameters": {
+                "username": "test",
+                "password": "test",
+                "age": 0
+              },
+              "expected_status_code": 200,
+              "assertions": [
+                "status_code == 200"
+              ]
+            }
+          ],
+          "executions": [
+            {
+              "trace_id": "e9e4949f-c143-4a2b-a7d8-42b5fc4b5478",
+              "test_name": "login_normal",
+              "status": "passed",
+              "started_at": "2026-10-30T08:47:27.500883Z",
+              "finished_at": "2026-10-30T08:47:27.983830Z",
+              "duration_seconds": 0.482947,
+              "stdout": "AI_TEST_AGENT_HTTP_STATUS=200\n.\n1 passed in 0.05s\n",
+              "stderr": "",
+              "exit_code": 0,
+              "http_status_code": 200
+            },
+            {
+              "trace_id": "d0714af6-7274-4b16-84d7-12a09f2dea4c",
+              "test_name": "login_missing_username",
+              "status": "failed",
+              "started_at": "2026-10-30T08:47:27.983830Z",
+              "finished_at": "2026-10-30T08:47:28.504649Z",
+              "duration_seconds": 0.520819,
+              "stdout": "AI_TEST_AGENT_HTTP_STATUS=400\nF\n================================== FAILURES ===================================\n___________________________ test_generated_api_case ___________________________\n\n    def test_generated_api_case():\n        method = \"POST\"\n        url = \"http://127.0.0.1:6361/login\"\n        parameters = {\n        \"password\": \"test\",\n        \"age\": 18\n    }\n        expected_status = 200\n    \n        if method == \"GET\":\n            if parameters:\n                url = f\"{url}?{urlencode(parameters, doseq=True)}\"\n            data = None\n        else:\n            data = urlencode(parameters, doseq=True).encode()\n    \n        request = Request(\n            url=url,\n            data=data,\n            method=method,\n            headers={\n                \"Content-Type\": \"application/x-www-form-urlencoded\",\n            },\n        )\n    \n        try:\n            with urlopen(request, timeout=10) as response:\n                status_code = response.status\n        except HTTPError as exc:\n            status_code = exc.code\n        except URLError as exc:\n            raise RuntimeError(\n                f\"Request failed: {exc.reason}\"\n            ) from exc\n    \n        print(\n            f\"AI_TEST_AGENT_HTTP_STATUS={status_code}\"\n        )\n    \n>       assert status_code == expected_status\nE       assert 400 == 200\n\ntest_generated.py:45: AssertionError\n=========================== short test summary info ===========================\nFAILED test_generated.py::test_generated_api_case - assert 400 == 200\n1 failed in 0.08s\n",
+              "stderr": "",
+              "exit_code": 1,
+              "http_status_code": 400
+            },
+            {
+              "trace_id": "ce17d696-8d51-480a-9e56-6b089eeed1b1",
+              "test_name": "login_wrong_type_username",
+              "status": "passed",
+              "started_at": "2026-10-30T08:47:28.504649Z",
+              "finished_at": "2026-10-30T08:47:29.012736Z",
+              "duration_seconds": 0.508087,
+              "stdout": "AI_TEST_AGENT_HTTP_STATUS=200\n.\n1 passed in 0.05s\n",
+              "stderr": "",
+              "exit_code": 0,
+              "http_status_code": 200
+            },
+            {
+              "trace_id": "e23592ca-35d4-474a-b701-feb5945d8356",
+              "test_name": "login_empty_username",
+              "status": "failed",
+              "started_at": "2026-10-30T08:47:29.012736Z",
+              "finished_at": "2026-10-30T08:47:29.574361Z",
+              "duration_seconds": 0.561625,
+              "stdout": "AI_TEST_AGENT_HTTP_STATUS=400\nF\n================================== FAILURES ===================================\n___________________________ test_generated_api_case ___________________________\n\n    def test_generated_api_case():\n        method = \"POST\"\n        url = \"http://127.0.0.1:6361/login\"\n        parameters = {\n        \"username\": \"\",\n        \"password\": \"test\",\n        \"age\": 18\n    }\n        expected_status = 200\n    \n        if method == \"GET\":\n            if parameters:\n                url = f\"{url}?{urlencode(parameters, doseq=True)}\"\n            data = None\n        else:\n            data = urlencode(parameters, doseq=True).encode()\n    \n        request = Request(\n            url=url,\n            data=data,\n            method=method,\n            headers={\n                \"Content-Type\": \"application/x-www-form-urlencoded\",\n            },\n        )\n    \n        try:\n            with urlopen(request, timeout=10) as response:\n                status_code = response.status\n        except HTTPError as exc:\n            status_code = exc.code\n        except URLError as exc:\n            raise RuntimeError(\n                f\"Request failed: {exc.reason}\"\n            ) from exc\n    \n        print(\n            f\"AI_TEST_AGENT_HTTP_STATUS={status_code}\"\n        )\n    \n>       assert status_code == expected_status\nE       assert 400 == 200\n\ntest_generated.py:46: AssertionError\n=========================== short test summary info ===========================\nFAILED test_generated.py::test_generated_api_case - assert 400 == 200\n1 failed in 0.09s\n",
+              "stderr": "",
+              "exit_code": 1,
+              "http_status_code": 400
+            },
+            {
+              "trace_id": "90ca57af-a631-485c-acd7-dc724600359f",
+              "test_name": "login_boundary_username",
+              "status": "failed",
+              "started_at": "2026-10-30T08:47:29.574361Z",
+              "finished_at": "2026-10-30T08:47:30.102257Z",
+              "duration_seconds": 0.527896,
+              "stdout": "AI_TEST_AGENT_HTTP_STATUS=400\nF\n================================== FAILURES ===================================\n___________________________ test_generated_api_case ___________________________\n\n    def test_generated_api_case():\n        method = \"POST\"\n        url = \"http://127.0.0.1:6361/login\"\n        parameters = {\n        \"username\": \"\",\n        \"password\": \"test\",\n        \"age\": 18\n    }\n        expected_status = 200\n    \n        if method == \"GET\":\n            if parameters:\n                url = f\"{url}?{urlencode(parameters, doseq=True)}\"\n            data = None\n        else:\n            data = urlencode(parameters, doseq=True).encode()\n    \n        request = Request(\n            url=url,\n            data=data,\n            method=method,\n            headers={\n                \"Content-Type\": \"application/x-www-form-urlencoded\",\n            },\n        )\n    \n        try:\n            with urlopen(request, timeout=10) as response:\n                status_code = response.status\n        except HTTPError as exc:\n            status_code = exc.code\n        except URLError as exc:\n            raise RuntimeError(\n                f\"Request failed: {exc.reason}\"\n            ) from exc\n    \n        print(\n            f\"AI_TEST_AGENT_HTTP_STATUS={status_code}\"\n        )\n    \n>       assert status_code == expected_status\nE       assert 400 == 200\n\ntest_generated.py:46: AssertionError\n=========================== short test summary info ===========================\nFAILED test_generated.py::test_generated_api_case - assert 400 == 200\n1 failed in 0.08s\n",
+              "stderr": "",
+              "exit_code": 1,
+              "http_status_code": 400
+            },
+            {
+              "trace_id": "812bdaa1-1d80-42b4-acb9-44f291c03fe0",
+              "test_name": "login_missing_password",
+              "status": "failed",
+              "started_at": "2026-10-30T08:47:30.102257Z",
+              "finished_at": "2026-10-30T08:47:30.621535Z",
+              "duration_seconds": 0.519278,
+              "stdout": "AI_TEST_AGENT_HTTP_STATUS=400\nF\n================================== FAILURES ===================================\n___________________________ test_generated_api_case ___________________________\n\n    def test_generated_api_case():\n        method = \"POST\"\n        url = \"http://127.0.0.1:6361/login\"\n        parameters = {\n        \"username\": \"test\",\n        \"age\": 18\n    }\n        expected_status = 200\n    \n        if method == \"GET\":\n            if parameters:\n                url = f\"{url}?{urlencode(parameters, doseq=True)}\"\n            data = None\n        else:\n            data = urlencode(parameters, doseq=True).encode()\n    \n        request = Request(\n            url=url,\n            data=data,\n            method=method,\n            headers={\n                \"Content-Type\": \"application/x-www-form-urlencoded\",\n            },\n        )\n    \n        try:\n            with urlopen(request, timeout=10) as response:\n                status_code = response.status\n        except HTTPError as exc:\n            status_code = exc.code\n        except URLError as exc:\n            raise RuntimeError(\n                f\"Request failed: {exc.reason}\"\n            ) from exc\n    \n        print(\n            f\"AI_TEST_AGENT_HTTP_STATUS={status_code}\"\n        )\n    \n>       assert status_code == expected_status\nE       assert 400 == 200\n\ntest_generated.py:45: AssertionError\n=========================== short test summary info ===========================\nFAILED test_generated.py::test_generated_api_case - assert 400 == 200\n1 failed in 0.08s\n",
+              "stderr": "",
+              "exit_code": 1,
+              "http_status_code": 400
+            },
+            {
+              "trace_id": "d6b35900-d675-444c-8b35-98bca89bffc8",
+              "test_name": "login_wrong_type_password",
+              "status": "passed",
+              "started_at": "2026-10-30T08:47:30.621535Z",
+              "finished_at": "2026-10-30T08:47:31.092937Z",
+              "duration_seconds": 0.471402,
+              "stdout": "AI_TEST_AGENT_HTTP_STATUS=200\n.\n1 passed in 0.04s\n",
+              "stderr": "",
+              "exit_code": 0,
+              "http_status_code": 200
+            },
+            {
+              "trace_id": "2bbef8eb-03ee-4e5c-8f0e-508c2fd63620",
+              "test_name": "login_empty_password",
+              "status": "failed",
+              "started_at": "2026-10-30T08:47:31.092937Z",
+              "finished_at": "2026-10-30T08:47:31.603409Z",
+              "duration_seconds": 0.510472,
+              "stdout": "AI_TEST_AGENT_HTTP_STATUS=400\nF\n================================== FAILURES ===================================\n___________________________ test_generated_api_case ___________________________\n\n    def test_generated_api_case():\n        method = \"POST\"\n        url = \"http://127.0.0.1:6361/login\"\n        parameters = {\n        \"username\": \"test\",\n        \"password\": \"\",\n        \"age\": 18\n    }\n        expected_status = 200\n    \n        if method == \"GET\":\n            if parameters:\n                url = f\"{url}?{urlencode(parameters, doseq=True)}\"\n            data = None\n        else:\n            data = urlencode(parameters, doseq=True).encode()\n    \n        request = Request(\n            url=url,\n            data=data,\n            method=method,\n            headers={\n                \"Content-Type\": \"application/x-www-form-urlencoded\",\n            },\n        )\n    \n        try:\n            with urlopen(request, timeout=10) as response:\n                status_code = response.status\n        except HTTPError as exc:\n            status_code = exc.code\n        except URLError as exc:\n            raise RuntimeError(\n                f\"Request failed: {exc.reason}\"\n            ) from exc\n    \n        print(\n            f\"AI_TEST_AGENT_HTTP_STATUS={status_code}\"\n        )\n    \n>       assert status_code == expected_status\nE       assert 400 == 200\n\ntest_generated.py:46: AssertionError\n=========================== short test summary info ===========================\nFAILED test_generated.py::test_generated_api_case - assert 400 == 200\n1 failed in 0.08s\n",
+              "stderr": "",
+              "exit_code": 1,
+              "http_status_code": 400
+            },
+            {
+              "trace_id": "0e59fb9f-f035-47e4-af4f-f643bc38727d",
+              "test_name": "login_boundary_password",
+              "status": "failed",
+              "started_at": "2026-10-30T08:47:31.603409Z",
+              "finished_at": "2026-10-30T08:47:32.142873Z",
+              "duration_seconds": 0.539464,
+              "stdout": "AI_TEST_AGENT_HTTP_STATUS=400\nF\n================================== FAILURES ===================================\n___________________________ test_generated_api_case ___________________________\n\n    def test_generated_api_case():\n        method = \"POST\"\n        url = \"http://127.0.0.1:6361/login\"\n        parameters = {\n        \"username\": \"test\",\n        \"password\": \"\",\n        \"age\": 18\n    }\n        expected_status = 200\n    \n        if method == \"GET\":\n            if parameters:\n                url = f\"{url}?{urlencode(parameters, doseq=True)}\"\n            data = None\n        else:\n            data = urlencode(parameters, doseq=True).encode()\n    \n        request = Request(\n            url=url,\n            data=data,\n            method=method,\n            headers={\n                \"Content-Type\": \"application/x-www-form-urlencoded\",\n            },\n        )\n    \n        try:\n            with urlopen(request, timeout=10) as response:\n                status_code = response.status\n        except HTTPError as exc:\n            status_code = exc.code\n        except URLError as exc:\n            raise RuntimeError(\n                f\"Request failed: {exc.reason}\"\n            ) from exc\n    \n        print(\n            f\"AI_TEST_AGENT_HTTP_STATUS={status_code}\"\n        )\n    \n>       assert status_code == expected_status\nE       assert 400 == 200\n\ntest_generated.py:46: AssertionError\n=========================== short test summary info ===========================\nFAILED test_generated.py::test_generated_api_case - assert 400 == 200\n1 failed in 0.08s\n",
+              "stderr": "",
+              "exit_code": 1,
+              "http_status_code": 400
+            },
+            {
+              "trace_id": "61dee257-7699-461c-ad42-6f10cb65ad90",
+              "test_name": "login_wrong_type_age",
+              "status": "passed",
+              "started_at": "2026-10-30T08:47:32.142873Z",
+              "finished_at": "2026-10-30T08:47:32.652351Z",
+              "duration_seconds": 0.509478,
+              "stdout": "AI_TEST_AGENT_HTTP_STATUS=200\n.\n1 passed in 0.05s\n",
+              "stderr": "",
+              "exit_code": 0,
+              "http_status_code": 200
+            },
+            {
+              "trace_id": "7315f597-23a8-4b31-b7dc-84e62ca2c8b4",
+              "test_name": "login_boundary_age",
+              "status": "passed",
+              "started_at": "2026-10-30T08:47:32.652351Z",
+              "finished_at": "2026-10-30T08:47:33.143164Z",
+              "duration_seconds": 0.490813,
+              "stdout": "AI_TEST_AGENT_HTTP_STATUS=200\n.\n1 passed in 0.04s\n",
+              "stderr": "",
+              "exit_code": 0,
+              "http_status_code": 200
+            }
+          ],
+          "healing_outcomes": []
+        },
+        "stdout": "Generated tests: 11\nPassed executions: 5/11\nMarkdown report: C:\\Users\\kaaka\\AppData\\Local\\Temp\\agent-eval-mauevfhp\\agent-report.md\nJSON report: C:\\Users\\kaaka\\AppData\\Local\\Temp\\agent-eval-mauevfhp\\agent-report.json\n",
+        "stderr": "",
+        "exit_code": 0,
+        "executable": "E:\\code\\1\\.venv\\Scripts\\ai-test-agent.exe",
+        "spec": "E:\\code\\1\\2\\AI-Test-Agent1\\examples\\login.md",
+        "base_url": "http://127.0.0.1:6361",
+        "mock": true,
+        "trace_events": [
+          {
+            "event_type": "message",
+            "name": "ai_test_agent_execution",
+            "data": {
+              "source": "ai_test_agent",
+              "evidence_type": "test_execution",
+              "index": 1,
+              "trace_id": "e9e4949f-c143-4a2b-a7d8-42b5fc4b5478",
+              "test_name": "login_normal",
+              "status": "passed",
+              "exit_code": 0,
+              "http_status_code": 200,
+              "duration_seconds": 0.482947
+            }
+          },
+          {
+            "event_type": "message",
+            "name": "ai_test_agent_execution",
+            "data": {
+              "source": "ai_test_agent",
+              "evidence_type": "test_execution",
+              "index": 2,
+              "trace_id": "d0714af6-7274-4b16-84d7-12a09f2dea4c",
+              "test_name": "login_missing_username",
+              "status": "failed",
+              "exit_code": 1,
+              "http_status_code": 400,
+              "duration_seconds": 0.520819
+            }
+          },
+          {
+            "event_type": "message",
+            "name": "ai_test_agent_execution",
+            "data": {
+              "source": "ai_test_agent",
+              "evidence_type": "test_execution",
+              "index": 3,
+              "trace_id": "ce17d696-8d51-480a-9e56-6b089eeed1b1",
+              "test_name": "login_wrong_type_username",
+              "status": "passed",
+              "exit_code": 0,
+              "http_status_code": 200,
+              "duration_seconds": 0.508087
+            }
+          },
+          {
+            "event_type": "message",
+            "name": "ai_test_agent_execution",
+            "data": {
+              "source": "ai_test_agent",
+              "evidence_type": "test_execution",
+              "index": 4,
+              "trace_id": "e23592ca-35d4-474a-b701-feb5945d8356",
+              "test_name": "login_empty_username",
+              "status": "failed",
+              "exit_code": 1,
+              "http_status_code": 400,
+              "duration_seconds": 0.561625
+            }
+          },
+          {
+            "event_type": "message",
+            "name": "ai_test_agent_execution",
+            "data": {
+              "source": "ai_test_agent",
+              "evidence_type": "test_execution",
+              "index": 5,
+              "trace_id": "90ca57af-a631-485c-acd7-dc724600359f",
+              "test_name": "login_boundary_username",
+              "status": "failed",
+              "exit_code": 1,
+              "http_status_code": 400,
+              "duration_seconds": 0.527896
+            }
+          },
+          {
+            "event_type": "message",
+            "name": "ai_test_agent_execution",
+            "data": {
+              "source": "ai_test_agent",
+              "evidence_type": "test_execution",
+              "index": 6,
+              "trace_id": "812bdaa1-1d80-42b4-acb9-44f291c03fe0",
+              "test_name": "login_missing_password",
+              "status": "failed",
+              "exit_code": 1,
+              "http_status_code": 400,
+              "duration_seconds": 0.519278
+            }
+          },
+          {
+            "event_type": "message",
+            "name": "ai_test_agent_execution",
+            "data": {
+              "source": "ai_test_agent",
+              "evidence_type": "test_execution",
+              "index": 7,
+              "trace_id": "d6b35900-d675-444c-8b35-98bca89bffc8",
+              "test_name": "login_wrong_type_password",
+              "status": "passed",
+              "exit_code": 0,
+              "http_status_code": 200,
+              "duration_seconds": 0.471402
+            }
+          },
+          {
+            "event_type": "message",
+            "name": "ai_test_agent_execution",
+            "data": {
+              "source": "ai_test_agent",
+              "evidence_type": "test_execution",
+              "index": 8,
+              "trace_id": "2bbef8eb-03ee-4e5c-8f0e-508c2fd63620",
+              "test_name": "login_empty_password",
+              "status": "failed",
+              "exit_code": 1,
+              "http_status_code": 400,
+              "duration_seconds": 0.510472
+            }
+          },
+          {
+            "event_type": "message",
+            "name": "ai_test_agent_execution",
+            "data": {
+              "source": "ai_test_agent",
+              "evidence_type": "test_execution",
+              "index": 9,
+              "trace_id": "0e59fb9f-f035-47e4-af4f-f643bc38727d",
+              "test_name": "login_boundary_password",
+              "status": "failed",
+              "exit_code": 1,
+              "http_status_code": 400,
+              "duration_seconds": 0.539464
+            }
+          },
+          {
+            "event_type": "message",
+            "name": "ai_test_agent_execution",
+            "data": {
+              "source": "ai_test_agent",
+              "evidence_type": "test_execution",
+              "index": 10,
+              "trace_id": "61dee257-7699-461c-ad42-6f10cb65ad90",
+              "test_name": "login_wrong_type_age",
+              "status": "passed",
+              "exit_code": 0,
+              "http_status_code": 200,
+              "duration_seconds": 0.509478
+            }
+          },
+          {
+            "event_type": "message",
+            "name": "ai_test_agent_execution",
+            "data": {
+              "source": "ai_test_agent",
+              "evidence_type": "test_execution",
+              "index": 11,
+              "trace_id": "7315f597-23a8-4b31-b7dc-84e62ca2c8b4",
+              "test_name": "login_boundary_age",
+              "status": "passed",
+              "exit_code": 0,
+              "http_status_code": 200,
+              "duration_seconds": 0.490813
+            }
+          },
+          {
+            "event_type": "message",
+            "name": "ai_test_agent_process_result",
+            "data": {
+              "source": "ai_test_agent",
+              "evidence_type": "process_result",
+              "exit_code": 0,
+              "generated_tests": 11,
+              "executions": 11,
+              "stdout_present": true,
+              "stderr_present": false
+            }
+          }
+        ]
+      },
+      "trace": {
+        "events": [
+          {
+            "timestamp": "2026-10-30T08:47:27.243254Z",
+            "event_type": "agent_start",
+            "name": "agent_started",
+            "data": {}
+          },
+          {
+            "timestamp": "2026-10-30T08:47:33.171301Z",
+            "event_type": "message",
+            "name": "ai_test_agent_execution",
+            "data": {
+              "source": "ai_test_agent",
+              "evidence_type": "test_execution",
+              "index": 1,
+              "trace_id": "e9e4949f-c143-4a2b-a7d8-42b5fc4b5478",
+              "test_name": "login_normal",
+              "status": "passed",
+              "exit_code": 0,
+              "http_status_code": 200,
+              "duration_seconds": 0.482947
+            }
+          },
+          {
+            "timestamp": "2026-10-30T08:47:33.171301Z",
+            "event_type": "message",
+            "name": "ai_test_agent_execution",
+            "data": {
+              "source": "ai_test_agent",
+              "evidence_type": "test_execution",
+              "index": 2,
+              "trace_id": "d0714af6-7274-4b16-84d7-12a09f2dea4c",
+              "test_name": "login_missing_username",
+              "status": "failed",
+              "exit_code": 1,
+              "http_status_code": 400,
+              "duration_seconds": 0.520819
+            }
+          },
+          {
+            "timestamp": "2026-10-30T08:47:33.171301Z",
+            "event_type": "message",
+            "name": "ai_test_agent_execution",
+            "data": {
+              "source": "ai_test_agent",
+              "evidence_type": "test_execution",
+              "index": 3,
+              "trace_id": "ce17d696-8d51-480a-9e56-6b089eeed1b1",
+              "test_name": "login_wrong_type_username",
+              "status": "passed",
+              "exit_code": 0,
+              "http_status_code": 200,
+              "duration_seconds": 0.508087
+            }
+          },
+          {
+            "timestamp": "2026-10-30T08:47:33.171301Z",
+            "event_type": "message",
+            "name": "ai_test_agent_execution",
+            "data": {
+              "source": "ai_test_agent",
+              "evidence_type": "test_execution",
+              "index": 4,
+              "trace_id": "e23592ca-35d4-474a-b701-feb5945d8356",
+              "test_name": "login_empty_username",
+              "status": "failed",
+              "exit_code": 1,
+              "http_status_code": 400,
+              "duration_seconds": 0.561625
+            }
+          },
+          {
+            "timestamp": "2026-10-30T08:47:33.171301Z",
+            "event_type": "message",
+            "name": "ai_test_agent_execution",
+            "data": {
+              "source": "ai_test_agent",
+              "evidence_type": "test_execution",
+              "index": 5,
+              "trace_id": "90ca57af-a631-485c-acd7-dc724600359f",
+              "test_name": "login_boundary_username",
+              "status": "failed",
+              "exit_code": 1,
+              "http_status_code": 400,
+              "duration_seconds": 0.527896
+            }
+          },
+          {
+            "timestamp": "2026-10-30T08:47:33.171301Z",
+            "event_type": "message",
+            "name": "ai_test_agent_execution",
+            "data": {
+              "source": "ai_test_agent",
+              "evidence_type": "test_execution",
+              "index": 6,
+              "trace_id": "812bdaa1-1d80-42b4-acb9-44f291c03fe0",
+              "test_name": "login_missing_password",
+              "status": "failed",
+              "exit_code": 1,
+              "http_status_code": 400,
+              "duration_seconds": 0.519278
+            }
+          },
+          {
+            "timestamp": "2026-10-30T08:47:33.171301Z",
+            "event_type": "message",
+            "name": "ai_test_agent_execution",
+            "data": {
+              "source": "ai_test_agent",
+              "evidence_type": "test_execution",
+              "index": 7,
+              "trace_id": "d6b35900-d675-444c-8b35-98bca89bffc8",
+              "test_name": "login_wrong_type_password",
+              "status": "passed",
+              "exit_code": 0,
+              "http_status_code": 200,
+              "duration_seconds": 0.471402
+            }
+          },
+          {
+            "timestamp": "2026-10-30T08:47:33.171301Z",
+            "event_type": "message",
+            "name": "ai_test_agent_execution",
+            "data": {
+              "source": "ai_test_agent",
+              "evidence_type": "test_execution",
+              "index": 8,
+              "trace_id": "2bbef8eb-03ee-4e5c-8f0e-508c2fd63620",
+              "test_name": "login_empty_password",
+              "status": "failed",
+              "exit_code": 1,
+              "http_status_code": 400,
+              "duration_seconds": 0.510472
+            }
+          },
+          {
+            "timestamp": "2026-10-30T08:47:33.171301Z",
+            "event_type": "message",
+            "name": "ai_test_agent_execution",
+            "data": {
+              "source": "ai_test_agent",
+              "evidence_type": "test_execution",
+              "index": 9,
+              "trace_id": "0e59fb9f-f035-47e4-af4f-f643bc38727d",
+              "test_name": "login_boundary_password",
+              "status": "failed",
+              "exit_code": 1,
+              "http_status_code": 400,
+              "duration_seconds": 0.539464
+            }
+          },
+          {
+            "timestamp": "2026-10-30T08:47:33.171301Z",
+            "event_type": "message",
+            "name": "ai_test_agent_execution",
+            "data": {
+              "source": "ai_test_agent",
+              "evidence_type": "test_execution",
+              "index": 10,
+              "trace_id": "61dee257-7699-461c-ad42-6f10cb65ad90",
+              "test_name": "login_wrong_type_age",
+              "status": "passed",
+              "exit_code": 0,
+              "http_status_code": 200,
+              "duration_seconds": 0.509478
+            }
+          },
+          {
+            "timestamp": "2026-10-30T08:47:33.171301Z",
+            "event_type": "message",
+            "name": "ai_test_agent_execution",
+            "data": {
+              "source": "ai_test_agent",
+              "evidence_type": "test_execution",
+              "index": 11,
+              "trace_id": "7315f597-23a8-4b31-b7dc-84e62ca2c8b4",
+              "test_name": "login_boundary_age",
+              "status": "passed",
+              "exit_code": 0,
+              "http_status_code": 200,
+              "duration_seconds": 0.490813
+            }
+          },
+          {
+            "timestamp": "2026-10-30T08:47:33.171301Z",
+            "event_type": "message",
+            "name": "ai_test_agent_process_result",
+            "data": {
+              "source": "ai_test_agent",
+              "evidence_type": "process_result",
+              "exit_code": 0,
+              "generated_tests": 11,
+              "executions": 11,
+              "stdout_present": true,
+              "stderr_present": false
+            }
+          },
+          {
+            "timestamp": "2026-10-30T08:47:33.171301Z",
+            "event_type": "agent_end",
+            "name": "agent_finished",
+            "data": {
+              "output_type": "dict"
+            }
+          }
+        ]
+      },
+      "error": null,
+      "metadata": {}
+    },
+    {
+      "id": "run-ai-test-agent-login-e2e-002",
+      "task_id": "ai-test-agent-login-e2e",
+      "status": "success",
+      "started_at": "2026-10-30T08:47:33.171301Z",
+      "finished_at": "2026-10-30T08:47:39.166961Z",
+      "duration_ms": 5995.66,
+      "output": {
+        "report": {
+          "spec": {
+            "name": "login",
+            "method": "POST",
+            "path": "/login",
+            "parameters": [
+              {
+                "name": "username",
+                "type": "string",
+                "required": true
+              },
+              {
+                "name": "password",
+                "type": "string",
+                "required": true
+              },
+              {
+                "name": "age",
+                "type": "integer",
+                "required": false
+              }
+            ]
+          },
+          "test_cases": [
+            {
+              "name": "login_normal",
+              "scenario_type": "normal",
+              "target_parameter": null,
+              "method": "POST",
+              "path": "/login",
+              "description": "Send a valid request using valid parameter values.",
+              "parameters": [
+                {
+                  "name": "username",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "password",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "age",
+                  "type": "integer",
+                  "required": false
+                }
+              ]
+            },
+            {
+              "name": "login_missing_username",
+              "scenario_type": "missing",
+              "target_parameter": "username",
+              "method": "POST",
+              "path": "/login",
+              "description": "Send a request without required parameter 'username'.",
+              "parameters": [
+                {
+                  "name": "username",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "password",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "age",
+                  "type": "integer",
+                  "required": false
+                }
+              ]
+            },
+            {
+              "name": "login_wrong_type_username",
+              "scenario_type": "wrong_type",
+              "target_parameter": "username",
+              "method": "POST",
+              "path": "/login",
+              "description": "Send a request with an invalid type for parameter 'username'.",
+              "parameters": [
+                {
+                  "name": "username",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "password",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "age",
+                  "type": "integer",
+                  "required": false
+                }
+              ]
+            },
+            {
+              "name": "login_empty_username",
+              "scenario_type": "empty",
+              "target_parameter": "username",
+              "method": "POST",
+              "path": "/login",
+              "description": "Send an empty string for parameter 'username'.",
+              "parameters": [
+                {
+                  "name": "username",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "password",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "age",
+                  "type": "integer",
+                  "required": false
+                }
+              ]
+            },
+            {
+              "name": "login_boundary_username",
+              "scenario_type": "boundary",
+              "target_parameter": "username",
+              "method": "POST",
+              "path": "/login",
+              "description": "Test string boundary values for parameter 'username'.",
+              "parameters": [
+                {
+                  "name": "username",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "password",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "age",
+                  "type": "integer",
+                  "required": false
+                }
+              ]
+            },
+            {
+              "name": "login_missing_password",
+              "scenario_type": "missing",
+              "target_parameter": "password",
+              "method": "POST",
+              "path": "/login",
+              "description": "Send a request without required parameter 'password'.",
+              "parameters": [
+                {
+                  "name": "username",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "password",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "age",
+                  "type": "integer",
+                  "required": false
+                }
+              ]
+            },
+            {
+              "name": "login_wrong_type_password",
+              "scenario_type": "wrong_type",
+              "target_parameter": "password",
+              "method": "POST",
+              "path": "/login",
+              "description": "Send a request with an invalid type for parameter 'password'.",
+              "parameters": [
+                {
+                  "name": "username",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "password",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "age",
+                  "type": "integer",
+                  "required": false
+                }
+              ]
+            },
+            {
+              "name": "login_empty_password",
+              "scenario_type": "empty",
+              "target_parameter": "password",
+              "method": "POST",
+              "path": "/login",
+              "description": "Send an empty string for parameter 'password'.",
+              "parameters": [
+                {
+                  "name": "username",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "password",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "age",
+                  "type": "integer",
+                  "required": false
+                }
+              ]
+            },
+            {
+              "name": "login_boundary_password",
+              "scenario_type": "boundary",
+              "target_parameter": "password",
+              "method": "POST",
+              "path": "/login",
+              "description": "Test string boundary values for parameter 'password'.",
+              "parameters": [
+                {
+                  "name": "username",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "password",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "age",
+                  "type": "integer",
+                  "required": false
+                }
+              ]
+            },
+            {
+              "name": "login_wrong_type_age",
+              "scenario_type": "wrong_type",
+              "target_parameter": "age",
+              "method": "POST",
+              "path": "/login",
+              "description": "Send a request with an invalid type for parameter 'age'.",
+              "parameters": [
+                {
+                  "name": "username",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "password",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "age",
+                  "type": "integer",
+                  "required": false
+                }
+              ]
+            },
+            {
+              "name": "login_boundary_age",
+              "scenario_type": "boundary",
+              "target_parameter": "age",
+              "method": "POST",
+              "path": "/login",
+              "description": "Test integer boundary values for parameter 'age'.",
+              "parameters": [
+                {
+                  "name": "username",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "password",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "age",
+                  "type": "integer",
+                  "required": false
+                }
+              ]
+            }
+          ],
+          "generated_tests": [
+            {
+              "name": "login_normal",
+              "method": "POST",
+              "path": "/login",
+              "scenario_type": "normal",
+              "request_parameters": {
+                "username": "test",
+                "password": "test",
+                "age": 18
+              },
+              "expected_status_code": 200,
+              "assertions": [
+                "status_code == 200"
+              ]
+            },
+            {
+              "name": "login_missing_username",
+              "method": "POST",
+              "path": "/login",
+              "scenario_type": "missing",
+              "request_parameters": {
+                "password": "test",
+                "age": 18
+              },
+              "expected_status_code": 200,
+              "assertions": [
+                "status_code == 200"
+              ]
+            },
+            {
+              "name": "login_wrong_type_username",
+              "method": "POST",
+              "path": "/login",
+              "scenario_type": "wrong_type",
+              "request_parameters": {
+                "username": 12345,
+                "password": "test",
+                "age": 18
+              },
+              "expected_status_code": 200,
+              "assertions": [
+                "status_code == 200"
+              ]
+            },
+            {
+              "name": "login_empty_username",
+              "method": "POST",
+              "path": "/login",
+              "scenario_type": "empty",
+              "request_parameters": {
+                "username": "",
+                "password": "test",
+                "age": 18
+              },
+              "expected_status_code": 200,
+              "assertions": [
+                "status_code == 200"
+              ]
+            },
+            {
+              "name": "login_boundary_username",
+              "method": "POST",
+              "path": "/login",
+              "scenario_type": "boundary",
+              "request_parameters": {
+                "username": "",
+                "password": "test",
+                "age": 18
+              },
+              "expected_status_code": 200,
+              "assertions": [
+                "status_code == 200"
+              ]
+            },
+            {
+              "name": "login_missing_password",
+              "method": "POST",
+              "path": "/login",
+              "scenario_type": "missing",
+              "request_parameters": {
+                "username": "test",
+                "age": 18
+              },
+              "expected_status_code": 200,
+              "assertions": [
+                "status_code == 200"
+              ]
+            },
+            {
+              "name": "login_wrong_type_password",
+              "method": "POST",
+              "path": "/login",
+              "scenario_type": "wrong_type",
+              "request_parameters": {
+                "username": "test",
+                "password": 12345,
+                "age": 18
+              },
+              "expected_status_code": 200,
+              "assertions": [
+                "status_code == 200"
+              ]
+            },
+            {
+              "name": "login_empty_password",
+              "method": "POST",
+              "path": "/login",
+              "scenario_type": "empty",
+              "request_parameters": {
+                "username": "test",
+                "password": "",
+                "age": 18
+              },
+              "expected_status_code": 200,
+              "assertions": [
+                "status_code == 200"
+              ]
+            },
+            {
+              "name": "login_boundary_password",
+              "method": "POST",
+              "path": "/login",
+              "scenario_type": "boundary",
+              "request_parameters": {
+                "username": "test",
+                "password": "",
+                "age": 18
+              },
+              "expected_status_code": 200,
+              "assertions": [
+                "status_code == 200"
+              ]
+            },
+            {
+              "name": "login_wrong_type_age",
+              "method": "POST",
+              "path": "/login",
+              "scenario_type": "wrong_type",
+              "request_parameters": {
+                "username": "test",
+                "password": "test",
+                "age": "not-a-number"
+              },
+              "expected_status_code": 200,
+              "assertions": [
+                "status_code == 200"
+              ]
+            },
+            {
+              "name": "login_boundary_age",
+              "method": "POST",
+              "path": "/login",
+              "scenario_type": "boundary",
+              "request_parameters": {
+                "username": "test",
+                "password": "test",
+                "age": 0
+              },
+              "expected_status_code": 200,
+              "assertions": [
+                "status_code == 200"
+              ]
+            }
+          ],
+          "executions": [
+            {
+              "trace_id": "c42a89c7-37aa-4008-adaa-d9d8e076d04f",
+              "test_name": "login_normal",
+              "status": "passed",
+              "started_at": "2026-10-30T08:47:33.436211Z",
+              "finished_at": "2026-10-30T08:47:33.896408Z",
+              "duration_seconds": 0.460197,
+              "stdout": "AI_TEST_AGENT_HTTP_STATUS=200\n.\n1 passed in 0.03s\n",
+              "stderr": "",
+              "exit_code": 0,
+              "http_status_code": 200
+            },
+            {
+              "trace_id": "e6f2b444-974f-49e2-825c-45acfef3940c",
+              "test_name": "login_missing_username",
+              "status": "failed",
+              "started_at": "2026-10-30T08:47:33.896408Z",
+              "finished_at": "2026-10-30T08:47:34.400063Z",
+              "duration_seconds": 0.503655,
+              "stdout": "AI_TEST_AGENT_HTTP_STATUS=400\nF\n================================== FAILURES ===================================\n___________________________ test_generated_api_case ___________________________\n\n    def test_generated_api_case():\n        method = \"POST\"\n        url = \"http://127.0.0.1:6361/login\"\n        parameters = {\n        \"password\": \"test\",\n        \"age\": 18\n    }\n        expected_status = 200\n    \n        if method == \"GET\":\n            if parameters:\n                url = f\"{url}?{urlencode(parameters, doseq=True)}\"\n            data = None\n        else:\n            data = urlencode(parameters, doseq=True).encode()\n    \n        request = Request(\n            url=url,\n            data=data,\n            method=method,\n            headers={\n                \"Content-Type\": \"application/x-www-form-urlencoded\",\n            },\n        )\n    \n        try:\n            with urlopen(request, timeout=10) as response:\n                status_code = response.status\n        except HTTPError as exc:\n            status_code = exc.code\n        except URLError as exc:\n            raise RuntimeError(\n                f\"Request failed: {exc.reason}\"\n            ) from exc\n    \n        print(\n            f\"AI_TEST_AGENT_HTTP_STATUS={status_code}\"\n        )\n    \n>       assert status_code == expected_status\nE       assert 400 == 200\n\ntest_generated.py:45: AssertionError\n=========================== short test summary info ===========================\nFAILED test_generated.py::test_generated_api_case - assert 400 == 200\n1 failed in 0.08s\n",
+              "stderr": "",
+              "exit_code": 1,
+              "http_status_code": 400
+            },
+            {
+              "trace_id": "25cbb8a8-6901-4cd0-adc6-594e69beacdb",
+              "test_name": "login_wrong_type_username",
+              "status": "passed",
+              "started_at": "2026-10-30T08:47:34.400063Z",
+              "finished_at": "2026-10-30T08:47:34.879130Z",
+              "duration_seconds": 0.479067,
+              "stdout": "AI_TEST_AGENT_HTTP_STATUS=200\n.\n1 passed in 0.04s\n",
+              "stderr": "",
+              "exit_code": 0,
+              "http_status_code": 200
+            },
+            {
+              "trace_id": "a6744480-fa35-4b35-9fde-31514608c852",
+              "test_name": "login_empty_username",
+              "status": "failed",
+              "started_at": "2026-10-30T08:47:34.879130Z",
+              "finished_at": "2026-10-30T08:47:35.430088Z",
+              "duration_seconds": 0.550958,
+              "stdout": "AI_TEST_AGENT_HTTP_STATUS=400\nF\n================================== FAILURES ===================================\n___________________________ test_generated_api_case ___________________________\n\n    def test_generated_api_case():\n        method = \"POST\"\n        url = \"http://127.0.0.1:6361/login\"\n        parameters = {\n        \"username\": \"\",\n        \"password\": \"test\",\n        \"age\": 18\n    }\n        expected_status = 200\n    \n        if method == \"GET\":\n            if parameters:\n                url = f\"{url}?{urlencode(parameters, doseq=True)}\"\n            data = None\n        else:\n            data = urlencode(parameters, doseq=True).encode()\n    \n        request = Request(\n            url=url,\n            data=data,\n            method=method,\n            headers={\n                \"Content-Type\": \"application/x-www-form-urlencoded\",\n            },\n        )\n    \n        try:\n            with urlopen(request, timeout=10) as response:\n                status_code = response.status\n        except HTTPError as exc:\n            status_code = exc.code\n        except URLError as exc:\n            raise RuntimeError(\n                f\"Request failed: {exc.reason}\"\n            ) from exc\n    \n        print(\n            f\"AI_TEST_AGENT_HTTP_STATUS={status_code}\"\n        )\n    \n>       assert status_code == expected_status\nE       assert 400 == 200\n\ntest_generated.py:46: AssertionError\n=========================== short test summary info ===========================\nFAILED test_generated.py::test_generated_api_case - assert 400 == 200\n1 failed in 0.08s\n",
+              "stderr": "",
+              "exit_code": 1,
+              "http_status_code": 400
+            },
+            {
+              "trace_id": "f4875211-e71c-422f-84f4-1281657efa98",
+              "test_name": "login_boundary_username",
+              "status": "failed",
+              "started_at": "2026-10-30T08:47:35.431085Z",
+              "finished_at": "2026-10-30T08:47:35.980881Z",
+              "duration_seconds": 0.549796,
+              "stdout": "AI_TEST_AGENT_HTTP_STATUS=400\nF\n================================== FAILURES ===================================\n___________________________ test_generated_api_case ___________________________\n\n    def test_generated_api_case():\n        method = \"POST\"\n        url = \"http://127.0.0.1:6361/login\"\n        parameters = {\n        \"username\": \"\",\n        \"password\": \"test\",\n        \"age\": 18\n    }\n        expected_status = 200\n    \n        if method == \"GET\":\n            if parameters:\n                url = f\"{url}?{urlencode(parameters, doseq=True)}\"\n            data = None\n        else:\n            data = urlencode(parameters, doseq=True).encode()\n    \n        request = Request(\n            url=url,\n            data=data,\n            method=method,\n            headers={\n                \"Content-Type\": \"application/x-www-form-urlencoded\",\n            },\n        )\n    \n        try:\n            with urlopen(request, timeout=10) as response:\n                status_code = response.status\n        except HTTPError as exc:\n            status_code = exc.code\n        except URLError as exc:\n            raise RuntimeError(\n                f\"Request failed: {exc.reason}\"\n            ) from exc\n    \n        print(\n            f\"AI_TEST_AGENT_HTTP_STATUS={status_code}\"\n        )\n    \n>       assert status_code == expected_status\nE       assert 400 == 200\n\ntest_generated.py:46: AssertionError\n=========================== short test summary info ===========================\nFAILED test_generated.py::test_generated_api_case - assert 400 == 200\n1 failed in 0.08s\n",
+              "stderr": "",
+              "exit_code": 1,
+              "http_status_code": 400
+            },
+            {
+              "trace_id": "06679a57-ef57-45cf-99c8-36e550931590",
+              "test_name": "login_missing_password",
+              "status": "failed",
+              "started_at": "2026-10-30T08:47:35.980881Z",
+              "finished_at": "2026-10-30T08:47:36.500706Z",
+              "duration_seconds": 0.519825,
+              "stdout": "AI_TEST_AGENT_HTTP_STATUS=400\nF\n================================== FAILURES ===================================\n___________________________ test_generated_api_case ___________________________\n\n    def test_generated_api_case():\n        method = \"POST\"\n        url = \"http://127.0.0.1:6361/login\"\n        parameters = {\n        \"username\": \"test\",\n        \"age\": 18\n    }\n        expected_status = 200\n    \n        if method == \"GET\":\n            if parameters:\n                url = f\"{url}?{urlencode(parameters, doseq=True)}\"\n            data = None\n        else:\n            data = urlencode(parameters, doseq=True).encode()\n    \n        request = Request(\n            url=url,\n            data=data,\n            method=method,\n            headers={\n                \"Content-Type\": \"application/x-www-form-urlencoded\",\n            },\n        )\n    \n        try:\n            with urlopen(request, timeout=10) as response:\n                status_code = response.status\n        except HTTPError as exc:\n            status_code = exc.code\n        except URLError as exc:\n            raise RuntimeError(\n                f\"Request failed: {exc.reason}\"\n            ) from exc\n    \n        print(\n            f\"AI_TEST_AGENT_HTTP_STATUS={status_code}\"\n        )\n    \n>       assert status_code == expected_status\nE       assert 400 == 200\n\ntest_generated.py:45: AssertionError\n=========================== short test summary info ===========================\nFAILED test_generated.py::test_generated_api_case - assert 400 == 200\n1 failed in 0.08s\n",
+              "stderr": "",
+              "exit_code": 1,
+              "http_status_code": 400
+            },
+            {
+              "trace_id": "0ca97e8b-af4f-4271-93dc-0af5b6666496",
+              "test_name": "login_wrong_type_password",
+              "status": "passed",
+              "started_at": "2026-10-30T08:47:36.500706Z",
+              "finished_at": "2026-10-30T08:47:36.997252Z",
+              "duration_seconds": 0.496546,
+              "stdout": "AI_TEST_AGENT_HTTP_STATUS=200\n.\n1 passed in 0.04s\n",
+              "stderr": "",
+              "exit_code": 0,
+              "http_status_code": 200
+            },
+            {
+              "trace_id": "78caa7af-b052-4362-a5d1-c96e13f61e0d",
+              "test_name": "login_empty_password",
+              "status": "failed",
+              "started_at": "2026-10-30T08:47:36.997252Z",
+              "finished_at": "2026-10-30T08:47:37.523440Z",
+              "duration_seconds": 0.526188,
+              "stdout": "AI_TEST_AGENT_HTTP_STATUS=400\nF\n================================== FAILURES ===================================\n___________________________ test_generated_api_case ___________________________\n\n    def test_generated_api_case():\n        method = \"POST\"\n        url = \"http://127.0.0.1:6361/login\"\n        parameters = {\n        \"username\": \"test\",\n        \"password\": \"\",\n        \"age\": 18\n    }\n        expected_status = 200\n    \n        if method == \"GET\":\n            if parameters:\n                url = f\"{url}?{urlencode(parameters, doseq=True)}\"\n            data = None\n        else:\n            data = urlencode(parameters, doseq=True).encode()\n    \n        request = Request(\n            url=url,\n            data=data,\n            method=method,\n            headers={\n                \"Content-Type\": \"application/x-www-form-urlencoded\",\n            },\n        )\n    \n        try:\n            with urlopen(request, timeout=10) as response:\n                status_code = response.status\n        except HTTPError as exc:\n            status_code = exc.code\n        except URLError as exc:\n            raise RuntimeError(\n                f\"Request failed: {exc.reason}\"\n            ) from exc\n    \n        print(\n            f\"AI_TEST_AGENT_HTTP_STATUS={status_code}\"\n        )\n    \n>       assert status_code == expected_status\nE       assert 400 == 200\n\ntest_generated.py:46: AssertionError\n=========================== short test summary info ===========================\nFAILED test_generated.py::test_generated_api_case - assert 400 == 200\n1 failed in 0.08s\n",
+              "stderr": "",
+              "exit_code": 1,
+              "http_status_code": 400
+            },
+            {
+              "trace_id": "83be6e2e-8b1a-460b-bdae-d0152af9966a",
+              "test_name": "login_boundary_password",
+              "status": "failed",
+              "started_at": "2026-10-30T08:47:37.523440Z",
+              "finished_at": "2026-10-30T08:47:38.095875Z",
+              "duration_seconds": 0.572435,
+              "stdout": "AI_TEST_AGENT_HTTP_STATUS=400\nF\n================================== FAILURES ===================================\n___________________________ test_generated_api_case ___________________________\n\n    def test_generated_api_case():\n        method = \"POST\"\n        url = \"http://127.0.0.1:6361/login\"\n        parameters = {\n        \"username\": \"test\",\n        \"password\": \"\",\n        \"age\": 18\n    }\n        expected_status = 200\n    \n        if method == \"GET\":\n            if parameters:\n                url = f\"{url}?{urlencode(parameters, doseq=True)}\"\n            data = None\n        else:\n            data = urlencode(parameters, doseq=True).encode()\n    \n        request = Request(\n            url=url,\n            data=data,\n            method=method,\n            headers={\n                \"Content-Type\": \"application/x-www-form-urlencoded\",\n            },\n        )\n    \n        try:\n            with urlopen(request, timeout=10) as response:\n                status_code = response.status\n        except HTTPError as exc:\n            status_code = exc.code\n        except URLError as exc:\n            raise RuntimeError(\n                f\"Request failed: {exc.reason}\"\n            ) from exc\n    \n        print(\n            f\"AI_TEST_AGENT_HTTP_STATUS={status_code}\"\n        )\n    \n>       assert status_code == expected_status\nE       assert 400 == 200\n\ntest_generated.py:46: AssertionError\n=========================== short test summary info ===========================\nFAILED test_generated.py::test_generated_api_case - assert 400 == 200\n1 failed in 0.08s\n",
+              "stderr": "",
+              "exit_code": 1,
+              "http_status_code": 400
+            },
+            {
+              "trace_id": "9b64a39f-1ef4-4956-9282-08d22c45aaec",
+              "test_name": "login_wrong_type_age",
+              "status": "passed",
+              "started_at": "2026-10-30T08:47:38.095875Z",
+              "finished_at": "2026-10-30T08:47:38.618480Z",
+              "duration_seconds": 0.522605,
+              "stdout": "AI_TEST_AGENT_HTTP_STATUS=200\n.\n1 passed in 0.04s\n",
+              "stderr": "",
+              "exit_code": 0,
+              "http_status_code": 200
+            },
+            {
+              "trace_id": "af9fa1eb-53a1-426f-826b-7bc506f32a1c",
+              "test_name": "login_boundary_age",
+              "status": "passed",
+              "started_at": "2026-10-30T08:47:38.618480Z",
+              "finished_at": "2026-10-30T08:47:39.133696Z",
+              "duration_seconds": 0.515216,
+              "stdout": "AI_TEST_AGENT_HTTP_STATUS=200\n.\n1 passed in 0.04s\n",
+              "stderr": "",
+              "exit_code": 0,
+              "http_status_code": 200
+            }
+          ],
+          "healing_outcomes": []
+        },
+        "stdout": "Generated tests: 11\nPassed executions: 5/11\nMarkdown report: C:\\Users\\kaaka\\AppData\\Local\\Temp\\agent-eval-nn5wp3cx\\agent-report.md\nJSON report: C:\\Users\\kaaka\\AppData\\Local\\Temp\\agent-eval-nn5wp3cx\\agent-report.json\n",
+        "stderr": "",
+        "exit_code": 0,
+        "executable": "E:\\code\\1\\.venv\\Scripts\\ai-test-agent.exe",
+        "spec": "E:\\code\\1\\2\\AI-Test-Agent1\\examples\\login.md",
+        "base_url": "http://127.0.0.1:6361",
+        "mock": true,
+        "trace_events": [
+          {
+            "event_type": "message",
+            "name": "ai_test_agent_execution",
+            "data": {
+              "source": "ai_test_agent",
+              "evidence_type": "test_execution",
+              "index": 1,
+              "trace_id": "c42a89c7-37aa-4008-adaa-d9d8e076d04f",
+              "test_name": "login_normal",
+              "status": "passed",
+              "exit_code": 0,
+              "http_status_code": 200,
+              "duration_seconds": 0.460197
+            }
+          },
+          {
+            "event_type": "message",
+            "name": "ai_test_agent_execution",
+            "data": {
+              "source": "ai_test_agent",
+              "evidence_type": "test_execution",
+              "index": 2,
+              "trace_id": "e6f2b444-974f-49e2-825c-45acfef3940c",
+              "test_name": "login_missing_username",
+              "status": "failed",
+              "exit_code": 1,
+              "http_status_code": 400,
+              "duration_seconds": 0.503655
+            }
+          },
+          {
+            "event_type": "message",
+            "name": "ai_test_agent_execution",
+            "data": {
+              "source": "ai_test_agent",
+              "evidence_type": "test_execution",
+              "index": 3,
+              "trace_id": "25cbb8a8-6901-4cd0-adc6-594e69beacdb",
+              "test_name": "login_wrong_type_username",
+              "status": "passed",
+              "exit_code": 0,
+              "http_status_code": 200,
+              "duration_seconds": 0.479067
+            }
+          },
+          {
+            "event_type": "message",
+            "name": "ai_test_agent_execution",
+            "data": {
+              "source": "ai_test_agent",
+              "evidence_type": "test_execution",
+              "index": 4,
+              "trace_id": "a6744480-fa35-4b35-9fde-31514608c852",
+              "test_name": "login_empty_username",
+              "status": "failed",
+              "exit_code": 1,
+              "http_status_code": 400,
+              "duration_seconds": 0.550958
+            }
+          },
+          {
+            "event_type": "message",
+            "name": "ai_test_agent_execution",
+            "data": {
+              "source": "ai_test_agent",
+              "evidence_type": "test_execution",
+              "index": 5,
+              "trace_id": "f4875211-e71c-422f-84f4-1281657efa98",
+              "test_name": "login_boundary_username",
+              "status": "failed",
+              "exit_code": 1,
+              "http_status_code": 400,
+              "duration_seconds": 0.549796
+            }
+          },
+          {
+            "event_type": "message",
+            "name": "ai_test_agent_execution",
+            "data": {
+              "source": "ai_test_agent",
+              "evidence_type": "test_execution",
+              "index": 6,
+              "trace_id": "06679a57-ef57-45cf-99c8-36e550931590",
+              "test_name": "login_missing_password",
+              "status": "failed",
+              "exit_code": 1,
+              "http_status_code": 400,
+              "duration_seconds": 0.519825
+            }
+          },
+          {
+            "event_type": "message",
+            "name": "ai_test_agent_execution",
+            "data": {
+              "source": "ai_test_agent",
+              "evidence_type": "test_execution",
+              "index": 7,
+              "trace_id": "0ca97e8b-af4f-4271-93dc-0af5b6666496",
+              "test_name": "login_wrong_type_password",
+              "status": "passed",
+              "exit_code": 0,
+              "http_status_code": 200,
+              "duration_seconds": 0.496546
+            }
+          },
+          {
+            "event_type": "message",
+            "name": "ai_test_agent_execution",
+            "data": {
+              "source": "ai_test_agent",
+              "evidence_type": "test_execution",
+              "index": 8,
+              "trace_id": "78caa7af-b052-4362-a5d1-c96e13f61e0d",
+              "test_name": "login_empty_password",
+              "status": "failed",
+              "exit_code": 1,
+              "http_status_code": 400,
+              "duration_seconds": 0.526188
+            }
+          },
+          {
+            "event_type": "message",
+            "name": "ai_test_agent_execution",
+            "data": {
+              "source": "ai_test_agent",
+              "evidence_type": "test_execution",
+              "index": 9,
+              "trace_id": "83be6e2e-8b1a-460b-bdae-d0152af9966a",
+              "test_name": "login_boundary_password",
+              "status": "failed",
+              "exit_code": 1,
+              "http_status_code": 400,
+              "duration_seconds": 0.572435
+            }
+          },
+          {
+            "event_type": "message",
+            "name": "ai_test_agent_execution",
+            "data": {
+              "source": "ai_test_agent",
+              "evidence_type": "test_execution",
+              "index": 10,
+              "trace_id": "9b64a39f-1ef4-4956-9282-08d22c45aaec",
+              "test_name": "login_wrong_type_age",
+              "status": "passed",
+              "exit_code": 0,
+              "http_status_code": 200,
+              "duration_seconds": 0.522605
+            }
+          },
+          {
+            "event_type": "message",
+            "name": "ai_test_agent_execution",
+            "data": {
+              "source": "ai_test_agent",
+              "evidence_type": "test_execution",
+              "index": 11,
+              "trace_id": "af9fa1eb-53a1-426f-826b-7bc506f32a1c",
+              "test_name": "login_boundary_age",
+              "status": "passed",
+              "exit_code": 0,
+              "http_status_code": 200,
+              "duration_seconds": 0.515216
+            }
+          },
+          {
+            "event_type": "message",
+            "name": "ai_test_agent_process_result",
+            "data": {
+              "source": "ai_test_agent",
+              "evidence_type": "process_result",
+              "exit_code": 0,
+              "generated_tests": 11,
+              "executions": 11,
+              "stdout_present": true,
+              "stderr_present": false
+            }
+          }
+        ]
+      },
+      "trace": {
+        "events": [
+          {
+            "timestamp": "2026-10-30T08:47:33.171301Z",
+            "event_type": "agent_start",
+            "name": "agent_started",
+            "data": {}
+          },
+          {
+            "timestamp": "2026-10-30T08:47:39.166961Z",
+            "event_type": "message",
+            "name": "ai_test_agent_execution",
+            "data": {
+              "source": "ai_test_agent",
+              "evidence_type": "test_execution",
+              "index": 1,
+              "trace_id": "c42a89c7-37aa-4008-adaa-d9d8e076d04f",
+              "test_name": "login_normal",
+              "status": "passed",
+              "exit_code": 0,
+              "http_status_code": 200,
+              "duration_seconds": 0.460197
+            }
+          },
+          {
+            "timestamp": "2026-10-30T08:47:39.166961Z",
+            "event_type": "message",
+            "name": "ai_test_agent_execution",
+            "data": {
+              "source": "ai_test_agent",
+              "evidence_type": "test_execution",
+              "index": 2,
+              "trace_id": "e6f2b444-974f-49e2-825c-45acfef3940c",
+              "test_name": "login_missing_username",
+              "status": "failed",
+              "exit_code": 1,
+              "http_status_code": 400,
+              "duration_seconds": 0.503655
+            }
+          },
+          {
+            "timestamp": "2026-10-30T08:47:39.166961Z",
+            "event_type": "message",
+            "name": "ai_test_agent_execution",
+            "data": {
+              "source": "ai_test_agent",
+              "evidence_type": "test_execution",
+              "index": 3,
+              "trace_id": "25cbb8a8-6901-4cd0-adc6-594e69beacdb",
+              "test_name": "login_wrong_type_username",
+              "status": "passed",
+              "exit_code": 0,
+              "http_status_code": 200,
+              "duration_seconds": 0.479067
+            }
+          },
+          {
+            "timestamp": "2026-10-30T08:47:39.166961Z",
+            "event_type": "message",
+            "name": "ai_test_agent_execution",
+            "data": {
+              "source": "ai_test_agent",
+              "evidence_type": "test_execution",
+              "index": 4,
+              "trace_id": "a6744480-fa35-4b35-9fde-31514608c852",
+              "test_name": "login_empty_username",
+              "status": "failed",
+              "exit_code": 1,
+              "http_status_code": 400,
+              "duration_seconds": 0.550958
+            }
+          },
+          {
+            "timestamp": "2026-10-30T08:47:39.166961Z",
+            "event_type": "message",
+            "name": "ai_test_agent_execution",
+            "data": {
+              "source": "ai_test_agent",
+              "evidence_type": "test_execution",
+              "index": 5,
+              "trace_id": "f4875211-e71c-422f-84f4-1281657efa98",
+              "test_name": "login_boundary_username",
+              "status": "failed",
+              "exit_code": 1,
+              "http_status_code": 400,
+              "duration_seconds": 0.549796
+            }
+          },
+          {
+            "timestamp": "2026-10-30T08:47:39.166961Z",
+            "event_type": "message",
+            "name": "ai_test_agent_execution",
+            "data": {
+              "source": "ai_test_agent",
+              "evidence_type": "test_execution",
+              "index": 6,
+              "trace_id": "06679a57-ef57-45cf-99c8-36e550931590",
+              "test_name": "login_missing_password",
+              "status": "failed",
+              "exit_code": 1,
+              "http_status_code": 400,
+              "duration_seconds": 0.519825
+            }
+          },
+          {
+            "timestamp": "2026-10-30T08:47:39.166961Z",
+            "event_type": "message",
+            "name": "ai_test_agent_execution",
+            "data": {
+              "source": "ai_test_agent",
+              "evidence_type": "test_execution",
+              "index": 7,
+              "trace_id": "0ca97e8b-af4f-4271-93dc-0af5b6666496",
+              "test_name": "login_wrong_type_password",
+              "status": "passed",
+              "exit_code": 0,
+              "http_status_code": 200,
+              "duration_seconds": 0.496546
+            }
+          },
+          {
+            "timestamp": "2026-10-30T08:47:39.166961Z",
+            "event_type": "message",
+            "name": "ai_test_agent_execution",
+            "data": {
+              "source": "ai_test_agent",
+              "evidence_type": "test_execution",
+              "index": 8,
+              "trace_id": "78caa7af-b052-4362-a5d1-c96e13f61e0d",
+              "test_name": "login_empty_password",
+              "status": "failed",
+              "exit_code": 1,
+              "http_status_code": 400,
+              "duration_seconds": 0.526188
+            }
+          },
+          {
+            "timestamp": "2026-10-30T08:47:39.166961Z",
+            "event_type": "message",
+            "name": "ai_test_agent_execution",
+            "data": {
+              "source": "ai_test_agent",
+              "evidence_type": "test_execution",
+              "index": 9,
+              "trace_id": "83be6e2e-8b1a-460b-bdae-d0152af9966a",
+              "test_name": "login_boundary_password",
+              "status": "failed",
+              "exit_code": 1,
+              "http_status_code": 400,
+              "duration_seconds": 0.572435
+            }
+          },
+          {
+            "timestamp": "2026-10-30T08:47:39.166961Z",
+            "event_type": "message",
+            "name": "ai_test_agent_execution",
+            "data": {
+              "source": "ai_test_agent",
+              "evidence_type": "test_execution",
+              "index": 10,
+              "trace_id": "9b64a39f-1ef4-4956-9282-08d22c45aaec",
+              "test_name": "login_wrong_type_age",
+              "status": "passed",
+              "exit_code": 0,
+              "http_status_code": 200,
+              "duration_seconds": 0.522605
+            }
+          },
+          {
+            "timestamp": "2026-10-30T08:47:39.166961Z",
+            "event_type": "message",
+            "name": "ai_test_agent_execution",
+            "data": {
+              "source": "ai_test_agent",
+              "evidence_type": "test_execution",
+              "index": 11,
+              "trace_id": "af9fa1eb-53a1-426f-826b-7bc506f32a1c",
+              "test_name": "login_boundary_age",
+              "status": "passed",
+              "exit_code": 0,
+              "http_status_code": 200,
+              "duration_seconds": 0.515216
+            }
+          },
+          {
+            "timestamp": "2026-10-30T08:47:39.166961Z",
+            "event_type": "message",
+            "name": "ai_test_agent_process_result",
+            "data": {
+              "source": "ai_test_agent",
+              "evidence_type": "process_result",
+              "exit_code": 0,
+              "generated_tests": 11,
+              "executions": 11,
+              "stdout_present": true,
+              "stderr_present": false
+            }
+          },
+          {
+            "timestamp": "2026-10-30T08:47:39.166961Z",
+            "event_type": "agent_end",
+            "name": "agent_finished",
+            "data": {
+              "output_type": "dict"
+            }
+          }
+        ]
+      },
+      "error": null,
+      "metadata": {}
+    },
+    {
+      "id": "run-ai-test-agent-login-e2e-003",
+      "task_id": "ai-test-agent-login-e2e",
+      "status": "success",
+      "started_at": "2026-10-30T08:47:39.166961Z",
+      "finished_at": "2026-10-30T08:47:45.892786Z",
+      "duration_ms": 6725.825000000001,
+      "output": {
+        "report": {
+          "spec": {
+            "name": "login",
+            "method": "POST",
+            "path": "/login",
+            "parameters": [
+              {
+                "name": "username",
+                "type": "string",
+                "required": true
+              },
+              {
+                "name": "password",
+                "type": "string",
+                "required": true
+              },
+              {
+                "name": "age",
+                "type": "integer",
+                "required": false
+              }
+            ]
+          },
+          "test_cases": [
+            {
+              "name": "login_normal",
+              "scenario_type": "normal",
+              "target_parameter": null,
+              "method": "POST",
+              "path": "/login",
+              "description": "Send a valid request using valid parameter values.",
+              "parameters": [
+                {
+                  "name": "username",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "password",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "age",
+                  "type": "integer",
+                  "required": false
+                }
+              ]
+            },
+            {
+              "name": "login_missing_username",
+              "scenario_type": "missing",
+              "target_parameter": "username",
+              "method": "POST",
+              "path": "/login",
+              "description": "Send a request without required parameter 'username'.",
+              "parameters": [
+                {
+                  "name": "username",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "password",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "age",
+                  "type": "integer",
+                  "required": false
+                }
+              ]
+            },
+            {
+              "name": "login_wrong_type_username",
+              "scenario_type": "wrong_type",
+              "target_parameter": "username",
+              "method": "POST",
+              "path": "/login",
+              "description": "Send a request with an invalid type for parameter 'username'.",
+              "parameters": [
+                {
+                  "name": "username",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "password",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "age",
+                  "type": "integer",
+                  "required": false
+                }
+              ]
+            },
+            {
+              "name": "login_empty_username",
+              "scenario_type": "empty",
+              "target_parameter": "username",
+              "method": "POST",
+              "path": "/login",
+              "description": "Send an empty string for parameter 'username'.",
+              "parameters": [
+                {
+                  "name": "username",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "password",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "age",
+                  "type": "integer",
+                  "required": false
+                }
+              ]
+            },
+            {
+              "name": "login_boundary_username",
+              "scenario_type": "boundary",
+              "target_parameter": "username",
+              "method": "POST",
+              "path": "/login",
+              "description": "Test string boundary values for parameter 'username'.",
+              "parameters": [
+                {
+                  "name": "username",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "password",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "age",
+                  "type": "integer",
+                  "required": false
+                }
+              ]
+            },
+            {
+              "name": "login_missing_password",
+              "scenario_type": "missing",
+              "target_parameter": "password",
+              "method": "POST",
+              "path": "/login",
+              "description": "Send a request without required parameter 'password'.",
+              "parameters": [
+                {
+                  "name": "username",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "password",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "age",
+                  "type": "integer",
+                  "required": false
+                }
+              ]
+            },
+            {
+              "name": "login_wrong_type_password",
+              "scenario_type": "wrong_type",
+              "target_parameter": "password",
+              "method": "POST",
+              "path": "/login",
+              "description": "Send a request with an invalid type for parameter 'password'.",
+              "parameters": [
+                {
+                  "name": "username",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "password",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "age",
+                  "type": "integer",
+                  "required": false
+                }
+              ]
+            },
+            {
+              "name": "login_empty_password",
+              "scenario_type": "empty",
+              "target_parameter": "password",
+              "method": "POST",
+              "path": "/login",
+              "description": "Send an empty string for parameter 'password'.",
+              "parameters": [
+                {
+                  "name": "username",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "password",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "age",
+                  "type": "integer",
+                  "required": false
+                }
+              ]
+            },
+            {
+              "name": "login_boundary_password",
+              "scenario_type": "boundary",
+              "target_parameter": "password",
+              "method": "POST",
+              "path": "/login",
+              "description": "Test string boundary values for parameter 'password'.",
+              "parameters": [
+                {
+                  "name": "username",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "password",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "age",
+                  "type": "integer",
+                  "required": false
+                }
+              ]
+            },
+            {
+              "name": "login_wrong_type_age",
+              "scenario_type": "wrong_type",
+              "target_parameter": "age",
+              "method": "POST",
+              "path": "/login",
+              "description": "Send a request with an invalid type for parameter 'age'.",
+              "parameters": [
+                {
+                  "name": "username",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "password",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "age",
+                  "type": "integer",
+                  "required": false
+                }
+              ]
+            },
+            {
+              "name": "login_boundary_age",
+              "scenario_type": "boundary",
+              "target_parameter": "age",
+              "method": "POST",
+              "path": "/login",
+              "description": "Test integer boundary values for parameter 'age'.",
+              "parameters": [
+                {
+                  "name": "username",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "password",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "age",
+                  "type": "integer",
+                  "required": false
+                }
+              ]
+            }
+          ],
+          "generated_tests": [
+            {
+              "name": "login_normal",
+              "method": "POST",
+              "path": "/login",
+              "scenario_type": "normal",
+              "request_parameters": {
+                "username": "test",
+                "password": "test",
+                "age": 18
+              },
+              "expected_status_code": 200,
+              "assertions": [
+                "status_code == 200"
+              ]
+            },
+            {
+              "name": "login_missing_username",
+              "method": "POST",
+              "path": "/login",
+              "scenario_type": "missing",
+              "request_parameters": {
+                "password": "test",
+                "age": 18
+              },
+              "expected_status_code": 200,
+              "assertions": [
+                "status_code == 200"
+              ]
+            },
+            {
+              "name": "login_wrong_type_username",
+              "method": "POST",
+              "path": "/login",
+              "scenario_type": "wrong_type",
+              "request_parameters": {
+                "username": 12345,
+                "password": "test",
+                "age": 18
+              },
+              "expected_status_code": 200,
+              "assertions": [
+                "status_code == 200"
+              ]
+            },
+            {
+              "name": "login_empty_username",
+              "method": "POST",
+              "path": "/login",
+              "scenario_type": "empty",
+              "request_parameters": {
+                "username": "",
+                "password": "test",
+                "age": 18
+              },
+              "expected_status_code": 200,
+              "assertions": [
+                "status_code == 200"
+              ]
+            },
+            {
+              "name": "login_boundary_username",
+              "method": "POST",
+              "path": "/login",
+              "scenario_type": "boundary",
+              "request_parameters": {
+                "username": "",
+                "password": "test",
+                "age": 18
+              },
+              "expected_status_code": 200,
+              "assertions": [
+                "status_code == 200"
+              ]
+            },
+            {
+              "name": "login_missing_password",
+              "method": "POST",
+              "path": "/login",
+              "scenario_type": "missing",
+              "request_parameters": {
+                "username": "test",
+                "age": 18
+              },
+              "expected_status_code": 200,
+              "assertions": [
+                "status_code == 200"
+              ]
+            },
+            {
+              "name": "login_wrong_type_password",
+              "method": "POST",
+              "path": "/login",
+              "scenario_type": "wrong_type",
+              "request_parameters": {
+                "username": "test",
+                "password": 12345,
+                "age": 18
+              },
+              "expected_status_code": 200,
+              "assertions": [
+                "status_code == 200"
+              ]
+            },
+            {
+              "name": "login_empty_password",
+              "method": "POST",
+              "path": "/login",
+              "scenario_type": "empty",
+              "request_parameters": {
+                "username": "test",
+                "password": "",
+                "age": 18
+              },
+              "expected_status_code": 200,
+              "assertions": [
+                "status_code == 200"
+              ]
+            },
+            {
+              "name": "login_boundary_password",
+              "method": "POST",
+              "path": "/login",
+              "scenario_type": "boundary",
+              "request_parameters": {
+                "username": "test",
+                "password": "",
+                "age": 18
+              },
+              "expected_status_code": 200,
+              "assertions": [
+                "status_code == 200"
+              ]
+            },
+            {
+              "name": "login_wrong_type_age",
+              "method": "POST",
+              "path": "/login",
+              "scenario_type": "wrong_type",
+              "request_parameters": {
+                "username": "test",
+                "password": "test",
+                "age": "not-a-number"
+              },
+              "expected_status_code": 200,
+              "assertions": [
+                "status_code == 200"
+              ]
+            },
+            {
+              "name": "login_boundary_age",
+              "method": "POST",
+              "path": "/login",
+              "scenario_type": "boundary",
+              "request_parameters": {
+                "username": "test",
+                "password": "test",
+                "age": 0
+              },
+              "expected_status_code": 200,
+              "assertions": [
+                "status_code == 200"
+              ]
+            }
+          ],
+          "executions": [
+            {
+              "trace_id": "32090163-93ec-452f-89e8-e8f30da43936",
+              "test_name": "login_normal",
+              "status": "passed",
+              "started_at": "2026-10-30T08:47:39.615863Z",
+              "finished_at": "2026-10-30T08:47:40.162241Z",
+              "duration_seconds": 0.546378,
+              "stdout": "AI_TEST_AGENT_HTTP_STATUS=200\n.\n1 passed in 0.04s\n",
+              "stderr": "",
+              "exit_code": 0,
+              "http_status_code": 200
+            },
+            {
+              "trace_id": "f9474c0a-4043-4b22-8855-1d563b123ae7",
+              "test_name": "login_missing_username",
+              "status": "failed",
+              "started_at": "2026-10-30T08:47:40.162241Z",
+              "finished_at": "2026-10-30T08:47:41.083982Z",
+              "duration_seconds": 0.921741,
+              "stdout": "AI_TEST_AGENT_HTTP_STATUS=400\nF\n================================== FAILURES ===================================\n___________________________ test_generated_api_case ___________________________\n\n    def test_generated_api_case():\n        method = \"POST\"\n        url = \"http://127.0.0.1:6361/login\"\n        parameters = {\n        \"password\": \"test\",\n        \"age\": 18\n    }\n        expected_status = 200\n    \n        if method == \"GET\":\n            if parameters:\n                url = f\"{url}?{urlencode(parameters, doseq=True)}\"\n            data = None\n        else:\n            data = urlencode(parameters, doseq=True).encode()\n    \n        request = Request(\n            url=url,\n            data=data,\n            method=method,\n            headers={\n                \"Content-Type\": \"application/x-www-form-urlencoded\",\n            },\n        )\n    \n        try:\n            with urlopen(request, timeout=10) as response:\n                status_code = response.status\n        except HTTPError as exc:\n            status_code = exc.code\n        except URLError as exc:\n            raise RuntimeError(\n                f\"Request failed: {exc.reason}\"\n            ) from exc\n    \n        print(\n            f\"AI_TEST_AGENT_HTTP_STATUS={status_code}\"\n        )\n    \n>       assert status_code == expected_status\nE       assert 400 == 200\n\ntest_generated.py:45: AssertionError\n=========================== short test summary info ===========================\nFAILED test_generated.py::test_generated_api_case - assert 400 == 200\n1 failed in 0.09s\n",
+              "stderr": "",
+              "exit_code": 1,
+              "http_status_code": 400
+            },
+            {
+              "trace_id": "cc827204-f623-4d7b-854a-6efe353403ca",
+              "test_name": "login_wrong_type_username",
+              "status": "passed",
+              "started_at": "2026-10-30T08:47:41.083982Z",
+              "finished_at": "2026-10-30T08:47:41.689183Z",
+              "duration_seconds": 0.605201,
+              "stdout": "AI_TEST_AGENT_HTTP_STATUS=200\n.\n1 passed in 0.05s\n",
+              "stderr": "",
+              "exit_code": 0,
+              "http_status_code": 200
+            },
+            {
+              "trace_id": "c7f34053-1aed-409b-af87-088aca6091c4",
+              "test_name": "login_empty_username",
+              "status": "failed",
+              "started_at": "2026-10-30T08:47:41.689183Z",
+              "finished_at": "2026-10-30T08:47:42.247777Z",
+              "duration_seconds": 0.558594,
+              "stdout": "AI_TEST_AGENT_HTTP_STATUS=400\nF\n================================== FAILURES ===================================\n___________________________ test_generated_api_case ___________________________\n\n    def test_generated_api_case():\n        method = \"POST\"\n        url = \"http://127.0.0.1:6361/login\"\n        parameters = {\n        \"username\": \"\",\n        \"password\": \"test\",\n        \"age\": 18\n    }\n        expected_status = 200\n    \n        if method == \"GET\":\n            if parameters:\n                url = f\"{url}?{urlencode(parameters, doseq=True)}\"\n            data = None\n        else:\n            data = urlencode(parameters, doseq=True).encode()\n    \n        request = Request(\n            url=url,\n            data=data,\n            method=method,\n            headers={\n                \"Content-Type\": \"application/x-www-form-urlencoded\",\n            },\n        )\n    \n        try:\n            with urlopen(request, timeout=10) as response:\n                status_code = response.status\n        except HTTPError as exc:\n            status_code = exc.code\n        except URLError as exc:\n            raise RuntimeError(\n                f\"Request failed: {exc.reason}\"\n            ) from exc\n    \n        print(\n            f\"AI_TEST_AGENT_HTTP_STATUS={status_code}\"\n        )\n    \n>       assert status_code == expected_status\nE       assert 400 == 200\n\ntest_generated.py:46: AssertionError\n=========================== short test summary info ===========================\nFAILED test_generated.py::test_generated_api_case - assert 400 == 200\n1 failed in 0.08s\n",
+              "stderr": "",
+              "exit_code": 1,
+              "http_status_code": 400
+            },
+            {
+              "trace_id": "a65fd322-0cae-4894-bddf-c05e315e0ce3",
+              "test_name": "login_boundary_username",
+              "status": "failed",
+              "started_at": "2026-10-30T08:47:42.247777Z",
+              "finished_at": "2026-10-30T08:47:42.792141Z",
+              "duration_seconds": 0.544364,
+              "stdout": "AI_TEST_AGENT_HTTP_STATUS=400\nF\n================================== FAILURES ===================================\n___________________________ test_generated_api_case ___________________________\n\n    def test_generated_api_case():\n        method = \"POST\"\n        url = \"http://127.0.0.1:6361/login\"\n        parameters = {\n        \"username\": \"\",\n        \"password\": \"test\",\n        \"age\": 18\n    }\n        expected_status = 200\n    \n        if method == \"GET\":\n            if parameters:\n                url = f\"{url}?{urlencode(parameters, doseq=True)}\"\n            data = None\n        else:\n            data = urlencode(parameters, doseq=True).encode()\n    \n        request = Request(\n            url=url,\n            data=data,\n            method=method,\n            headers={\n                \"Content-Type\": \"application/x-www-form-urlencoded\",\n            },\n        )\n    \n        try:\n            with urlopen(request, timeout=10) as response:\n                status_code = response.status\n        except HTTPError as exc:\n            status_code = exc.code\n        except URLError as exc:\n            raise RuntimeError(\n                f\"Request failed: {exc.reason}\"\n            ) from exc\n    \n        print(\n            f\"AI_TEST_AGENT_HTTP_STATUS={status_code}\"\n        )\n    \n>       assert status_code == expected_status\nE       assert 400 == 200\n\ntest_generated.py:46: AssertionError\n=========================== short test summary info ===========================\nFAILED test_generated.py::test_generated_api_case - assert 400 == 200\n1 failed in 0.08s\n",
+              "stderr": "",
+              "exit_code": 1,
+              "http_status_code": 400
+            },
+            {
+              "trace_id": "64227cdc-6e8f-4756-b8b0-6ee40f90a082",
+              "test_name": "login_missing_password",
+              "status": "failed",
+              "started_at": "2026-10-30T08:47:42.792141Z",
+              "finished_at": "2026-10-30T08:47:43.311213Z",
+              "duration_seconds": 0.519072,
+              "stdout": "AI_TEST_AGENT_HTTP_STATUS=400\nF\n================================== FAILURES ===================================\n___________________________ test_generated_api_case ___________________________\n\n    def test_generated_api_case():\n        method = \"POST\"\n        url = \"http://127.0.0.1:6361/login\"\n        parameters = {\n        \"username\": \"test\",\n        \"age\": 18\n    }\n        expected_status = 200\n    \n        if method == \"GET\":\n            if parameters:\n                url = f\"{url}?{urlencode(parameters, doseq=True)}\"\n            data = None\n        else:\n            data = urlencode(parameters, doseq=True).encode()\n    \n        request = Request(\n            url=url,\n            data=data,\n            method=method,\n            headers={\n                \"Content-Type\": \"application/x-www-form-urlencoded\",\n            },\n        )\n    \n        try:\n            with urlopen(request, timeout=10) as response:\n                status_code = response.status\n        except HTTPError as exc:\n            status_code = exc.code\n        except URLError as exc:\n            raise RuntimeError(\n                f\"Request failed: {exc.reason}\"\n            ) from exc\n    \n        print(\n            f\"AI_TEST_AGENT_HTTP_STATUS={status_code}\"\n        )\n    \n>       assert status_code == expected_status\nE       assert 400 == 200\n\ntest_generated.py:45: AssertionError\n=========================== short test summary info ===========================\nFAILED test_generated.py::test_generated_api_case - assert 400 == 200\n1 failed in 0.08s\n",
+              "stderr": "",
+              "exit_code": 1,
+              "http_status_code": 400
+            },
+            {
+              "trace_id": "8325ed11-71fd-4ca1-a33d-c18e7c9a099c",
+              "test_name": "login_wrong_type_password",
+              "status": "passed",
+              "started_at": "2026-10-30T08:47:43.312239Z",
+              "finished_at": "2026-10-30T08:47:43.798292Z",
+              "duration_seconds": 0.486053,
+              "stdout": "AI_TEST_AGENT_HTTP_STATUS=200\n.\n1 passed in 0.04s\n",
+              "stderr": "",
+              "exit_code": 0,
+              "http_status_code": 200
+            },
+            {
+              "trace_id": "2500cfc8-6879-4029-9006-ae19e83983c9",
+              "test_name": "login_empty_password",
+              "status": "failed",
+              "started_at": "2026-10-30T08:47:43.798292Z",
+              "finished_at": "2026-10-30T08:47:44.351043Z",
+              "duration_seconds": 0.552751,
+              "stdout": "AI_TEST_AGENT_HTTP_STATUS=400\nF\n================================== FAILURES ===================================\n___________________________ test_generated_api_case ___________________________\n\n    def test_generated_api_case():\n        method = \"POST\"\n        url = \"http://127.0.0.1:6361/login\"\n        parameters = {\n        \"username\": \"test\",\n        \"password\": \"\",\n        \"age\": 18\n    }\n        expected_status = 200\n    \n        if method == \"GET\":\n            if parameters:\n                url = f\"{url}?{urlencode(parameters, doseq=True)}\"\n            data = None\n        else:\n            data = urlencode(parameters, doseq=True).encode()\n    \n        request = Request(\n            url=url,\n            data=data,\n            method=method,\n            headers={\n                \"Content-Type\": \"application/x-www-form-urlencoded\",\n            },\n        )\n    \n        try:\n            with urlopen(request, timeout=10) as response:\n                status_code = response.status\n        except HTTPError as exc:\n            status_code = exc.code\n        except URLError as exc:\n            raise RuntimeError(\n                f\"Request failed: {exc.reason}\"\n            ) from exc\n    \n        print(\n            f\"AI_TEST_AGENT_HTTP_STATUS={status_code}\"\n        )\n    \n>       assert status_code == expected_status\nE       assert 400 == 200\n\ntest_generated.py:46: AssertionError\n=========================== short test summary info ===========================\nFAILED test_generated.py::test_generated_api_case - assert 400 == 200\n1 failed in 0.08s\n",
+              "stderr": "",
+              "exit_code": 1,
+              "http_status_code": 400
+            },
+            {
+              "trace_id": "d4b56846-615e-4e95-a519-91a20ff2f34a",
+              "test_name": "login_boundary_password",
+              "status": "failed",
+              "started_at": "2026-10-30T08:47:44.351043Z",
+              "finished_at": "2026-10-30T08:47:44.899743Z",
+              "duration_seconds": 0.5487,
+              "stdout": "AI_TEST_AGENT_HTTP_STATUS=400\nF\n================================== FAILURES ===================================\n___________________________ test_generated_api_case ___________________________\n\n    def test_generated_api_case():\n        method = \"POST\"\n        url = \"http://127.0.0.1:6361/login\"\n        parameters = {\n        \"username\": \"test\",\n        \"password\": \"\",\n        \"age\": 18\n    }\n        expected_status = 200\n    \n        if method == \"GET\":\n            if parameters:\n                url = f\"{url}?{urlencode(parameters, doseq=True)}\"\n            data = None\n        else:\n            data = urlencode(parameters, doseq=True).encode()\n    \n        request = Request(\n            url=url,\n            data=data,\n            method=method,\n            headers={\n                \"Content-Type\": \"application/x-www-form-urlencoded\",\n            },\n        )\n    \n        try:\n            with urlopen(request, timeout=10) as response:\n                status_code = response.status\n        except HTTPError as exc:\n            status_code = exc.code\n        except URLError as exc:\n            raise RuntimeError(\n                f\"Request failed: {exc.reason}\"\n            ) from exc\n    \n        print(\n            f\"AI_TEST_AGENT_HTTP_STATUS={status_code}\"\n        )\n    \n>       assert status_code == expected_status\nE       assert 400 == 200\n\ntest_generated.py:46: AssertionError\n=========================== short test summary info ===========================\nFAILED test_generated.py::test_generated_api_case - assert 400 == 200\n1 failed in 0.08s\n",
+              "stderr": "",
+              "exit_code": 1,
+              "http_status_code": 400
+            },
+            {
+              "trace_id": "2b3e9ded-9e48-4408-b169-9341e9947ee9",
+              "test_name": "login_wrong_type_age",
+              "status": "passed",
+              "started_at": "2026-10-30T08:47:44.900739Z",
+              "finished_at": "2026-10-30T08:47:45.379726Z",
+              "duration_seconds": 0.478987,
+              "stdout": "AI_TEST_AGENT_HTTP_STATUS=200\n.\n1 passed in 0.04s\n",
+              "stderr": "",
+              "exit_code": 0,
+              "http_status_code": 200
+            },
+            {
+              "trace_id": "716fc709-ef88-447f-bd28-3e3111ea0df7",
+              "test_name": "login_boundary_age",
+              "status": "passed",
+              "started_at": "2026-10-30T08:47:45.380723Z",
+              "finished_at": "2026-10-30T08:47:45.861870Z",
+              "duration_seconds": 0.481147,
+              "stdout": "AI_TEST_AGENT_HTTP_STATUS=200\n.\n1 passed in 0.04s\n",
+              "stderr": "",
+              "exit_code": 0,
+              "http_status_code": 200
+            }
+          ],
+          "healing_outcomes": []
+        },
+        "stdout": "Generated tests: 11\nPassed executions: 5/11\nMarkdown report: C:\\Users\\kaaka\\AppData\\Local\\Temp\\agent-eval-2rtd2vpv\\agent-report.md\nJSON report: C:\\Users\\kaaka\\AppData\\Local\\Temp\\agent-eval-2rtd2vpv\\agent-report.json\n",
+        "stderr": "",
+        "exit_code": 0,
+        "executable": "E:\\code\\1\\.venv\\Scripts\\ai-test-agent.exe",
+        "spec": "E:\\code\\1\\2\\AI-Test-Agent1\\examples\\login.md",
+        "base_url": "http://127.0.0.1:6361",
+        "mock": true,
+        "trace_events": [
+          {
+            "event_type": "message",
+            "name": "ai_test_agent_execution",
+            "data": {
+              "source": "ai_test_agent",
+              "evidence_type": "test_execution",
+              "index": 1,
+              "trace_id": "32090163-93ec-452f-89e8-e8f30da43936",
+              "test_name": "login_normal",
+              "status": "passed",
+              "exit_code": 0,
+              "http_status_code": 200,
+              "duration_seconds": 0.546378
+            }
+          },
+          {
+            "event_type": "message",
+            "name": "ai_test_agent_execution",
+            "data": {
+              "source": "ai_test_agent",
+              "evidence_type": "test_execution",
+              "index": 2,
+              "trace_id": "f9474c0a-4043-4b22-8855-1d563b123ae7",
+              "test_name": "login_missing_username",
+              "status": "failed",
+              "exit_code": 1,
+              "http_status_code": 400,
+              "duration_seconds": 0.921741
+            }
+          },
+          {
+            "event_type": "message",
+            "name": "ai_test_agent_execution",
+            "data": {
+              "source": "ai_test_agent",
+              "evidence_type": "test_execution",
+              "index": 3,
+              "trace_id": "cc827204-f623-4d7b-854a-6efe353403ca",
+              "test_name": "login_wrong_type_username",
+              "status": "passed",
+              "exit_code": 0,
+              "http_status_code": 200,
+              "duration_seconds": 0.605201
+            }
+          },
+          {
+            "event_type": "message",
+            "name": "ai_test_agent_execution",
+            "data": {
+              "source": "ai_test_agent",
+              "evidence_type": "test_execution",
+              "index": 4,
+              "trace_id": "c7f34053-1aed-409b-af87-088aca6091c4",
+              "test_name": "login_empty_username",
+              "status": "failed",
+              "exit_code": 1,
+              "http_status_code": 400,
+              "duration_seconds": 0.558594
+            }
+          },
+          {
+            "event_type": "message",
+            "name": "ai_test_agent_execution",
+            "data": {
+              "source": "ai_test_agent",
+              "evidence_type": "test_execution",
+              "index": 5,
+              "trace_id": "a65fd322-0cae-4894-bddf-c05e315e0ce3",
+              "test_name": "login_boundary_username",
+              "status": "failed",
+              "exit_code": 1,
+              "http_status_code": 400,
+              "duration_seconds": 0.544364
+            }
+          },
+          {
+            "event_type": "message",
+            "name": "ai_test_agent_execution",
+            "data": {
+              "source": "ai_test_agent",
+              "evidence_type": "test_execution",
+              "index": 6,
+              "trace_id": "64227cdc-6e8f-4756-b8b0-6ee40f90a082",
+              "test_name": "login_missing_password",
+              "status": "failed",
+              "exit_code": 1,
+              "http_status_code": 400,
+              "duration_seconds": 0.519072
+            }
+          },
+          {
+            "event_type": "message",
+            "name": "ai_test_agent_execution",
+            "data": {
+              "source": "ai_test_agent",
+              "evidence_type": "test_execution",
+              "index": 7,
+              "trace_id": "8325ed11-71fd-4ca1-a33d-c18e7c9a099c",
+              "test_name": "login_wrong_type_password",
+              "status": "passed",
+              "exit_code": 0,
+              "http_status_code": 200,
+              "duration_seconds": 0.486053
+            }
+          },
+          {
+            "event_type": "message",
+            "name": "ai_test_agent_execution",
+            "data": {
+              "source": "ai_test_agent",
+              "evidence_type": "test_execution",
+              "index": 8,
+              "trace_id": "2500cfc8-6879-4029-9006-ae19e83983c9",
+              "test_name": "login_empty_password",
+              "status": "failed",
+              "exit_code": 1,
+              "http_status_code": 400,
+              "duration_seconds": 0.552751
+            }
+          },
+          {
+            "event_type": "message",
+            "name": "ai_test_agent_execution",
+            "data": {
+              "source": "ai_test_agent",
+              "evidence_type": "test_execution",
+              "index": 9,
+              "trace_id": "d4b56846-615e-4e95-a519-91a20ff2f34a",
+              "test_name": "login_boundary_password",
+              "status": "failed",
+              "exit_code": 1,
+              "http_status_code": 400,
+              "duration_seconds": 0.5487
+            }
+          },
+          {
+            "event_type": "message",
+            "name": "ai_test_agent_execution",
+            "data": {
+              "source": "ai_test_agent",
+              "evidence_type": "test_execution",
+              "index": 10,
+              "trace_id": "2b3e9ded-9e48-4408-b169-9341e9947ee9",
+              "test_name": "login_wrong_type_age",
+              "status": "passed",
+              "exit_code": 0,
+              "http_status_code": 200,
+              "duration_seconds": 0.478987
+            }
+          },
+          {
+            "event_type": "message",
+            "name": "ai_test_agent_execution",
+            "data": {
+              "source": "ai_test_agent",
+              "evidence_type": "test_execution",
+              "index": 11,
+              "trace_id": "716fc709-ef88-447f-bd28-3e3111ea0df7",
+              "test_name": "login_boundary_age",
+              "status": "passed",
+              "exit_code": 0,
+              "http_status_code": 200,
+              "duration_seconds": 0.481147
+            }
+          },
+          {
+            "event_type": "message",
+            "name": "ai_test_agent_process_result",
+            "data": {
+              "source": "ai_test_agent",
+              "evidence_type": "process_result",
+              "exit_code": 0,
+              "generated_tests": 11,
+              "executions": 11,
+              "stdout_present": true,
+              "stderr_present": false
+            }
+          }
+        ]
+      },
+      "trace": {
+        "events": [
+          {
+            "timestamp": "2026-10-30T08:47:39.166961Z",
+            "event_type": "agent_start",
+            "name": "agent_started",
+            "data": {}
+          },
+          {
+            "timestamp": "2026-10-30T08:47:45.892786Z",
+            "event_type": "message",
+            "name": "ai_test_agent_execution",
+            "data": {
+              "source": "ai_test_agent",
+              "evidence_type": "test_execution",
+              "index": 1,
+              "trace_id": "32090163-93ec-452f-89e8-e8f30da43936",
+              "test_name": "login_normal",
+              "status": "passed",
+              "exit_code": 0,
+              "http_status_code": 200,
+              "duration_seconds": 0.546378
+            }
+          },
+          {
+            "timestamp": "2026-10-30T08:47:45.892786Z",
+            "event_type": "message",
+            "name": "ai_test_agent_execution",
+            "data": {
+              "source": "ai_test_agent",
+              "evidence_type": "test_execution",
+              "index": 2,
+              "trace_id": "f9474c0a-4043-4b22-8855-1d563b123ae7",
+              "test_name": "login_missing_username",
+              "status": "failed",
+              "exit_code": 1,
+              "http_status_code": 400,
+              "duration_seconds": 0.921741
+            }
+          },
+          {
+            "timestamp": "2026-10-30T08:47:45.892786Z",
+            "event_type": "message",
+            "name": "ai_test_agent_execution",
+            "data": {
+              "source": "ai_test_agent",
+              "evidence_type": "test_execution",
+              "index": 3,
+              "trace_id": "cc827204-f623-4d7b-854a-6efe353403ca",
+              "test_name": "login_wrong_type_username",
+              "status": "passed",
+              "exit_code": 0,
+              "http_status_code": 200,
+              "duration_seconds": 0.605201
+            }
+          },
+          {
+            "timestamp": "2026-10-30T08:47:45.892786Z",
+            "event_type": "message",
+            "name": "ai_test_agent_execution",
+            "data": {
+              "source": "ai_test_agent",
+              "evidence_type": "test_execution",
+              "index": 4,
+              "trace_id": "c7f34053-1aed-409b-af87-088aca6091c4",
+              "test_name": "login_empty_username",
+              "status": "failed",
+              "exit_code": 1,
+              "http_status_code": 400,
+              "duration_seconds": 0.558594
+            }
+          },
+          {
+            "timestamp": "2026-10-30T08:47:45.892786Z",
+            "event_type": "message",
+            "name": "ai_test_agent_execution",
+            "data": {
+              "source": "ai_test_agent",
+              "evidence_type": "test_execution",
+              "index": 5,
+              "trace_id": "a65fd322-0cae-4894-bddf-c05e315e0ce3",
+              "test_name": "login_boundary_username",
+              "status": "failed",
+              "exit_code": 1,
+              "http_status_code": 400,
+              "duration_seconds": 0.544364
+            }
+          },
+          {
+            "timestamp": "2026-10-30T08:47:45.892786Z",
+            "event_type": "message",
+            "name": "ai_test_agent_execution",
+            "data": {
+              "source": "ai_test_agent",
+              "evidence_type": "test_execution",
+              "index": 6,
+              "trace_id": "64227cdc-6e8f-4756-b8b0-6ee40f90a082",
+              "test_name": "login_missing_password",
+              "status": "failed",
+              "exit_code": 1,
+              "http_status_code": 400,
+              "duration_seconds": 0.519072
+            }
+          },
+          {
+            "timestamp": "2026-10-30T08:47:45.892786Z",
+            "event_type": "message",
+            "name": "ai_test_agent_execution",
+            "data": {
+              "source": "ai_test_agent",
+              "evidence_type": "test_execution",
+              "index": 7,
+              "trace_id": "8325ed11-71fd-4ca1-a33d-c18e7c9a099c",
+              "test_name": "login_wrong_type_password",
+              "status": "passed",
+              "exit_code": 0,
+              "http_status_code": 200,
+              "duration_seconds": 0.486053
+            }
+          },
+          {
+            "timestamp": "2026-10-30T08:47:45.892786Z",
+            "event_type": "message",
+            "name": "ai_test_agent_execution",
+            "data": {
+              "source": "ai_test_agent",
+              "evidence_type": "test_execution",
+              "index": 8,
+              "trace_id": "2500cfc8-6879-4029-9006-ae19e83983c9",
+              "test_name": "login_empty_password",
+              "status": "failed",
+              "exit_code": 1,
+              "http_status_code": 400,
+              "duration_seconds": 0.552751
+            }
+          },
+          {
+            "timestamp": "2026-10-30T08:47:45.892786Z",
+            "event_type": "message",
+            "name": "ai_test_agent_execution",
+            "data": {
+              "source": "ai_test_agent",
+              "evidence_type": "test_execution",
+              "index": 9,
+              "trace_id": "d4b56846-615e-4e95-a519-91a20ff2f34a",
+              "test_name": "login_boundary_password",
+              "status": "failed",
+              "exit_code": 1,
+              "http_status_code": 400,
+              "duration_seconds": 0.5487
+            }
+          },
+          {
+            "timestamp": "2026-10-30T08:47:45.892786Z",
+            "event_type": "message",
+            "name": "ai_test_agent_execution",
+            "data": {
+              "source": "ai_test_agent",
+              "evidence_type": "test_execution",
+              "index": 10,
+              "trace_id": "2b3e9ded-9e48-4408-b169-9341e9947ee9",
+              "test_name": "login_wrong_type_age",
+              "status": "passed",
+              "exit_code": 0,
+              "http_status_code": 200,
+              "duration_seconds": 0.478987
+            }
+          },
+          {
+            "timestamp": "2026-10-30T08:47:45.892786Z",
+            "event_type": "message",
+            "name": "ai_test_agent_execution",
+            "data": {
+              "source": "ai_test_agent",
+              "evidence_type": "test_execution",
+              "index": 11,
+              "trace_id": "716fc709-ef88-447f-bd28-3e3111ea0df7",
+              "test_name": "login_boundary_age",
+              "status": "passed",
+              "exit_code": 0,
+              "http_status_code": 200,
+              "duration_seconds": 0.481147
+            }
+          },
+          {
+            "timestamp": "2026-10-30T08:47:45.892786Z",
+            "event_type": "message",
+            "name": "ai_test_agent_process_result",
+            "data": {
+              "source": "ai_test_agent",
+              "evidence_type": "process_result",
+              "exit_code": 0,
+              "generated_tests": 11,
+              "executions": 11,
+              "stdout_present": true,
+              "stderr_present": false
+            }
+          },
+          {
+            "timestamp": "2026-10-30T08:47:45.892786Z",
+            "event_type": "agent_end",
+            "name": "agent_finished",
+            "data": {
+              "output_type": "dict"
+            }
+          }
+        ]
+      },
+      "error": null,
+      "metadata": {}
+    }
+  ],
+  "evaluations": [
+    {
+      "task_id": "ai-test-agent-login-e2e",
+      "run_id": "run-ai-test-agent-login-e2e-001",
+      "passed": true,
+      "score": 1.0,
+      "reason": "Output matches the expected schema.",
+      "metrics": {},
+      "evaluator": "schema"
+    },
+    {
+      "task_id": "ai-test-agent-login-e2e",
+      "run_id": "run-ai-test-agent-login-e2e-001",
+      "passed": false,
+      "score": 0.45454545454545453,
+      "reason": "6 of 11 target-agent execution(s) failed.",
+      "metrics": {
+        "execution_total": 11.0,
+        "execution_passed": 5.0,
+        "execution_failed": 6.0,
+        "execution_pass_rate": 0.45454545454545453,
+        "comparable_execution_count": 0.0,
+        "status_mismatch_count": 0.0,
+        "http_status_mismatch_count": 0.0
+      },
+      "evaluator": "execution_outcome"
+    },
+    {
+      "task_id": "ai-test-agent-login-e2e",
+      "run_id": "run-ai-test-agent-login-e2e-001",
+      "passed": true,
+      "score": 1.0,
+      "reason": "Generated tests meet the basic completeness requirements.",
+      "metrics": {
+        "generated_test_count": 11.0,
+        "missing_scenario_count": 0.0,
+        "missing_generation_count": 0.0,
+        "planned_test_case_count": 11.0
+      },
+      "evaluator": "generation_completeness"
+    },
+    {
+      "task_id": "ai-test-agent-login-e2e",
+      "run_id": "run-ai-test-agent-login-e2e-002",
+      "passed": true,
+      "score": 1.0,
+      "reason": "Output matches the expected schema.",
+      "metrics": {},
+      "evaluator": "schema"
+    },
+    {
+      "task_id": "ai-test-agent-login-e2e",
+      "run_id": "run-ai-test-agent-login-e2e-002",
+      "passed": false,
+      "score": 0.45454545454545453,
+      "reason": "6 of 11 target-agent execution(s) failed.",
+      "metrics": {
+        "execution_total": 11.0,
+        "execution_passed": 5.0,
+        "execution_failed": 6.0,
+        "execution_pass_rate": 0.45454545454545453,
+        "comparable_execution_count": 0.0,
+        "status_mismatch_count": 0.0,
+        "http_status_mismatch_count": 0.0
+      },
+      "evaluator": "execution_outcome"
+    },
+    {
+      "task_id": "ai-test-agent-login-e2e",
+      "run_id": "run-ai-test-agent-login-e2e-002",
+      "passed": true,
+      "score": 1.0,
+      "reason": "Generated tests meet the basic completeness requirements.",
+      "metrics": {
+        "generated_test_count": 11.0,
+        "missing_scenario_count": 0.0,
+        "missing_generation_count": 0.0,
+        "planned_test_case_count": 11.0
+      },
+      "evaluator": "generation_completeness"
+    },
+    {
+      "task_id": "ai-test-agent-login-e2e",
+      "run_id": "run-ai-test-agent-login-e2e-003",
+      "passed": true,
+      "score": 1.0,
+      "reason": "Output matches the expected schema.",
+      "metrics": {},
+      "evaluator": "schema"
+    },
+    {
+      "task_id": "ai-test-agent-login-e2e",
+      "run_id": "run-ai-test-agent-login-e2e-003",
+      "passed": false,
+      "score": 0.45454545454545453,
+      "reason": "6 of 11 target-agent execution(s) failed.",
+      "metrics": {
+        "execution_total": 11.0,
+        "execution_passed": 5.0,
+        "execution_failed": 6.0,
+        "execution_pass_rate": 0.45454545454545453,
+        "comparable_execution_count": 0.0,
+        "status_mismatch_count": 0.0,
+        "http_status_mismatch_count": 0.0
+      },
+      "evaluator": "execution_outcome"
+    },
+    {
+      "task_id": "ai-test-agent-login-e2e",
+      "run_id": "run-ai-test-agent-login-e2e-003",
+      "passed": true,
+      "score": 1.0,
+      "reason": "Generated tests meet the basic completeness requirements.",
+      "metrics": {
+        "generated_test_count": 11.0,
+        "missing_scenario_count": 0.0,
+        "missing_generation_count": 0.0,
+        "planned_test_case_count": 11.0
+      },
+      "evaluator": "generation_completeness"
+    }
+  ],
+  "metrics": {
+    "task_success_rate": 0.0,
+    "average_score": 0.8181818181818181,
+    "failure_rate": 0.0,
+    "average_latency_ms": 6216.510666666667
+  },
+  "metadata": {}
+}

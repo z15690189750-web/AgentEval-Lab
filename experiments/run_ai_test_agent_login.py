@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import argparse
+import os
+import sys
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from pathlib import Path
 from threading import Thread
@@ -21,9 +23,36 @@ from agent_eval_lab.repeated_runner import RepeatedRunner
 from agent_eval_lab.run import Runner
 
 
-AI_TEST_AGENT_ROOT = Path(
-    r"E:\code\1\AI-Agent-Portfolio\AI-Test-Agent1"
-)
+def _resolve_ai_test_agent_root() -> Path:
+    """Locate AI Test Agent without hardcoding an absolute path."""
+
+    configured = os.getenv("AI_TEST_AGENT_ROOT")
+
+    if configured:
+        return Path(configured)
+
+    return Path(__file__).resolve().parents[2] / "AI-Test-Agent1"
+
+
+AI_TEST_AGENT_ROOT = _resolve_ai_test_agent_root()
+
+
+def _resolve_ai_test_agent_executable() -> str:
+    """Locate the AI Test Agent console script without relying on PATH."""
+
+    configured = os.getenv("AI_TEST_AGENT_EXECUTABLE")
+
+    if configured:
+        return configured
+
+    candidate = Path(sys.executable).with_name(
+        "ai-test-agent.exe" if os.name == "nt" else "ai-test-agent"
+    )
+
+    if candidate.exists():
+        return str(candidate)
+
+    return "ai-test-agent"
 
 LOGIN_SPEC = AI_TEST_AGENT_ROOT / "examples" / "login.md"
 
@@ -337,7 +366,7 @@ def run_experiment(args: argparse.Namespace) -> None:
         )
 
         adapter = AITestAgentAdapter(
-            executable="ai-test-agent",
+            executable=_resolve_ai_test_agent_executable(),
             cwd=AI_TEST_AGENT_ROOT,
             timeout=60.0,
         )
