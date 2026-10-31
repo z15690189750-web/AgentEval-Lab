@@ -1,12 +1,10 @@
 from __future__ import annotations
 
 import argparse
+import json
 import os
 import sys
-from http.server import BaseHTTPRequestHandler, HTTPServer
 from pathlib import Path
-from threading import Thread
-from time import sleep
 from urllib.parse import parse_qs, urlparse
 
 from agent_eval_lab.adapters.ai_test_agent import AITestAgentAdapter
@@ -57,149 +55,20 @@ def _resolve_ai_test_agent_executable() -> str:
 LOGIN_SPEC = AI_TEST_AGENT_ROOT / "examples" / "login.md"
 
 
-class LocalAPIHandler(BaseHTTPRequestHandler):
-    """Minimal local API used by the real AI Test Agent E2E experiment."""
+def _shared_local_api_server() -> type:
+    """Reuse the mock API contract that ships with AI Test Agent tests."""
 
-    def do_GET(self) -> None:
-        parsed = urlparse(self.path)
+    tests_dir = AI_TEST_AGENT_ROOT / "tests"
 
-        if parsed.path == "/health":
-            self._send_response(200, "ok")
-            return
+    if str(tests_dir) not in sys.path:
+        sys.path.insert(0, str(tests_dir))
 
-        if parsed.path == "/users":
-            self._send_response(200, "users")
-            return
+    from support.local_api import LocalAPIServer as SharedLocalAPIServer
 
-        if parsed.path == "/server-error":
-            self._send_response(500, "internal server error")
-            return
-
-        if parsed.path == "/slow":
-            sleep(11)
-            self._send_response(200, "slow response")
-            return
-
-        self._send_response(404, "not found")
-
-    def do_POST(self) -> None:
-        parsed = urlparse(self.path)
-
-        if parsed.path != "/login":
-            self._send_response(404, "not found")
-            return
-
-        content_length = int(
-            self.headers.get(
-                "Content-Length",
-                "0",
-            )
-        )
-
-        body = self.rfile.read(
-            content_length
-        ).decode("utf-8")
-
-        parameters = parse_qs(body)
-
-        username = parameters.get("username")
-        password = parameters.get("password")
-
-        if not username or not password:
-            self._send_response(
-                400,
-                "missing credentials",
-            )
-            return
-
-        self._send_response(
-            200,
-            "login success",
-        )
-
-    def log_message(
-        self,
-        format: str,
-        *args,
-    ) -> None:
-        """Keep experiment output focused on evaluation results."""
-
-    def _send_response(
-        self,
-        status_code: int,
-        body: str,
-    ) -> None:
-        encoded_body = body.encode("utf-8")
-
-        try:
-            self.send_response(status_code)
-
-            self.send_header(
-                "Content-Type",
-                "text/plain; charset=utf-8",
-            )
-
-            self.send_header(
-                "Content-Length",
-                str(len(encoded_body)),
-            )
-
-            self.end_headers()
-
-            self.wfile.write(encoded_body)
-
-        except (
-            BrokenPipeError,
-            ConnectionResetError,
-        ):
-            pass
+    return SharedLocalAPIServer
 
 
-class LocalAPIServer:
-    """Start and stop an ephemeral local HTTP server for the experiment."""
-
-    def __init__(self) -> None:
-        self.server = HTTPServer(
-            ("127.0.0.1", 0),
-            LocalAPIHandler,
-        )
-
-        self.thread = Thread(
-            target=self.server.serve_forever,
-            daemon=True,
-        )
-
-    @property
-    def base_url(self) -> str:
-        """Return the dynamically assigned server base URL."""
-
-        host, port = self.server.server_address
-
-        return f"http://{host}:{port}"
-
-    def start(self) -> None:
-        """Start serving requests in a background thread."""
-
-        self.thread.start()
-
-    def stop(self) -> None:
-        """Stop the server and wait briefly for the thread to exit."""
-
-        self.server.shutdown()
-        self.server.server_close()
-        self.thread.join(timeout=2)
-
-    def __enter__(self) -> LocalAPIServer:
-        self.start()
-        return self
-
-    def __exit__(
-        self,
-        exc_type,
-        exc_value,
-        traceback,
-    ) -> None:
-        self.stop()
+LocalAPIServer = _shared_local_api_server()
 
 
 def build_parser() -> argparse.ArgumentParser:

@@ -1,0 +1,57 @@
+{
+  "baseline": {
+    "id": "e2e-008",
+    "name": "ai-test-agent-login-e2e-008",
+    "benchmark_name": "ai-test-agent-login"
+  },
+  "current": {
+    "id": "e2e-007",
+    "name": "ai-test-agent-login-e2e-007",
+    "benchmark_name": "ai-test-agent-login"
+  },
+  "regressed": true,
+  "regressed_metrics": [
+    "task_success_rate",
+    "average_score",
+    "average_latency_ms"
+  ],
+  "improved_metrics": [],
+  "results": [
+    {
+      "metric": "task_success_rate",
+      "baseline": 1.0,
+      "current": 0.0,
+      "delta": -1.0,
+      "threshold": 0.0,
+      "higher_is_better": true,
+      "regressed": true
+    },
+    {
+      "metric": "average_score",
+      "baseline": 1.0,
+      "current": 0.9090909090909091,
+      "delta": -0.09090909090909094,
+      "threshold": 0.0,
+      "higher_is_better": true,
+      "regressed": true
+    },
+    {
+      "metric": "failure_rate",
+      "baseline": 0.0,
+      "current": 0.0,
+      "delta": 0.0,
+      "threshold": 0.0,
+      "higher_is_better": false,
+      "regressed": false
+    },
+    {
+      "metric": "average_latency_ms",
+      "baseline": 5301.1849999999995,
+      "current": 5656.686333333333,
+      "delta": 355.5013333333336,
+      "threshold": 0.0,
+      "higher_is_better": false,
+      "regressed": true
+    }
+  ]
+}

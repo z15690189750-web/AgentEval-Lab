@@ -38,3 +38,14 @@ reports/*
 # Local experiment outputs
 experiments/results/
 *.bak
+
+!reports/e2e-008.json
+!reports/e2e-008.md
+!reports/regression-007.json
+!reports/regression-007.md
+!reports/regression-008.json
+!reports/regression-008.md
+!reports/baseline/ai-test-agent-login-baseline-002.json
+
+!reports/baseline/
+!reports/baseline/ai-test-agent-login-baseline-002.json
