@@ -1,0 +1,1676 @@
+{
+  "id": "ai-test-agent-login-baseline-001",
+  "name": "AI Test Agent Login Baseline",
+  "benchmark_name": "ai-test-agent-login",
+  "created_at": "2026-09-11T03:15:58.259999Z",
+  "runs": [
+    {
+      "id": "run-ai-test-agent-login-e2e-001",
+      "task_id": "ai-test-agent-login-e2e",
+      "status": "success",
+      "started_at": "2026-09-11T03:15:44.348893Z",
+      "finished_at": "2026-09-11T03:15:49.150239Z",
+      "duration_ms": 4801.346,
+      "output": {
+        "report": {
+          "spec": {
+            "name": "login",
+            "method": "POST",
+            "path": "/login",
+            "parameters": [
+              {
+                "name": "username",
+                "type": "string",
+                "required": true
+              },
+              {
+                "name": "password",
+                "type": "string",
+                "required": true
+              },
+              {
+                "name": "age",
+                "type": "integer",
+                "required": false
+              }
+            ]
+          },
+          "test_cases": [
+            {
+              "name": "login_normal",
+              "scenario_type": "normal",
+              "target_parameter": null,
+              "method": "POST",
+              "path": "/login",
+              "description": "Send a valid request using valid parameter values."
+            },
+            {
+              "name": "login_missing_username",
+              "scenario_type": "missing",
+              "target_parameter": "username",
+              "method": "POST",
+              "path": "/login",
+              "description": "Send a request without required parameter 'username'."
+            },
+            {
+              "name": "login_wrong_type_username",
+              "scenario_type": "wrong_type",
+              "target_parameter": "username",
+              "method": "POST",
+              "path": "/login",
+              "description": "Send a request with an invalid type for parameter 'username'."
+            },
+            {
+              "name": "login_empty_username",
+              "scenario_type": "empty",
+              "target_parameter": "username",
+              "method": "POST",
+              "path": "/login",
+              "description": "Send an empty string for parameter 'username'."
+            },
+            {
+              "name": "login_boundary_username",
+              "scenario_type": "boundary",
+              "target_parameter": "username",
+              "method": "POST",
+              "path": "/login",
+              "description": "Test string boundary values for parameter 'username'."
+            },
+            {
+              "name": "login_missing_password",
+              "scenario_type": "missing",
+              "target_parameter": "password",
+              "method": "POST",
+              "path": "/login",
+              "description": "Send a request without required parameter 'password'."
+            },
+            {
+              "name": "login_wrong_type_password",
+              "scenario_type": "wrong_type",
+              "target_parameter": "password",
+              "method": "POST",
+              "path": "/login",
+              "description": "Send a request with an invalid type for parameter 'password'."
+            },
+            {
+              "name": "login_empty_password",
+              "scenario_type": "empty",
+              "target_parameter": "password",
+              "method": "POST",
+              "path": "/login",
+              "description": "Send an empty string for parameter 'password'."
+            },
+            {
+              "name": "login_boundary_password",
+              "scenario_type": "boundary",
+              "target_parameter": "password",
+              "method": "POST",
+              "path": "/login",
+              "description": "Test string boundary values for parameter 'password'."
+            },
+            {
+              "name": "login_wrong_type_age",
+              "scenario_type": "wrong_type",
+              "target_parameter": "age",
+              "method": "POST",
+              "path": "/login",
+              "description": "Send a request with an invalid type for parameter 'age'."
+            },
+            {
+              "name": "login_boundary_age",
+              "scenario_type": "boundary",
+              "target_parameter": "age",
+              "method": "POST",
+              "path": "/login",
+              "description": "Test integer boundary values for parameter 'age'."
+            }
+          ],
+          "generated_tests": [
+            {
+              "name": "login_normal",
+              "method": "POST",
+              "path": "/login",
+              "scenario_type": "normal",
+              "request_parameters": {},
+              "expected_status_code": 200,
+              "assertions": [
+                "status_code == 200"
+              ]
+            },
+            {
+              "name": "login_missing_username",
+              "method": "POST",
+              "path": "/login",
+              "scenario_type": "missing",
+              "request_parameters": {},
+              "expected_status_code": 200,
+              "assertions": [
+                "status_code == 200"
+              ]
+            },
+            {
+              "name": "login_wrong_type_username",
+              "method": "POST",
+              "path": "/login",
+              "scenario_type": "wrong_type",
+              "request_parameters": {},
+              "expected_status_code": 200,
+              "assertions": [
+                "status_code == 200"
+              ]
+            },
+            {
+              "name": "login_empty_username",
+              "method": "POST",
+              "path": "/login",
+              "scenario_type": "empty",
+              "request_parameters": {},
+              "expected_status_code": 200,
+              "assertions": [
+                "status_code == 200"
+              ]
+            },
+            {
+              "name": "login_boundary_username",
+              "method": "POST",
+              "path": "/login",
+              "scenario_type": "boundary",
+              "request_parameters": {},
+              "expected_status_code": 200,
+              "assertions": [
+                "status_code == 200"
+              ]
+            },
+            {
+              "name": "login_missing_password",
+              "method": "POST",
+              "path": "/login",
+              "scenario_type": "missing",
+              "request_parameters": {},
+              "expected_status_code": 200,
+              "assertions": [
+                "status_code == 200"
+              ]
+            },
+            {
+              "name": "login_wrong_type_password",
+              "method": "POST",
+              "path": "/login",
+              "scenario_type": "wrong_type",
+              "request_parameters": {},
+              "expected_status_code": 200,
+              "assertions": [
+                "status_code == 200"
+              ]
+            },
+            {
+              "name": "login_empty_password",
+              "method": "POST",
+              "path": "/login",
+              "scenario_type": "empty",
+              "request_parameters": {},
+              "expected_status_code": 200,
+              "assertions": [
+                "status_code == 200"
+              ]
+            },
+            {
+              "name": "login_boundary_password",
+              "method": "POST",
+              "path": "/login",
+              "scenario_type": "boundary",
+              "request_parameters": {},
+              "expected_status_code": 200,
+              "assertions": [
+                "status_code == 200"
+              ]
+            },
+            {
+              "name": "login_wrong_type_age",
+              "method": "POST",
+              "path": "/login",
+              "scenario_type": "wrong_type",
+              "request_parameters": {},
+              "expected_status_code": 200,
+              "assertions": [
+                "status_code == 200"
+              ]
+            },
+            {
+              "name": "login_boundary_age",
+              "method": "POST",
+              "path": "/login",
+              "scenario_type": "boundary",
+              "request_parameters": {},
+              "expected_status_code": 200,
+              "assertions": [
+                "status_code == 200"
+              ]
+            }
+          ],
+          "executions": [
+            {
+              "trace_id": "7a175e8b-d057-451b-8cb9-ed39e44b7e33",
+              "test_name": "login_normal",
+              "status": "failed",
+              "started_at": "2026-09-11T03:15:44.542814Z",
+              "finished_at": "2026-09-11T03:15:44.957823Z",
+              "duration_seconds": 0.415009,
+              "stdout": "AI_TEST_AGENT_HTTP_STATUS=400\nF\n================================== FAILURES ===================================\n___________________________ test_generated_api_case ___________________________\n\n    def test_generated_api_case():\n        method = \"POST\"\n        url = \"http://127.0.0.1:10875/login\"\n        parameters = {}\n        expected_status = 200\n    \n        if method == \"GET\":\n            if parameters:\n                url = f\"{url}?{urlencode(parameters, doseq=True)}\"\n            data = None\n        else:\n            data = urlencode(parameters, doseq=True).encode()\n    \n        request = Request(\n            url=url,\n            data=data,\n            method=method,\n            headers={\n                \"Content-Type\": \"application/x-www-form-urlencoded\",\n            },\n        )\n    \n        try:\n            with urlopen(request, timeout=10) as response:\n                status_code = response.status\n        except HTTPError as exc:\n            status_code = exc.code\n        except URLError as exc:\n            raise RuntimeError(\n                f\"Request failed: {exc.reason}\"\n            ) from exc\n    \n        print(\n            f\"AI_TEST_AGENT_HTTP_STATUS={status_code}\"\n        )\n    \n>       assert status_code == expected_status\nE       assert 400 == 200\n\ntest_generated.py:42: AssertionError\n=========================== short test summary info ===========================\nFAILED test_generated.py::test_generated_api_case - assert 400 == 200\n1 failed in 0.08s\n",
+              "stderr": "",
+              "exit_code": 1,
+              "http_status_code": 400
+            },
+            {
+              "trace_id": "815807be-f125-484a-9cd7-1888351e2ca6",
+              "test_name": "login_missing_username",
+              "status": "failed",
+              "started_at": "2026-09-11T03:15:44.957823Z",
+              "finished_at": "2026-09-11T03:15:45.432275Z",
+              "duration_seconds": 0.474452,
+              "stdout": "AI_TEST_AGENT_HTTP_STATUS=400\nF\n================================== FAILURES ===================================\n___________________________ test_generated_api_case ___________________________\n\n    def test_generated_api_case():\n        method = \"POST\"\n        url = \"http://127.0.0.1:10875/login\"\n        parameters = {}\n        expected_status = 200\n    \n        if method == \"GET\":\n            if parameters:\n                url = f\"{url}?{urlencode(parameters, doseq=True)}\"\n            data = None\n        else:\n            data = urlencode(parameters, doseq=True).encode()\n    \n        request = Request(\n            url=url,\n            data=data,\n            method=method,\n            headers={\n                \"Content-Type\": \"application/x-www-form-urlencoded\",\n            },\n        )\n    \n        try:\n            with urlopen(request, timeout=10) as response:\n                status_code = response.status\n        except HTTPError as exc:\n            status_code = exc.code\n        except URLError as exc:\n            raise RuntimeError(\n                f\"Request failed: {exc.reason}\"\n            ) from exc\n    \n        print(\n            f\"AI_TEST_AGENT_HTTP_STATUS={status_code}\"\n        )\n    \n>       assert status_code == expected_status\nE       assert 400 == 200\n\ntest_generated.py:42: AssertionError\n=========================== short test summary info ===========================\nFAILED test_generated.py::test_generated_api_case - assert 400 == 200\n1 failed in 0.09s\n",
+              "stderr": "",
+              "exit_code": 1,
+              "http_status_code": 400
+            },
+            {
+              "trace_id": "6f802086-0bbe-4805-b5c8-cf2a33624e5b",
+              "test_name": "login_wrong_type_username",
+              "status": "failed",
+              "started_at": "2026-09-11T03:15:45.432275Z",
+              "finished_at": "2026-09-11T03:15:45.872218Z",
+              "duration_seconds": 0.439943,
+              "stdout": "AI_TEST_AGENT_HTTP_STATUS=400\nF\n================================== FAILURES ===================================\n___________________________ test_generated_api_case ___________________________\n\n    def test_generated_api_case():\n        method = \"POST\"\n        url = \"http://127.0.0.1:10875/login\"\n        parameters = {}\n        expected_status = 200\n    \n        if method == \"GET\":\n            if parameters:\n                url = f\"{url}?{urlencode(parameters, doseq=True)}\"\n            data = None\n        else:\n            data = urlencode(parameters, doseq=True).encode()\n    \n        request = Request(\n            url=url,\n            data=data,\n            method=method,\n            headers={\n                \"Content-Type\": \"application/x-www-form-urlencoded\",\n            },\n        )\n    \n        try:\n            with urlopen(request, timeout=10) as response:\n                status_code = response.status\n        except HTTPError as exc:\n            status_code = exc.code\n        except URLError as exc:\n            raise RuntimeError(\n                f\"Request failed: {exc.reason}\"\n            ) from exc\n    \n        print(\n            f\"AI_TEST_AGENT_HTTP_STATUS={status_code}\"\n        )\n    \n>       assert status_code == expected_status\nE       assert 400 == 200\n\ntest_generated.py:42: AssertionError\n=========================== short test summary info ===========================\nFAILED test_generated.py::test_generated_api_case - assert 400 == 200\n1 failed in 0.08s\n",
+              "stderr": "",
+              "exit_code": 1,
+              "http_status_code": 400
+            },
+            {
+              "trace_id": "9916a639-274e-45df-84d8-dd02fad15b37",
+              "test_name": "login_empty_username",
+              "status": "failed",
+              "started_at": "2026-09-11T03:15:45.872218Z",
+              "finished_at": "2026-09-11T03:15:46.289535Z",
+              "duration_seconds": 0.417317,
+              "stdout": "AI_TEST_AGENT_HTTP_STATUS=400\nF\n================================== FAILURES ===================================\n___________________________ test_generated_api_case ___________________________\n\n    def test_generated_api_case():\n        method = \"POST\"\n        url = \"http://127.0.0.1:10875/login\"\n        parameters = {}\n        expected_status = 200\n    \n        if method == \"GET\":\n            if parameters:\n                url = f\"{url}?{urlencode(parameters, doseq=True)}\"\n            data = None\n        else:\n            data = urlencode(parameters, doseq=True).encode()\n    \n        request = Request(\n            url=url,\n            data=data,\n            method=method,\n            headers={\n                \"Content-Type\": \"application/x-www-form-urlencoded\",\n            },\n        )\n    \n        try:\n            with urlopen(request, timeout=10) as response:\n                status_code = response.status\n        except HTTPError as exc:\n            status_code = exc.code\n        except URLError as exc:\n            raise RuntimeError(\n                f\"Request failed: {exc.reason}\"\n            ) from exc\n    \n        print(\n            f\"AI_TEST_AGENT_HTTP_STATUS={status_code}\"\n        )\n    \n>       assert status_code == expected_status\nE       assert 400 == 200\n\ntest_generated.py:42: AssertionError\n=========================== short test summary info ===========================\nFAILED test_generated.py::test_generated_api_case - assert 400 == 200\n1 failed in 0.07s\n",
+              "stderr": "",
+              "exit_code": 1,
+              "http_status_code": 400
+            },
+            {
+              "trace_id": "d47d729f-427d-47a2-a0ad-650c7d9a1adc",
+              "test_name": "login_boundary_username",
+              "status": "failed",
+              "started_at": "2026-09-11T03:15:46.289535Z",
+              "finished_at": "2026-09-11T03:15:46.696906Z",
+              "duration_seconds": 0.407371,
+              "stdout": "AI_TEST_AGENT_HTTP_STATUS=400\nF\n================================== FAILURES ===================================\n___________________________ test_generated_api_case ___________________________\n\n    def test_generated_api_case():\n        method = \"POST\"\n        url = \"http://127.0.0.1:10875/login\"\n        parameters = {}\n        expected_status = 200\n    \n        if method == \"GET\":\n            if parameters:\n                url = f\"{url}?{urlencode(parameters, doseq=True)}\"\n            data = None\n        else:\n            data = urlencode(parameters, doseq=True).encode()\n    \n        request = Request(\n            url=url,\n            data=data,\n            method=method,\n            headers={\n                \"Content-Type\": \"application/x-www-form-urlencoded\",\n            },\n        )\n    \n        try:\n            with urlopen(request, timeout=10) as response:\n                status_code = response.status\n        except HTTPError as exc:\n            status_code = exc.code\n        except URLError as exc:\n            raise RuntimeError(\n                f\"Request failed: {exc.reason}\"\n            ) from exc\n    \n        print(\n            f\"AI_TEST_AGENT_HTTP_STATUS={status_code}\"\n        )\n    \n>       assert status_code == expected_status\nE       assert 400 == 200\n\ntest_generated.py:42: AssertionError\n=========================== short test summary info ===========================\nFAILED test_generated.py::test_generated_api_case - assert 400 == 200\n1 failed in 0.07s\n",
+              "stderr": "",
+              "exit_code": 1,
+              "http_status_code": 400
+            },
+            {
+              "trace_id": "99921383-8155-4eb1-8477-63739dff98f6",
+              "test_name": "login_missing_password",
+              "status": "failed",
+              "started_at": "2026-09-11T03:15:46.696906Z",
+              "finished_at": "2026-09-11T03:15:47.093259Z",
+              "duration_seconds": 0.396353,
+              "stdout": "AI_TEST_AGENT_HTTP_STATUS=400\nF\n================================== FAILURES ===================================\n___________________________ test_generated_api_case ___________________________\n\n    def test_generated_api_case():\n        method = \"POST\"\n        url = \"http://127.0.0.1:10875/login\"\n        parameters = {}\n        expected_status = 200\n    \n        if method == \"GET\":\n            if parameters:\n                url = f\"{url}?{urlencode(parameters, doseq=True)}\"\n            data = None\n        else:\n            data = urlencode(parameters, doseq=True).encode()\n    \n        request = Request(\n            url=url,\n            data=data,\n            method=method,\n            headers={\n                \"Content-Type\": \"application/x-www-form-urlencoded\",\n            },\n        )\n    \n        try:\n            with urlopen(request, timeout=10) as response:\n                status_code = response.status\n        except HTTPError as exc:\n            status_code = exc.code\n        except URLError as exc:\n            raise RuntimeError(\n                f\"Request failed: {exc.reason}\"\n            ) from exc\n    \n        print(\n            f\"AI_TEST_AGENT_HTTP_STATUS={status_code}\"\n        )\n    \n>       assert status_code == expected_status\nE       assert 400 == 200\n\ntest_generated.py:42: AssertionError\n=========================== short test summary info ===========================\nFAILED test_generated.py::test_generated_api_case - assert 400 == 200\n1 failed in 0.07s\n",
+              "stderr": "",
+              "exit_code": 1,
+              "http_status_code": 400
+            },
+            {
+              "trace_id": "4717c24c-fc98-49f4-bd81-434796ba5e01",
+              "test_name": "login_wrong_type_password",
+              "status": "failed",
+              "started_at": "2026-09-11T03:15:47.093259Z",
+              "finished_at": "2026-09-11T03:15:47.489867Z",
+              "duration_seconds": 0.396608,
+              "stdout": "AI_TEST_AGENT_HTTP_STATUS=400\nF\n================================== FAILURES ===================================\n___________________________ test_generated_api_case ___________________________\n\n    def test_generated_api_case():\n        method = \"POST\"\n        url = \"http://127.0.0.1:10875/login\"\n        parameters = {}\n        expected_status = 200\n    \n        if method == \"GET\":\n            if parameters:\n                url = f\"{url}?{urlencode(parameters, doseq=True)}\"\n            data = None\n        else:\n            data = urlencode(parameters, doseq=True).encode()\n    \n        request = Request(\n            url=url,\n            data=data,\n            method=method,\n            headers={\n                \"Content-Type\": \"application/x-www-form-urlencoded\",\n            },\n        )\n    \n        try:\n            with urlopen(request, timeout=10) as response:\n                status_code = response.status\n        except HTTPError as exc:\n            status_code = exc.code\n        except URLError as exc:\n            raise RuntimeError(\n                f\"Request failed: {exc.reason}\"\n            ) from exc\n    \n        print(\n            f\"AI_TEST_AGENT_HTTP_STATUS={status_code}\"\n        )\n    \n>       assert status_code == expected_status\nE       assert 400 == 200\n\ntest_generated.py:42: AssertionError\n=========================== short test summary info ===========================\nFAILED test_generated.py::test_generated_api_case - assert 400 == 200\n1 failed in 0.07s\n",
+              "stderr": "",
+              "exit_code": 1,
+              "http_status_code": 400
+            },
+            {
+              "trace_id": "585bd67a-defb-45b2-8977-714dbcb901b3",
+              "test_name": "login_empty_password",
+              "status": "failed",
+              "started_at": "2026-09-11T03:15:47.489867Z",
+              "finished_at": "2026-09-11T03:15:47.883071Z",
+              "duration_seconds": 0.393204,
+              "stdout": "AI_TEST_AGENT_HTTP_STATUS=400\nF\n================================== FAILURES ===================================\n___________________________ test_generated_api_case ___________________________\n\n    def test_generated_api_case():\n        method = \"POST\"\n        url = \"http://127.0.0.1:10875/login\"\n        parameters = {}\n        expected_status = 200\n    \n        if method == \"GET\":\n            if parameters:\n                url = f\"{url}?{urlencode(parameters, doseq=True)}\"\n            data = None\n        else:\n            data = urlencode(parameters, doseq=True).encode()\n    \n        request = Request(\n            url=url,\n            data=data,\n            method=method,\n            headers={\n                \"Content-Type\": \"application/x-www-form-urlencoded\",\n            },\n        )\n    \n        try:\n            with urlopen(request, timeout=10) as response:\n                status_code = response.status\n        except HTTPError as exc:\n            status_code = exc.code\n        except URLError as exc:\n            raise RuntimeError(\n                f\"Request failed: {exc.reason}\"\n            ) from exc\n    \n        print(\n            f\"AI_TEST_AGENT_HTTP_STATUS={status_code}\"\n        )\n    \n>       assert status_code == expected_status\nE       assert 400 == 200\n\ntest_generated.py:42: AssertionError\n=========================== short test summary info ===========================\nFAILED test_generated.py::test_generated_api_case - assert 400 == 200\n1 failed in 0.07s\n",
+              "stderr": "",
+              "exit_code": 1,
+              "http_status_code": 400
+            },
+            {
+              "trace_id": "6ed59295-4891-45a5-a857-2aa3f92d7188",
+              "test_name": "login_boundary_password",
+              "status": "failed",
+              "started_at": "2026-09-11T03:15:47.883071Z",
+              "finished_at": "2026-09-11T03:15:48.293745Z",
+              "duration_seconds": 0.410674,
+              "stdout": "AI_TEST_AGENT_HTTP_STATUS=400\nF\n================================== FAILURES ===================================\n___________________________ test_generated_api_case ___________________________\n\n    def test_generated_api_case():\n        method = \"POST\"\n        url = \"http://127.0.0.1:10875/login\"\n        parameters = {}\n        expected_status = 200\n    \n        if method == \"GET\":\n            if parameters:\n                url = f\"{url}?{urlencode(parameters, doseq=True)}\"\n            data = None\n        else:\n            data = urlencode(parameters, doseq=True).encode()\n    \n        request = Request(\n            url=url,\n            data=data,\n            method=method,\n            headers={\n                \"Content-Type\": \"application/x-www-form-urlencoded\",\n            },\n        )\n    \n        try:\n            with urlopen(request, timeout=10) as response:\n                status_code = response.status\n        except HTTPError as exc:\n            status_code = exc.code\n        except URLError as exc:\n            raise RuntimeError(\n                f\"Request failed: {exc.reason}\"\n            ) from exc\n    \n        print(\n            f\"AI_TEST_AGENT_HTTP_STATUS={status_code}\"\n        )\n    \n>       assert status_code == expected_status\nE       assert 400 == 200\n\ntest_generated.py:42: AssertionError\n=========================== short test summary info ===========================\nFAILED test_generated.py::test_generated_api_case - assert 400 == 200\n1 failed in 0.07s\n",
+              "stderr": "",
+              "exit_code": 1,
+              "http_status_code": 400
+            },
+            {
+              "trace_id": "d35939ce-ac73-4c93-a854-bab58d01682e",
+              "test_name": "login_wrong_type_age",
+              "status": "failed",
+              "started_at": "2026-09-11T03:15:48.293745Z",
+              "finished_at": "2026-09-11T03:15:48.700176Z",
+              "duration_seconds": 0.406431,
+              "stdout": "AI_TEST_AGENT_HTTP_STATUS=400\nF\n================================== FAILURES ===================================\n___________________________ test_generated_api_case ___________________________\n\n    def test_generated_api_case():\n        method = \"POST\"\n        url = \"http://127.0.0.1:10875/login\"\n        parameters = {}\n        expected_status = 200\n    \n        if method == \"GET\":\n            if parameters:\n                url = f\"{url}?{urlencode(parameters, doseq=True)}\"\n            data = None\n        else:\n            data = urlencode(parameters, doseq=True).encode()\n    \n        request = Request(\n            url=url,\n            data=data,\n            method=method,\n            headers={\n                \"Content-Type\": \"application/x-www-form-urlencoded\",\n            },\n        )\n    \n        try:\n            with urlopen(request, timeout=10) as response:\n                status_code = response.status\n        except HTTPError as exc:\n            status_code = exc.code\n        except URLError as exc:\n            raise RuntimeError(\n                f\"Request failed: {exc.reason}\"\n            ) from exc\n    \n        print(\n            f\"AI_TEST_AGENT_HTTP_STATUS={status_code}\"\n        )\n    \n>       assert status_code == expected_status\nE       assert 400 == 200\n\ntest_generated.py:42: AssertionError\n=========================== short test summary info ===========================\nFAILED test_generated.py::test_generated_api_case - assert 400 == 200\n1 failed in 0.07s\n",
+              "stderr": "",
+              "exit_code": 1,
+              "http_status_code": 400
+            },
+            {
+              "trace_id": "2f25c7ff-fd12-4999-9b39-0658f93d8025",
+              "test_name": "login_boundary_age",
+              "status": "failed",
+              "started_at": "2026-09-11T03:15:48.701172Z",
+              "finished_at": "2026-09-11T03:15:49.125353Z",
+              "duration_seconds": 0.424181,
+              "stdout": "AI_TEST_AGENT_HTTP_STATUS=400\nF\n================================== FAILURES ===================================\n___________________________ test_generated_api_case ___________________________\n\n    def test_generated_api_case():\n        method = \"POST\"\n        url = \"http://127.0.0.1:10875/login\"\n        parameters = {}\n        expected_status = 200\n    \n        if method == \"GET\":\n            if parameters:\n                url = f\"{url}?{urlencode(parameters, doseq=True)}\"\n            data = None\n        else:\n            data = urlencode(parameters, doseq=True).encode()\n    \n        request = Request(\n            url=url,\n            data=data,\n            method=method,\n            headers={\n                \"Content-Type\": \"application/x-www-form-urlencoded\",\n            },\n        )\n    \n        try:\n            with urlopen(request, timeout=10) as response:\n                status_code = response.status\n        except HTTPError as exc:\n            status_code = exc.code\n        except URLError as exc:\n            raise RuntimeError(\n                f\"Request failed: {exc.reason}\"\n            ) from exc\n    \n        print(\n            f\"AI_TEST_AGENT_HTTP_STATUS={status_code}\"\n        )\n    \n>       assert status_code == expected_status\nE       assert 400 == 200\n\ntest_generated.py:42: AssertionError\n=========================== short test summary info ===========================\nFAILED test_generated.py::test_generated_api_case - assert 400 == 200\n1 failed in 0.07s\n",
+              "stderr": "",
+              "exit_code": 1,
+              "http_status_code": 400
+            }
+          ],
+          "healing_outcomes": []
+        },
+        "stdout": "Generated tests: 11\nPassed executions: 0/11\nMarkdown report: C:\\Users\\kaaka\\AppData\\Local\\Temp\\agent-eval-lf120zwz\\agent-report.md\nJSON report: C:\\Users\\kaaka\\AppData\\Local\\Temp\\agent-eval-lf120zwz\\agent-report.json\n",
+        "stderr": "",
+        "exit_code": 0
+      },
+      "trace": {
+        "events": [
+          {
+            "timestamp": "2026-09-11T03:15:44.348893Z",
+            "event_type": "agent_start",
+            "name": "ai_test_agent_started",
+            "data": {
+              "executable": "ai-test-agent",
+              "spec": "E:\\code\\1\\AI-Agent-Portfolio\\AI-Test-Agent1\\examples\\login.md",
+              "base_url": "http://127.0.0.1:10875",
+              "mock": true
+            }
+          },
+          {
+            "timestamp": "2026-09-11T03:15:49.150239Z",
+            "event_type": "message",
+            "name": "login_normal",
+            "data": {
+              "trace_id": "7a175e8b-d057-451b-8cb9-ed39e44b7e33",
+              "status": "failed",
+              "duration_seconds": 0.415009,
+              "exit_code": 1,
+              "http_status_code": 400
+            }
+          },
+          {
+            "timestamp": "2026-09-11T03:15:49.150239Z",
+            "event_type": "message",
+            "name": "login_missing_username",
+            "data": {
+              "trace_id": "815807be-f125-484a-9cd7-1888351e2ca6",
+              "status": "failed",
+              "duration_seconds": 0.474452,
+              "exit_code": 1,
+              "http_status_code": 400
+            }
+          },
+          {
+            "timestamp": "2026-09-11T03:15:49.150239Z",
+            "event_type": "message",
+            "name": "login_wrong_type_username",
+            "data": {
+              "trace_id": "6f802086-0bbe-4805-b5c8-cf2a33624e5b",
+              "status": "failed",
+              "duration_seconds": 0.439943,
+              "exit_code": 1,
+              "http_status_code": 400
+            }
+          },
+          {
+            "timestamp": "2026-09-11T03:15:49.150239Z",
+            "event_type": "message",
+            "name": "login_empty_username",
+            "data": {
+              "trace_id": "9916a639-274e-45df-84d8-dd02fad15b37",
+              "status": "failed",
+              "duration_seconds": 0.417317,
+              "exit_code": 1,
+              "http_status_code": 400
+            }
+          },
+          {
+            "timestamp": "2026-09-11T03:15:49.150239Z",
+            "event_type": "message",
+            "name": "login_boundary_username",
+            "data": {
+              "trace_id": "d47d729f-427d-47a2-a0ad-650c7d9a1adc",
+              "status": "failed",
+              "duration_seconds": 0.407371,
+              "exit_code": 1,
+              "http_status_code": 400
+            }
+          },
+          {
+            "timestamp": "2026-09-11T03:15:49.150239Z",
+            "event_type": "message",
+            "name": "login_missing_password",
+            "data": {
+              "trace_id": "99921383-8155-4eb1-8477-63739dff98f6",
+              "status": "failed",
+              "duration_seconds": 0.396353,
+              "exit_code": 1,
+              "http_status_code": 400
+            }
+          },
+          {
+            "timestamp": "2026-09-11T03:15:49.150239Z",
+            "event_type": "message",
+            "name": "login_wrong_type_password",
+            "data": {
+              "trace_id": "4717c24c-fc98-49f4-bd81-434796ba5e01",
+              "status": "failed",
+              "duration_seconds": 0.396608,
+              "exit_code": 1,
+              "http_status_code": 400
+            }
+          },
+          {
+            "timestamp": "2026-09-11T03:15:49.150239Z",
+            "event_type": "message",
+            "name": "login_empty_password",
+            "data": {
+              "trace_id": "585bd67a-defb-45b2-8977-714dbcb901b3",
+              "status": "failed",
+              "duration_seconds": 0.393204,
+              "exit_code": 1,
+              "http_status_code": 400
+            }
+          },
+          {
+            "timestamp": "2026-09-11T03:15:49.150239Z",
+            "event_type": "message",
+            "name": "login_boundary_password",
+            "data": {
+              "trace_id": "6ed59295-4891-45a5-a857-2aa3f92d7188",
+              "status": "failed",
+              "duration_seconds": 0.410674,
+              "exit_code": 1,
+              "http_status_code": 400
+            }
+          },
+          {
+            "timestamp": "2026-09-11T03:15:49.150239Z",
+            "event_type": "message",
+            "name": "login_wrong_type_age",
+            "data": {
+              "trace_id": "d35939ce-ac73-4c93-a854-bab58d01682e",
+              "status": "failed",
+              "duration_seconds": 0.406431,
+              "exit_code": 1,
+              "http_status_code": 400
+            }
+          },
+          {
+            "timestamp": "2026-09-11T03:15:49.150239Z",
+            "event_type": "message",
+            "name": "login_boundary_age",
+            "data": {
+              "trace_id": "2f25c7ff-fd12-4999-9b39-0658f93d8025",
+              "status": "failed",
+              "duration_seconds": 0.424181,
+              "exit_code": 1,
+              "http_status_code": 400
+            }
+          },
+          {
+            "timestamp": "2026-09-11T03:15:49.150239Z",
+            "event_type": "agent_end",
+            "name": "ai_test_agent_finished",
+            "data": {
+              "exit_code": 0,
+              "generated_tests": 11,
+              "executions": 11
+            }
+          }
+        ]
+      },
+      "error": null,
+      "metadata": {}
+    },
+    {
+      "id": "run-ai-test-agent-login-e2e-002",
+      "task_id": "ai-test-agent-login-e2e",
+      "status": "success",
+      "started_at": "2026-09-11T03:15:49.151235Z",
+      "finished_at": "2026-09-11T03:15:53.699873Z",
+      "duration_ms": 4548.638000000001,
+      "output": {
+        "report": {
+          "spec": {
+            "name": "login",
+            "method": "POST",
+            "path": "/login",
+            "parameters": [
+              {
+                "name": "username",
+                "type": "string",
+                "required": true
+              },
+              {
+                "name": "password",
+                "type": "string",
+                "required": true
+              },
+              {
+                "name": "age",
+                "type": "integer",
+                "required": false
+              }
+            ]
+          },
+          "test_cases": [
+            {
+              "name": "login_normal",
+              "scenario_type": "normal",
+              "target_parameter": null,
+              "method": "POST",
+              "path": "/login",
+              "description": "Send a valid request using valid parameter values."
+            },
+            {
+              "name": "login_missing_username",
+              "scenario_type": "missing",
+              "target_parameter": "username",
+              "method": "POST",
+              "path": "/login",
+              "description": "Send a request without required parameter 'username'."
+            },
+            {
+              "name": "login_wrong_type_username",
+              "scenario_type": "wrong_type",
+              "target_parameter": "username",
+              "method": "POST",
+              "path": "/login",
+              "description": "Send a request with an invalid type for parameter 'username'."
+            },
+            {
+              "name": "login_empty_username",
+              "scenario_type": "empty",
+              "target_parameter": "username",
+              "method": "POST",
+              "path": "/login",
+              "description": "Send an empty string for parameter 'username'."
+            },
+            {
+              "name": "login_boundary_username",
+              "scenario_type": "boundary",
+              "target_parameter": "username",
+              "method": "POST",
+              "path": "/login",
+              "description": "Test string boundary values for parameter 'username'."
+            },
+            {
+              "name": "login_missing_password",
+              "scenario_type": "missing",
+              "target_parameter": "password",
+              "method": "POST",
+              "path": "/login",
+              "description": "Send a request without required parameter 'password'."
+            },
+            {
+              "name": "login_wrong_type_password",
+              "scenario_type": "wrong_type",
+              "target_parameter": "password",
+              "method": "POST",
+              "path": "/login",
+              "description": "Send a request with an invalid type for parameter 'password'."
+            },
+            {
+              "name": "login_empty_password",
+              "scenario_type": "empty",
+              "target_parameter": "password",
+              "method": "POST",
+              "path": "/login",
+              "description": "Send an empty string for parameter 'password'."
+            },
+            {
+              "name": "login_boundary_password",
+              "scenario_type": "boundary",
+              "target_parameter": "password",
+              "method": "POST",
+              "path": "/login",
+              "description": "Test string boundary values for parameter 'password'."
+            },
+            {
+              "name": "login_wrong_type_age",
+              "scenario_type": "wrong_type",
+              "target_parameter": "age",
+              "method": "POST",
+              "path": "/login",
+              "description": "Send a request with an invalid type for parameter 'age'."
+            },
+            {
+              "name": "login_boundary_age",
+              "scenario_type": "boundary",
+              "target_parameter": "age",
+              "method": "POST",
+              "path": "/login",
+              "description": "Test integer boundary values for parameter 'age'."
+            }
+          ],
+          "generated_tests": [
+            {
+              "name": "login_normal",
+              "method": "POST",
+              "path": "/login",
+              "scenario_type": "normal",
+              "request_parameters": {},
+              "expected_status_code": 200,
+              "assertions": [
+                "status_code == 200"
+              ]
+            },
+            {
+              "name": "login_missing_username",
+              "method": "POST",
+              "path": "/login",
+              "scenario_type": "missing",
+              "request_parameters": {},
+              "expected_status_code": 200,
+              "assertions": [
+                "status_code == 200"
+              ]
+            },
+            {
+              "name": "login_wrong_type_username",
+              "method": "POST",
+              "path": "/login",
+              "scenario_type": "wrong_type",
+              "request_parameters": {},
+              "expected_status_code": 200,
+              "assertions": [
+                "status_code == 200"
+              ]
+            },
+            {
+              "name": "login_empty_username",
+              "method": "POST",
+              "path": "/login",
+              "scenario_type": "empty",
+              "request_parameters": {},
+              "expected_status_code": 200,
+              "assertions": [
+                "status_code == 200"
+              ]
+            },
+            {
+              "name": "login_boundary_username",
+              "method": "POST",
+              "path": "/login",
+              "scenario_type": "boundary",
+              "request_parameters": {},
+              "expected_status_code": 200,
+              "assertions": [
+                "status_code == 200"
+              ]
+            },
+            {
+              "name": "login_missing_password",
+              "method": "POST",
+              "path": "/login",
+              "scenario_type": "missing",
+              "request_parameters": {},
+              "expected_status_code": 200,
+              "assertions": [
+                "status_code == 200"
+              ]
+            },
+            {
+              "name": "login_wrong_type_password",
+              "method": "POST",
+              "path": "/login",
+              "scenario_type": "wrong_type",
+              "request_parameters": {},
+              "expected_status_code": 200,
+              "assertions": [
+                "status_code == 200"
+              ]
+            },
+            {
+              "name": "login_empty_password",
+              "method": "POST",
+              "path": "/login",
+              "scenario_type": "empty",
+              "request_parameters": {},
+              "expected_status_code": 200,
+              "assertions": [
+                "status_code == 200"
+              ]
+            },
+            {
+              "name": "login_boundary_password",
+              "method": "POST",
+              "path": "/login",
+              "scenario_type": "boundary",
+              "request_parameters": {},
+              "expected_status_code": 200,
+              "assertions": [
+                "status_code == 200"
+              ]
+            },
+            {
+              "name": "login_wrong_type_age",
+              "method": "POST",
+              "path": "/login",
+              "scenario_type": "wrong_type",
+              "request_parameters": {},
+              "expected_status_code": 200,
+              "assertions": [
+                "status_code == 200"
+              ]
+            },
+            {
+              "name": "login_boundary_age",
+              "method": "POST",
+              "path": "/login",
+              "scenario_type": "boundary",
+              "request_parameters": {},
+              "expected_status_code": 200,
+              "assertions": [
+                "status_code == 200"
+              ]
+            }
+          ],
+          "executions": [
+            {
+              "trace_id": "11a2325b-51b7-46a2-8c52-6f84dc036b4e",
+              "test_name": "login_normal",
+              "status": "failed",
+              "started_at": "2026-09-11T03:15:49.347591Z",
+              "finished_at": "2026-09-11T03:15:49.729637Z",
+              "duration_seconds": 0.382046,
+              "stdout": "AI_TEST_AGENT_HTTP_STATUS=400\nF\n================================== FAILURES ===================================\n___________________________ test_generated_api_case ___________________________\n\n    def test_generated_api_case():\n        method = \"POST\"\n        url = \"http://127.0.0.1:10875/login\"\n        parameters = {}\n        expected_status = 200\n    \n        if method == \"GET\":\n            if parameters:\n                url = f\"{url}?{urlencode(parameters, doseq=True)}\"\n            data = None\n        else:\n            data = urlencode(parameters, doseq=True).encode()\n    \n        request = Request(\n            url=url,\n            data=data,\n            method=method,\n            headers={\n                \"Content-Type\": \"application/x-www-form-urlencoded\",\n            },\n        )\n    \n        try:\n            with urlopen(request, timeout=10) as response:\n                status_code = response.status\n        except HTTPError as exc:\n            status_code = exc.code\n        except URLError as exc:\n            raise RuntimeError(\n                f\"Request failed: {exc.reason}\"\n            ) from exc\n    \n        print(\n            f\"AI_TEST_AGENT_HTTP_STATUS={status_code}\"\n        )\n    \n>       assert status_code == expected_status\nE       assert 400 == 200\n\ntest_generated.py:42: AssertionError\n=========================== short test summary info ===========================\nFAILED test_generated.py::test_generated_api_case - assert 400 == 200\n1 failed in 0.07s\n",
+              "stderr": "",
+              "exit_code": 1,
+              "http_status_code": 400
+            },
+            {
+              "trace_id": "d67b4e61-c073-41c1-8e69-10f5274c7c5a",
+              "test_name": "login_missing_username",
+              "status": "failed",
+              "started_at": "2026-09-11T03:15:49.730634Z",
+              "finished_at": "2026-09-11T03:15:50.114490Z",
+              "duration_seconds": 0.383856,
+              "stdout": "AI_TEST_AGENT_HTTP_STATUS=400\nF\n================================== FAILURES ===================================\n___________________________ test_generated_api_case ___________________________\n\n    def test_generated_api_case():\n        method = \"POST\"\n        url = \"http://127.0.0.1:10875/login\"\n        parameters = {}\n        expected_status = 200\n    \n        if method == \"GET\":\n            if parameters:\n                url = f\"{url}?{urlencode(parameters, doseq=True)}\"\n            data = None\n        else:\n            data = urlencode(parameters, doseq=True).encode()\n    \n        request = Request(\n            url=url,\n            data=data,\n            method=method,\n            headers={\n                \"Content-Type\": \"application/x-www-form-urlencoded\",\n            },\n        )\n    \n        try:\n            with urlopen(request, timeout=10) as response:\n                status_code = response.status\n        except HTTPError as exc:\n            status_code = exc.code\n        except URLError as exc:\n            raise RuntimeError(\n                f\"Request failed: {exc.reason}\"\n            ) from exc\n    \n        print(\n            f\"AI_TEST_AGENT_HTTP_STATUS={status_code}\"\n        )\n    \n>       assert status_code == expected_status\nE       assert 400 == 200\n\ntest_generated.py:42: AssertionError\n=========================== short test summary info ===========================\nFAILED test_generated.py::test_generated_api_case - assert 400 == 200\n1 failed in 0.07s\n",
+              "stderr": "",
+              "exit_code": 1,
+              "http_status_code": 400
+            },
+            {
+              "trace_id": "ea1e78f4-75d9-4528-8d76-140f9288b0f0",
+              "test_name": "login_wrong_type_username",
+              "status": "failed",
+              "started_at": "2026-09-11T03:15:50.114490Z",
+              "finished_at": "2026-09-11T03:15:50.502376Z",
+              "duration_seconds": 0.387886,
+              "stdout": "AI_TEST_AGENT_HTTP_STATUS=400\nF\n================================== FAILURES ===================================\n___________________________ test_generated_api_case ___________________________\n\n    def test_generated_api_case():\n        method = \"POST\"\n        url = \"http://127.0.0.1:10875/login\"\n        parameters = {}\n        expected_status = 200\n    \n        if method == \"GET\":\n            if parameters:\n                url = f\"{url}?{urlencode(parameters, doseq=True)}\"\n            data = None\n        else:\n            data = urlencode(parameters, doseq=True).encode()\n    \n        request = Request(\n            url=url,\n            data=data,\n            method=method,\n            headers={\n                \"Content-Type\": \"application/x-www-form-urlencoded\",\n            },\n        )\n    \n        try:\n            with urlopen(request, timeout=10) as response:\n                status_code = response.status\n        except HTTPError as exc:\n            status_code = exc.code\n        except URLError as exc:\n            raise RuntimeError(\n                f\"Request failed: {exc.reason}\"\n            ) from exc\n    \n        print(\n            f\"AI_TEST_AGENT_HTTP_STATUS={status_code}\"\n        )\n    \n>       assert status_code == expected_status\nE       assert 400 == 200\n\ntest_generated.py:42: AssertionError\n=========================== short test summary info ===========================\nFAILED test_generated.py::test_generated_api_case - assert 400 == 200\n1 failed in 0.07s\n",
+              "stderr": "",
+              "exit_code": 1,
+              "http_status_code": 400
+            },
+            {
+              "trace_id": "9456e678-12aa-405b-b91d-6ad83ec53c63",
+              "test_name": "login_empty_username",
+              "status": "failed",
+              "started_at": "2026-09-11T03:15:50.502376Z",
+              "finished_at": "2026-09-11T03:15:50.887978Z",
+              "duration_seconds": 0.385602,
+              "stdout": "AI_TEST_AGENT_HTTP_STATUS=400\nF\n================================== FAILURES ===================================\n___________________________ test_generated_api_case ___________________________\n\n    def test_generated_api_case():\n        method = \"POST\"\n        url = \"http://127.0.0.1:10875/login\"\n        parameters = {}\n        expected_status = 200\n    \n        if method == \"GET\":\n            if parameters:\n                url = f\"{url}?{urlencode(parameters, doseq=True)}\"\n            data = None\n        else:\n            data = urlencode(parameters, doseq=True).encode()\n    \n        request = Request(\n            url=url,\n            data=data,\n            method=method,\n            headers={\n                \"Content-Type\": \"application/x-www-form-urlencoded\",\n            },\n        )\n    \n        try:\n            with urlopen(request, timeout=10) as response:\n                status_code = response.status\n        except HTTPError as exc:\n            status_code = exc.code\n        except URLError as exc:\n            raise RuntimeError(\n                f\"Request failed: {exc.reason}\"\n            ) from exc\n    \n        print(\n            f\"AI_TEST_AGENT_HTTP_STATUS={status_code}\"\n        )\n    \n>       assert status_code == expected_status\nE       assert 400 == 200\n\ntest_generated.py:42: AssertionError\n=========================== short test summary info ===========================\nFAILED test_generated.py::test_generated_api_case - assert 400 == 200\n1 failed in 0.07s\n",
+              "stderr": "",
+              "exit_code": 1,
+              "http_status_code": 400
+            },
+            {
+              "trace_id": "4ecf6fa6-8365-45d7-be19-bd6a2f33a23f",
+              "test_name": "login_boundary_username",
+              "status": "failed",
+              "started_at": "2026-09-11T03:15:50.887978Z",
+              "finished_at": "2026-09-11T03:15:51.271705Z",
+              "duration_seconds": 0.383727,
+              "stdout": "AI_TEST_AGENT_HTTP_STATUS=400\nF\n================================== FAILURES ===================================\n___________________________ test_generated_api_case ___________________________\n\n    def test_generated_api_case():\n        method = \"POST\"\n        url = \"http://127.0.0.1:10875/login\"\n        parameters = {}\n        expected_status = 200\n    \n        if method == \"GET\":\n            if parameters:\n                url = f\"{url}?{urlencode(parameters, doseq=True)}\"\n            data = None\n        else:\n            data = urlencode(parameters, doseq=True).encode()\n    \n        request = Request(\n            url=url,\n            data=data,\n            method=method,\n            headers={\n                \"Content-Type\": \"application/x-www-form-urlencoded\",\n            },\n        )\n    \n        try:\n            with urlopen(request, timeout=10) as response:\n                status_code = response.status\n        except HTTPError as exc:\n            status_code = exc.code\n        except URLError as exc:\n            raise RuntimeError(\n                f\"Request failed: {exc.reason}\"\n            ) from exc\n    \n        print(\n            f\"AI_TEST_AGENT_HTTP_STATUS={status_code}\"\n        )\n    \n>       assert status_code == expected_status\nE       assert 400 == 200\n\ntest_generated.py:42: AssertionError\n=========================== short test summary info ===========================\nFAILED test_generated.py::test_generated_api_case - assert 400 == 200\n1 failed in 0.07s\n",
+              "stderr": "",
+              "exit_code": 1,
+              "http_status_code": 400
+            },
+            {
+              "trace_id": "fe477d7a-af39-48ff-90bf-7c4c89c7b5d1",
+              "test_name": "login_missing_password",
+              "status": "failed",
+              "started_at": "2026-09-11T03:15:51.271705Z",
+              "finished_at": "2026-09-11T03:15:51.695063Z",
+              "duration_seconds": 0.423358,
+              "stdout": "AI_TEST_AGENT_HTTP_STATUS=400\nF\n================================== FAILURES ===================================\n___________________________ test_generated_api_case ___________________________\n\n    def test_generated_api_case():\n        method = \"POST\"\n        url = \"http://127.0.0.1:10875/login\"\n        parameters = {}\n        expected_status = 200\n    \n        if method == \"GET\":\n            if parameters:\n                url = f\"{url}?{urlencode(parameters, doseq=True)}\"\n            data = None\n        else:\n            data = urlencode(parameters, doseq=True).encode()\n    \n        request = Request(\n            url=url,\n            data=data,\n            method=method,\n            headers={\n                \"Content-Type\": \"application/x-www-form-urlencoded\",\n            },\n        )\n    \n        try:\n            with urlopen(request, timeout=10) as response:\n                status_code = response.status\n        except HTTPError as exc:\n            status_code = exc.code\n        except URLError as exc:\n            raise RuntimeError(\n                f\"Request failed: {exc.reason}\"\n            ) from exc\n    \n        print(\n            f\"AI_TEST_AGENT_HTTP_STATUS={status_code}\"\n        )\n    \n>       assert status_code == expected_status\nE       assert 400 == 200\n\ntest_generated.py:42: AssertionError\n=========================== short test summary info ===========================\nFAILED test_generated.py::test_generated_api_case - assert 400 == 200\n1 failed in 0.07s\n",
+              "stderr": "",
+              "exit_code": 1,
+              "http_status_code": 400
+            },
+            {
+              "trace_id": "3410c90f-75ea-444f-a68a-e268d5979a0c",
+              "test_name": "login_wrong_type_password",
+              "status": "failed",
+              "started_at": "2026-09-11T03:15:51.695063Z",
+              "finished_at": "2026-09-11T03:15:52.096823Z",
+              "duration_seconds": 0.40176,
+              "stdout": "AI_TEST_AGENT_HTTP_STATUS=400\nF\n================================== FAILURES ===================================\n___________________________ test_generated_api_case ___________________________\n\n    def test_generated_api_case():\n        method = \"POST\"\n        url = \"http://127.0.0.1:10875/login\"\n        parameters = {}\n        expected_status = 200\n    \n        if method == \"GET\":\n            if parameters:\n                url = f\"{url}?{urlencode(parameters, doseq=True)}\"\n            data = None\n        else:\n            data = urlencode(parameters, doseq=True).encode()\n    \n        request = Request(\n            url=url,\n            data=data,\n            method=method,\n            headers={\n                \"Content-Type\": \"application/x-www-form-urlencoded\",\n            },\n        )\n    \n        try:\n            with urlopen(request, timeout=10) as response:\n                status_code = response.status\n        except HTTPError as exc:\n            status_code = exc.code\n        except URLError as exc:\n            raise RuntimeError(\n                f\"Request failed: {exc.reason}\"\n            ) from exc\n    \n        print(\n            f\"AI_TEST_AGENT_HTTP_STATUS={status_code}\"\n        )\n    \n>       assert status_code == expected_status\nE       assert 400 == 200\n\ntest_generated.py:42: AssertionError\n=========================== short test summary info ===========================\nFAILED test_generated.py::test_generated_api_case - assert 400 == 200\n1 failed in 0.07s\n",
+              "stderr": "",
+              "exit_code": 1,
+              "http_status_code": 400
+            },
+            {
+              "trace_id": "230eb49a-74e4-4d59-b0c6-8e5790388dfa",
+              "test_name": "login_empty_password",
+              "status": "failed",
+              "started_at": "2026-09-11T03:15:52.096823Z",
+              "finished_at": "2026-09-11T03:15:52.496728Z",
+              "duration_seconds": 0.399905,
+              "stdout": "AI_TEST_AGENT_HTTP_STATUS=400\nF\n================================== FAILURES ===================================\n___________________________ test_generated_api_case ___________________________\n\n    def test_generated_api_case():\n        method = \"POST\"\n        url = \"http://127.0.0.1:10875/login\"\n        parameters = {}\n        expected_status = 200\n    \n        if method == \"GET\":\n            if parameters:\n                url = f\"{url}?{urlencode(parameters, doseq=True)}\"\n            data = None\n        else:\n            data = urlencode(parameters, doseq=True).encode()\n    \n        request = Request(\n            url=url,\n            data=data,\n            method=method,\n            headers={\n                \"Content-Type\": \"application/x-www-form-urlencoded\",\n            },\n        )\n    \n        try:\n            with urlopen(request, timeout=10) as response:\n                status_code = response.status\n        except HTTPError as exc:\n            status_code = exc.code\n        except URLError as exc:\n            raise RuntimeError(\n                f\"Request failed: {exc.reason}\"\n            ) from exc\n    \n        print(\n            f\"AI_TEST_AGENT_HTTP_STATUS={status_code}\"\n        )\n    \n>       assert status_code == expected_status\nE       assert 400 == 200\n\ntest_generated.py:42: AssertionError\n=========================== short test summary info ===========================\nFAILED test_generated.py::test_generated_api_case - assert 400 == 200\n1 failed in 0.07s\n",
+              "stderr": "",
+              "exit_code": 1,
+              "http_status_code": 400
+            },
+            {
+              "trace_id": "0aff36f4-7738-460b-9ce0-2447d37fd53b",
+              "test_name": "login_boundary_password",
+              "status": "failed",
+              "started_at": "2026-09-11T03:15:52.496728Z",
+              "finished_at": "2026-09-11T03:15:52.894541Z",
+              "duration_seconds": 0.397813,
+              "stdout": "AI_TEST_AGENT_HTTP_STATUS=400\nF\n================================== FAILURES ===================================\n___________________________ test_generated_api_case ___________________________\n\n    def test_generated_api_case():\n        method = \"POST\"\n        url = \"http://127.0.0.1:10875/login\"\n        parameters = {}\n        expected_status = 200\n    \n        if method == \"GET\":\n            if parameters:\n                url = f\"{url}?{urlencode(parameters, doseq=True)}\"\n            data = None\n        else:\n            data = urlencode(parameters, doseq=True).encode()\n    \n        request = Request(\n            url=url,\n            data=data,\n            method=method,\n            headers={\n                \"Content-Type\": \"application/x-www-form-urlencoded\",\n            },\n        )\n    \n        try:\n            with urlopen(request, timeout=10) as response:\n                status_code = response.status\n        except HTTPError as exc:\n            status_code = exc.code\n        except URLError as exc:\n            raise RuntimeError(\n                f\"Request failed: {exc.reason}\"\n            ) from exc\n    \n        print(\n            f\"AI_TEST_AGENT_HTTP_STATUS={status_code}\"\n        )\n    \n>       assert status_code == expected_status\nE       assert 400 == 200\n\ntest_generated.py:42: AssertionError\n=========================== short test summary info ===========================\nFAILED test_generated.py::test_generated_api_case - assert 400 == 200\n1 failed in 0.07s\n",
+              "stderr": "",
+              "exit_code": 1,
+              "http_status_code": 400
+            },
+            {
+              "trace_id": "a56bcdf8-ee0c-4993-984f-476cd01fc1f0",
+              "test_name": "login_wrong_type_age",
+              "status": "failed",
+              "started_at": "2026-09-11T03:15:52.894541Z",
+              "finished_at": "2026-09-11T03:15:53.296308Z",
+              "duration_seconds": 0.401767,
+              "stdout": "AI_TEST_AGENT_HTTP_STATUS=400\nF\n================================== FAILURES ===================================\n___________________________ test_generated_api_case ___________________________\n\n    def test_generated_api_case():\n        method = \"POST\"\n        url = \"http://127.0.0.1:10875/login\"\n        parameters = {}\n        expected_status = 200\n    \n        if method == \"GET\":\n            if parameters:\n                url = f\"{url}?{urlencode(parameters, doseq=True)}\"\n            data = None\n        else:\n            data = urlencode(parameters, doseq=True).encode()\n    \n        request = Request(\n            url=url,\n            data=data,\n            method=method,\n            headers={\n                \"Content-Type\": \"application/x-www-form-urlencoded\",\n            },\n        )\n    \n        try:\n            with urlopen(request, timeout=10) as response:\n                status_code = response.status\n        except HTTPError as exc:\n            status_code = exc.code\n        except URLError as exc:\n            raise RuntimeError(\n                f\"Request failed: {exc.reason}\"\n            ) from exc\n    \n        print(\n            f\"AI_TEST_AGENT_HTTP_STATUS={status_code}\"\n        )\n    \n>       assert status_code == expected_status\nE       assert 400 == 200\n\ntest_generated.py:42: AssertionError\n=========================== short test summary info ===========================\nFAILED test_generated.py::test_generated_api_case - assert 400 == 200\n1 failed in 0.08s\n",
+              "stderr": "",
+              "exit_code": 1,
+              "http_status_code": 400
+            },
+            {
+              "trace_id": "5d9e9c34-c636-4d70-a37d-2d1ca2fe1367",
+              "test_name": "login_boundary_age",
+              "status": "failed",
+              "started_at": "2026-09-11T03:15:53.296759Z",
+              "finished_at": "2026-09-11T03:15:53.674780Z",
+              "duration_seconds": 0.378021,
+              "stdout": "AI_TEST_AGENT_HTTP_STATUS=400\nF\n================================== FAILURES ===================================\n___________________________ test_generated_api_case ___________________________\n\n    def test_generated_api_case():\n        method = \"POST\"\n        url = \"http://127.0.0.1:10875/login\"\n        parameters = {}\n        expected_status = 200\n    \n        if method == \"GET\":\n            if parameters:\n                url = f\"{url}?{urlencode(parameters, doseq=True)}\"\n            data = None\n        else:\n            data = urlencode(parameters, doseq=True).encode()\n    \n        request = Request(\n            url=url,\n            data=data,\n            method=method,\n            headers={\n                \"Content-Type\": \"application/x-www-form-urlencoded\",\n            },\n        )\n    \n        try:\n            with urlopen(request, timeout=10) as response:\n                status_code = response.status\n        except HTTPError as exc:\n            status_code = exc.code\n        except URLError as exc:\n            raise RuntimeError(\n                f\"Request failed: {exc.reason}\"\n            ) from exc\n    \n        print(\n            f\"AI_TEST_AGENT_HTTP_STATUS={status_code}\"\n        )\n    \n>       assert status_code == expected_status\nE       assert 400 == 200\n\ntest_generated.py:42: AssertionError\n=========================== short test summary info ===========================\nFAILED test_generated.py::test_generated_api_case - assert 400 == 200\n1 failed in 0.07s\n",
+              "stderr": "",
+              "exit_code": 1,
+              "http_status_code": 400
+            }
+          ],
+          "healing_outcomes": []
+        },
+        "stdout": "Generated tests: 11\nPassed executions: 0/11\nMarkdown report: C:\\Users\\kaaka\\AppData\\Local\\Temp\\agent-eval-uxtlnr7g\\agent-report.md\nJSON report: C:\\Users\\kaaka\\AppData\\Local\\Temp\\agent-eval-uxtlnr7g\\agent-report.json\n",
+        "stderr": "",
+        "exit_code": 0
+      },
+      "trace": {
+        "events": [
+          {
+            "timestamp": "2026-09-11T03:15:49.151235Z",
+            "event_type": "agent_start",
+            "name": "ai_test_agent_started",
+            "data": {
+              "executable": "ai-test-agent",
+              "spec": "E:\\code\\1\\AI-Agent-Portfolio\\AI-Test-Agent1\\examples\\login.md",
+              "base_url": "http://127.0.0.1:10875",
+              "mock": true
+            }
+          },
+          {
+            "timestamp": "2026-09-11T03:15:53.699873Z",
+            "event_type": "message",
+            "name": "login_normal",
+            "data": {
+              "trace_id": "11a2325b-51b7-46a2-8c52-6f84dc036b4e",
+              "status": "failed",
+              "duration_seconds": 0.382046,
+              "exit_code": 1,
+              "http_status_code": 400
+            }
+          },
+          {
+            "timestamp": "2026-09-11T03:15:53.699873Z",
+            "event_type": "message",
+            "name": "login_missing_username",
+            "data": {
+              "trace_id": "d67b4e61-c073-41c1-8e69-10f5274c7c5a",
+              "status": "failed",
+              "duration_seconds": 0.383856,
+              "exit_code": 1,
+              "http_status_code": 400
+            }
+          },
+          {
+            "timestamp": "2026-09-11T03:15:53.699873Z",
+            "event_type": "message",
+            "name": "login_wrong_type_username",
+            "data": {
+              "trace_id": "ea1e78f4-75d9-4528-8d76-140f9288b0f0",
+              "status": "failed",
+              "duration_seconds": 0.387886,
+              "exit_code": 1,
+              "http_status_code": 400
+            }
+          },
+          {
+            "timestamp": "2026-09-11T03:15:53.699873Z",
+            "event_type": "message",
+            "name": "login_empty_username",
+            "data": {
+              "trace_id": "9456e678-12aa-405b-b91d-6ad83ec53c63",
+              "status": "failed",
+              "duration_seconds": 0.385602,
+              "exit_code": 1,
+              "http_status_code": 400
+            }
+          },
+          {
+            "timestamp": "2026-09-11T03:15:53.699873Z",
+            "event_type": "message",
+            "name": "login_boundary_username",
+            "data": {
+              "trace_id": "4ecf6fa6-8365-45d7-be19-bd6a2f33a23f",
+              "status": "failed",
+              "duration_seconds": 0.383727,
+              "exit_code": 1,
+              "http_status_code": 400
+            }
+          },
+          {
+            "timestamp": "2026-09-11T03:15:53.699873Z",
+            "event_type": "message",
+            "name": "login_missing_password",
+            "data": {
+              "trace_id": "fe477d7a-af39-48ff-90bf-7c4c89c7b5d1",
+              "status": "failed",
+              "duration_seconds": 0.423358,
+              "exit_code": 1,
+              "http_status_code": 400
+            }
+          },
+          {
+            "timestamp": "2026-09-11T03:15:53.699873Z",
+            "event_type": "message",
+            "name": "login_wrong_type_password",
+            "data": {
+              "trace_id": "3410c90f-75ea-444f-a68a-e268d5979a0c",
+              "status": "failed",
+              "duration_seconds": 0.40176,
+              "exit_code": 1,
+              "http_status_code": 400
+            }
+          },
+          {
+            "timestamp": "2026-09-11T03:15:53.699873Z",
+            "event_type": "message",
+            "name": "login_empty_password",
+            "data": {
+              "trace_id": "230eb49a-74e4-4d59-b0c6-8e5790388dfa",
+              "status": "failed",
+              "duration_seconds": 0.399905,
+              "exit_code": 1,
+              "http_status_code": 400
+            }
+          },
+          {
+            "timestamp": "2026-09-11T03:15:53.699873Z",
+            "event_type": "message",
+            "name": "login_boundary_password",
+            "data": {
+              "trace_id": "0aff36f4-7738-460b-9ce0-2447d37fd53b",
+              "status": "failed",
+              "duration_seconds": 0.397813,
+              "exit_code": 1,
+              "http_status_code": 400
+            }
+          },
+          {
+            "timestamp": "2026-09-11T03:15:53.699873Z",
+            "event_type": "message",
+            "name": "login_wrong_type_age",
+            "data": {
+              "trace_id": "a56bcdf8-ee0c-4993-984f-476cd01fc1f0",
+              "status": "failed",
+              "duration_seconds": 0.401767,
+              "exit_code": 1,
+              "http_status_code": 400
+            }
+          },
+          {
+            "timestamp": "2026-09-11T03:15:53.699873Z",
+            "event_type": "message",
+            "name": "login_boundary_age",
+            "data": {
+              "trace_id": "5d9e9c34-c636-4d70-a37d-2d1ca2fe1367",
+              "status": "failed",
+              "duration_seconds": 0.378021,
+              "exit_code": 1,
+              "http_status_code": 400
+            }
+          },
+          {
+            "timestamp": "2026-09-11T03:15:53.699873Z",
+            "event_type": "agent_end",
+            "name": "ai_test_agent_finished",
+            "data": {
+              "exit_code": 0,
+              "generated_tests": 11,
+              "executions": 11
+            }
+          }
+        ]
+      },
+      "error": null,
+      "metadata": {}
+    },
+    {
+      "id": "run-ai-test-agent-login-e2e-003",
+      "task_id": "ai-test-agent-login-e2e",
+      "status": "success",
+      "started_at": "2026-09-11T03:15:53.700810Z",
+      "finished_at": "2026-09-11T03:15:58.258999Z",
+      "duration_ms": 4558.188999999999,
+      "output": {
+        "report": {
+          "spec": {
+            "name": "login",
+            "method": "POST",
+            "path": "/login",
+            "parameters": [
+              {
+                "name": "username",
+                "type": "string",
+                "required": true
+              },
+              {
+                "name": "password",
+                "type": "string",
+                "required": true
+              },
+              {
+                "name": "age",
+                "type": "integer",
+                "required": false
+              }
+            ]
+          },
+          "test_cases": [
+            {
+              "name": "login_normal",
+              "scenario_type": "normal",
+              "target_parameter": null,
+              "method": "POST",
+              "path": "/login",
+              "description": "Send a valid request using valid parameter values."
+            },
+            {
+              "name": "login_missing_username",
+              "scenario_type": "missing",
+              "target_parameter": "username",
+              "method": "POST",
+              "path": "/login",
+              "description": "Send a request without required parameter 'username'."
+            },
+            {
+              "name": "login_wrong_type_username",
+              "scenario_type": "wrong_type",
+              "target_parameter": "username",
+              "method": "POST",
+              "path": "/login",
+              "description": "Send a request with an invalid type for parameter 'username'."
+            },
+            {
+              "name": "login_empty_username",
+              "scenario_type": "empty",
+              "target_parameter": "username",
+              "method": "POST",
+              "path": "/login",
+              "description": "Send an empty string for parameter 'username'."
+            },
+            {
+              "name": "login_boundary_username",
+              "scenario_type": "boundary",
+              "target_parameter": "username",
+              "method": "POST",
+              "path": "/login",
+              "description": "Test string boundary values for parameter 'username'."
+            },
+            {
+              "name": "login_missing_password",
+              "scenario_type": "missing",
+              "target_parameter": "password",
+              "method": "POST",
+              "path": "/login",
+              "description": "Send a request without required parameter 'password'."
+            },
+            {
+              "name": "login_wrong_type_password",
+              "scenario_type": "wrong_type",
+              "target_parameter": "password",
+              "method": "POST",
+              "path": "/login",
+              "description": "Send a request with an invalid type for parameter 'password'."
+            },
+            {
+              "name": "login_empty_password",
+              "scenario_type": "empty",
+              "target_parameter": "password",
+              "method": "POST",
+              "path": "/login",
+              "description": "Send an empty string for parameter 'password'."
+            },
+            {
+              "name": "login_boundary_password",
+              "scenario_type": "boundary",
+              "target_parameter": "password",
+              "method": "POST",
+              "path": "/login",
+              "description": "Test string boundary values for parameter 'password'."
+            },
+            {
+              "name": "login_wrong_type_age",
+              "scenario_type": "wrong_type",
+              "target_parameter": "age",
+              "method": "POST",
+              "path": "/login",
+              "description": "Send a request with an invalid type for parameter 'age'."
+            },
+            {
+              "name": "login_boundary_age",
+              "scenario_type": "boundary",
+              "target_parameter": "age",
+              "method": "POST",
+              "path": "/login",
+              "description": "Test integer boundary values for parameter 'age'."
+            }
+          ],
+          "generated_tests": [
+            {
+              "name": "login_normal",
+              "method": "POST",
+              "path": "/login",
+              "scenario_type": "normal",
+              "request_parameters": {},
+              "expected_status_code": 200,
+              "assertions": [
+                "status_code == 200"
+              ]
+            },
+            {
+              "name": "login_missing_username",
+              "method": "POST",
+              "path": "/login",
+              "scenario_type": "missing",
+              "request_parameters": {},
+              "expected_status_code": 200,
+              "assertions": [
+                "status_code == 200"
+              ]
+            },
+            {
+              "name": "login_wrong_type_username",
+              "method": "POST",
+              "path": "/login",
+              "scenario_type": "wrong_type",
+              "request_parameters": {},
+              "expected_status_code": 200,
+              "assertions": [
+                "status_code == 200"
+              ]
+            },
+            {
+              "name": "login_empty_username",
+              "method": "POST",
+              "path": "/login",
+              "scenario_type": "empty",
+              "request_parameters": {},
+              "expected_status_code": 200,
+              "assertions": [
+                "status_code == 200"
+              ]
+            },
+            {
+              "name": "login_boundary_username",
+              "method": "POST",
+              "path": "/login",
+              "scenario_type": "boundary",
+              "request_parameters": {},
+              "expected_status_code": 200,
+              "assertions": [
+                "status_code == 200"
+              ]
+            },
+            {
+              "name": "login_missing_password",
+              "method": "POST",
+              "path": "/login",
+              "scenario_type": "missing",
+              "request_parameters": {},
+              "expected_status_code": 200,
+              "assertions": [
+                "status_code == 200"
+              ]
+            },
+            {
+              "name": "login_wrong_type_password",
+              "method": "POST",
+              "path": "/login",
+              "scenario_type": "wrong_type",
+              "request_parameters": {},
+              "expected_status_code": 200,
+              "assertions": [
+                "status_code == 200"
+              ]
+            },
+            {
+              "name": "login_empty_password",
+              "method": "POST",
+              "path": "/login",
+              "scenario_type": "empty",
+              "request_parameters": {},
+              "expected_status_code": 200,
+              "assertions": [
+                "status_code == 200"
+              ]
+            },
+            {
+              "name": "login_boundary_password",
+              "method": "POST",
+              "path": "/login",
+              "scenario_type": "boundary",
+              "request_parameters": {},
+              "expected_status_code": 200,
+              "assertions": [
+                "status_code == 200"
+              ]
+            },
+            {
+              "name": "login_wrong_type_age",
+              "method": "POST",
+              "path": "/login",
+              "scenario_type": "wrong_type",
+              "request_parameters": {},
+              "expected_status_code": 200,
+              "assertions": [
+                "status_code == 200"
+              ]
+            },
+            {
+              "name": "login_boundary_age",
+              "method": "POST",
+              "path": "/login",
+              "scenario_type": "boundary",
+              "request_parameters": {},
+              "expected_status_code": 200,
+              "assertions": [
+                "status_code == 200"
+              ]
+            }
+          ],
+          "executions": [
+            {
+              "trace_id": "4474fdb9-2c42-43ec-9c80-3363914b9e9f",
+              "test_name": "login_normal",
+              "status": "failed",
+              "started_at": "2026-09-11T03:15:53.907766Z",
+              "finished_at": "2026-09-11T03:15:54.289394Z",
+              "duration_seconds": 0.381628,
+              "stdout": "AI_TEST_AGENT_HTTP_STATUS=400\nF\n================================== FAILURES ===================================\n___________________________ test_generated_api_case ___________________________\n\n    def test_generated_api_case():\n        method = \"POST\"\n        url = \"http://127.0.0.1:10875/login\"\n        parameters = {}\n        expected_status = 200\n    \n        if method == \"GET\":\n            if parameters:\n                url = f\"{url}?{urlencode(parameters, doseq=True)}\"\n            data = None\n        else:\n            data = urlencode(parameters, doseq=True).encode()\n    \n        request = Request(\n            url=url,\n            data=data,\n            method=method,\n            headers={\n                \"Content-Type\": \"application/x-www-form-urlencoded\",\n            },\n        )\n    \n        try:\n            with urlopen(request, timeout=10) as response:\n                status_code = response.status\n        except HTTPError as exc:\n            status_code = exc.code\n        except URLError as exc:\n            raise RuntimeError(\n                f\"Request failed: {exc.reason}\"\n            ) from exc\n    \n        print(\n            f\"AI_TEST_AGENT_HTTP_STATUS={status_code}\"\n        )\n    \n>       assert status_code == expected_status\nE       assert 400 == 200\n\ntest_generated.py:42: AssertionError\n=========================== short test summary info ===========================\nFAILED test_generated.py::test_generated_api_case - assert 400 == 200\n1 failed in 0.07s\n",
+              "stderr": "",
+              "exit_code": 1,
+              "http_status_code": 400
+            },
+            {
+              "trace_id": "2aaa2521-193c-4495-8691-9314d327633a",
+              "test_name": "login_missing_username",
+              "status": "failed",
+              "started_at": "2026-09-11T03:15:54.290388Z",
+              "finished_at": "2026-09-11T03:15:54.697263Z",
+              "duration_seconds": 0.406875,
+              "stdout": "AI_TEST_AGENT_HTTP_STATUS=400\nF\n================================== FAILURES ===================================\n___________________________ test_generated_api_case ___________________________\n\n    def test_generated_api_case():\n        method = \"POST\"\n        url = \"http://127.0.0.1:10875/login\"\n        parameters = {}\n        expected_status = 200\n    \n        if method == \"GET\":\n            if parameters:\n                url = f\"{url}?{urlencode(parameters, doseq=True)}\"\n            data = None\n        else:\n            data = urlencode(parameters, doseq=True).encode()\n    \n        request = Request(\n            url=url,\n            data=data,\n            method=method,\n            headers={\n                \"Content-Type\": \"application/x-www-form-urlencoded\",\n            },\n        )\n    \n        try:\n            with urlopen(request, timeout=10) as response:\n                status_code = response.status\n        except HTTPError as exc:\n            status_code = exc.code\n        except URLError as exc:\n            raise RuntimeError(\n                f\"Request failed: {exc.reason}\"\n            ) from exc\n    \n        print(\n            f\"AI_TEST_AGENT_HTTP_STATUS={status_code}\"\n        )\n    \n>       assert status_code == expected_status\nE       assert 400 == 200\n\ntest_generated.py:42: AssertionError\n=========================== short test summary info ===========================\nFAILED test_generated.py::test_generated_api_case - assert 400 == 200\n1 failed in 0.09s\n",
+              "stderr": "",
+              "exit_code": 1,
+              "http_status_code": 400
+            },
+            {
+              "trace_id": "bffc0c1d-5240-4e7a-a4dd-9b10cd313725",
+              "test_name": "login_wrong_type_username",
+              "status": "failed",
+              "started_at": "2026-09-11T03:15:54.697263Z",
+              "finished_at": "2026-09-11T03:15:55.078787Z",
+              "duration_seconds": 0.381524,
+              "stdout": "AI_TEST_AGENT_HTTP_STATUS=400\nF\n================================== FAILURES ===================================\n___________________________ test_generated_api_case ___________________________\n\n    def test_generated_api_case():\n        method = \"POST\"\n        url = \"http://127.0.0.1:10875/login\"\n        parameters = {}\n        expected_status = 200\n    \n        if method == \"GET\":\n            if parameters:\n                url = f\"{url}?{urlencode(parameters, doseq=True)}\"\n            data = None\n        else:\n            data = urlencode(parameters, doseq=True).encode()\n    \n        request = Request(\n            url=url,\n            data=data,\n            method=method,\n            headers={\n                \"Content-Type\": \"application/x-www-form-urlencoded\",\n            },\n        )\n    \n        try:\n            with urlopen(request, timeout=10) as response:\n                status_code = response.status\n        except HTTPError as exc:\n            status_code = exc.code\n        except URLError as exc:\n            raise RuntimeError(\n                f\"Request failed: {exc.reason}\"\n            ) from exc\n    \n        print(\n            f\"AI_TEST_AGENT_HTTP_STATUS={status_code}\"\n        )\n    \n>       assert status_code == expected_status\nE       assert 400 == 200\n\ntest_generated.py:42: AssertionError\n=========================== short test summary info ===========================\nFAILED test_generated.py::test_generated_api_case - assert 400 == 200\n1 failed in 0.07s\n",
+              "stderr": "",
+              "exit_code": 1,
+              "http_status_code": 400
+            },
+            {
+              "trace_id": "49116881-9bf2-46e6-be3e-399b35b4e929",
+              "test_name": "login_empty_username",
+              "status": "failed",
+              "started_at": "2026-09-11T03:15:55.079784Z",
+              "finished_at": "2026-09-11T03:15:55.467108Z",
+              "duration_seconds": 0.387324,
+              "stdout": "AI_TEST_AGENT_HTTP_STATUS=400\nF\n================================== FAILURES ===================================\n___________________________ test_generated_api_case ___________________________\n\n    def test_generated_api_case():\n        method = \"POST\"\n        url = \"http://127.0.0.1:10875/login\"\n        parameters = {}\n        expected_status = 200\n    \n        if method == \"GET\":\n            if parameters:\n                url = f\"{url}?{urlencode(parameters, doseq=True)}\"\n            data = None\n        else:\n            data = urlencode(parameters, doseq=True).encode()\n    \n        request = Request(\n            url=url,\n            data=data,\n            method=method,\n            headers={\n                \"Content-Type\": \"application/x-www-form-urlencoded\",\n            },\n        )\n    \n        try:\n            with urlopen(request, timeout=10) as response:\n                status_code = response.status\n        except HTTPError as exc:\n            status_code = exc.code\n        except URLError as exc:\n            raise RuntimeError(\n                f\"Request failed: {exc.reason}\"\n            ) from exc\n    \n        print(\n            f\"AI_TEST_AGENT_HTTP_STATUS={status_code}\"\n        )\n    \n>       assert status_code == expected_status\nE       assert 400 == 200\n\ntest_generated.py:42: AssertionError\n=========================== short test summary info ===========================\nFAILED test_generated.py::test_generated_api_case - assert 400 == 200\n1 failed in 0.07s\n",
+              "stderr": "",
+              "exit_code": 1,
+              "http_status_code": 400
+            },
+            {
+              "trace_id": "87e6c3d7-8eff-4ae7-ae9e-0af758dbf7c9",
+              "test_name": "login_boundary_username",
+              "status": "failed",
+              "started_at": "2026-09-11T03:15:55.467108Z",
+              "finished_at": "2026-09-11T03:15:55.858227Z",
+              "duration_seconds": 0.391119,
+              "stdout": "AI_TEST_AGENT_HTTP_STATUS=400\nF\n================================== FAILURES ===================================\n___________________________ test_generated_api_case ___________________________\n\n    def test_generated_api_case():\n        method = \"POST\"\n        url = \"http://127.0.0.1:10875/login\"\n        parameters = {}\n        expected_status = 200\n    \n        if method == \"GET\":\n            if parameters:\n                url = f\"{url}?{urlencode(parameters, doseq=True)}\"\n            data = None\n        else:\n            data = urlencode(parameters, doseq=True).encode()\n    \n        request = Request(\n            url=url,\n            data=data,\n            method=method,\n            headers={\n                \"Content-Type\": \"application/x-www-form-urlencoded\",\n            },\n        )\n    \n        try:\n            with urlopen(request, timeout=10) as response:\n                status_code = response.status\n        except HTTPError as exc:\n            status_code = exc.code\n        except URLError as exc:\n            raise RuntimeError(\n                f\"Request failed: {exc.reason}\"\n            ) from exc\n    \n        print(\n            f\"AI_TEST_AGENT_HTTP_STATUS={status_code}\"\n        )\n    \n>       assert status_code == expected_status\nE       assert 400 == 200\n\ntest_generated.py:42: AssertionError\n=========================== short test summary info ===========================\nFAILED test_generated.py::test_generated_api_case - assert 400 == 200\n1 failed in 0.07s\n",
+              "stderr": "",
+              "exit_code": 1,
+              "http_status_code": 400
+            },
+            {
+              "trace_id": "c048bd14-05ce-4547-ad66-9cc26e5f0f0c",
+              "test_name": "login_missing_password",
+              "status": "failed",
+              "started_at": "2026-09-11T03:15:55.859224Z",
+              "finished_at": "2026-09-11T03:15:56.242892Z",
+              "duration_seconds": 0.383668,
+              "stdout": "AI_TEST_AGENT_HTTP_STATUS=400\nF\n================================== FAILURES ===================================\n___________________________ test_generated_api_case ___________________________\n\n    def test_generated_api_case():\n        method = \"POST\"\n        url = \"http://127.0.0.1:10875/login\"\n        parameters = {}\n        expected_status = 200\n    \n        if method == \"GET\":\n            if parameters:\n                url = f\"{url}?{urlencode(parameters, doseq=True)}\"\n            data = None\n        else:\n            data = urlencode(parameters, doseq=True).encode()\n    \n        request = Request(\n            url=url,\n            data=data,\n            method=method,\n            headers={\n                \"Content-Type\": \"application/x-www-form-urlencoded\",\n            },\n        )\n    \n        try:\n            with urlopen(request, timeout=10) as response:\n                status_code = response.status\n        except HTTPError as exc:\n            status_code = exc.code\n        except URLError as exc:\n            raise RuntimeError(\n                f\"Request failed: {exc.reason}\"\n            ) from exc\n    \n        print(\n            f\"AI_TEST_AGENT_HTTP_STATUS={status_code}\"\n        )\n    \n>       assert status_code == expected_status\nE       assert 400 == 200\n\ntest_generated.py:42: AssertionError\n=========================== short test summary info ===========================\nFAILED test_generated.py::test_generated_api_case - assert 400 == 200\n1 failed in 0.07s\n",
+              "stderr": "",
+              "exit_code": 1,
+              "http_status_code": 400
+            },
+            {
+              "trace_id": "850fb462-1cf8-4234-94aa-98cd53f58085",
+              "test_name": "login_wrong_type_password",
+              "status": "failed",
+              "started_at": "2026-09-11T03:15:56.242892Z",
+              "finished_at": "2026-09-11T03:15:56.626087Z",
+              "duration_seconds": 0.383195,
+              "stdout": "AI_TEST_AGENT_HTTP_STATUS=400\nF\n================================== FAILURES ===================================\n___________________________ test_generated_api_case ___________________________\n\n    def test_generated_api_case():\n        method = \"POST\"\n        url = \"http://127.0.0.1:10875/login\"\n        parameters = {}\n        expected_status = 200\n    \n        if method == \"GET\":\n            if parameters:\n                url = f\"{url}?{urlencode(parameters, doseq=True)}\"\n            data = None\n        else:\n            data = urlencode(parameters, doseq=True).encode()\n    \n        request = Request(\n            url=url,\n            data=data,\n            method=method,\n            headers={\n                \"Content-Type\": \"application/x-www-form-urlencoded\",\n            },\n        )\n    \n        try:\n            with urlopen(request, timeout=10) as response:\n                status_code = response.status\n        except HTTPError as exc:\n            status_code = exc.code\n        except URLError as exc:\n            raise RuntimeError(\n                f\"Request failed: {exc.reason}\"\n            ) from exc\n    \n        print(\n            f\"AI_TEST_AGENT_HTTP_STATUS={status_code}\"\n        )\n    \n>       assert status_code == expected_status\nE       assert 400 == 200\n\ntest_generated.py:42: AssertionError\n=========================== short test summary info ===========================\nFAILED test_generated.py::test_generated_api_case - assert 400 == 200\n1 failed in 0.07s\n",
+              "stderr": "",
+              "exit_code": 1,
+              "http_status_code": 400
+            },
+            {
+              "trace_id": "10231b9f-e5ea-49b1-92c6-e80bf20eac57",
+              "test_name": "login_empty_password",
+              "status": "failed",
+              "started_at": "2026-09-11T03:15:56.626087Z",
+              "finished_at": "2026-09-11T03:15:57.075624Z",
+              "duration_seconds": 0.449537,
+              "stdout": "AI_TEST_AGENT_HTTP_STATUS=400\nF\n================================== FAILURES ===================================\n___________________________ test_generated_api_case ___________________________\n\n    def test_generated_api_case():\n        method = \"POST\"\n        url = \"http://127.0.0.1:10875/login\"\n        parameters = {}\n        expected_status = 200\n    \n        if method == \"GET\":\n            if parameters:\n                url = f\"{url}?{urlencode(parameters, doseq=True)}\"\n            data = None\n        else:\n            data = urlencode(parameters, doseq=True).encode()\n    \n        request = Request(\n            url=url,\n            data=data,\n            method=method,\n            headers={\n                \"Content-Type\": \"application/x-www-form-urlencoded\",\n            },\n        )\n    \n        try:\n            with urlopen(request, timeout=10) as response:\n                status_code = response.status\n        except HTTPError as exc:\n            status_code = exc.code\n        except URLError as exc:\n            raise RuntimeError(\n                f\"Request failed: {exc.reason}\"\n            ) from exc\n    \n        print(\n            f\"AI_TEST_AGENT_HTTP_STATUS={status_code}\"\n        )\n    \n>       assert status_code == expected_status\nE       assert 400 == 200\n\ntest_generated.py:42: AssertionError\n=========================== short test summary info ===========================\nFAILED test_generated.py::test_generated_api_case - assert 400 == 200\n1 failed in 0.07s\n",
+              "stderr": "",
+              "exit_code": 1,
+              "http_status_code": 400
+            },
+            {
+              "trace_id": "843c2a5b-af99-46c1-9ca3-e4d0a6313b7f",
+              "test_name": "login_boundary_password",
+              "status": "failed",
+              "started_at": "2026-09-11T03:15:57.075624Z",
+              "finished_at": "2026-09-11T03:15:57.463943Z",
+              "duration_seconds": 0.388319,
+              "stdout": "AI_TEST_AGENT_HTTP_STATUS=400\nF\n================================== FAILURES ===================================\n___________________________ test_generated_api_case ___________________________\n\n    def test_generated_api_case():\n        method = \"POST\"\n        url = \"http://127.0.0.1:10875/login\"\n        parameters = {}\n        expected_status = 200\n    \n        if method == \"GET\":\n            if parameters:\n                url = f\"{url}?{urlencode(parameters, doseq=True)}\"\n            data = None\n        else:\n            data = urlencode(parameters, doseq=True).encode()\n    \n        request = Request(\n            url=url,\n            data=data,\n            method=method,\n            headers={\n                \"Content-Type\": \"application/x-www-form-urlencoded\",\n            },\n        )\n    \n        try:\n            with urlopen(request, timeout=10) as response:\n                status_code = response.status\n        except HTTPError as exc:\n            status_code = exc.code\n        except URLError as exc:\n            raise RuntimeError(\n                f\"Request failed: {exc.reason}\"\n            ) from exc\n    \n        print(\n            f\"AI_TEST_AGENT_HTTP_STATUS={status_code}\"\n        )\n    \n>       assert status_code == expected_status\nE       assert 400 == 200\n\ntest_generated.py:42: AssertionError\n=========================== short test summary info ===========================\nFAILED test_generated.py::test_generated_api_case - assert 400 == 200\n1 failed in 0.07s\n",
+              "stderr": "",
+              "exit_code": 1,
+              "http_status_code": 400
+            },
+            {
+              "trace_id": "14e8b0ac-fa60-4e42-92f6-72cf749df05f",
+              "test_name": "login_wrong_type_age",
+              "status": "failed",
+              "started_at": "2026-09-11T03:15:57.463943Z",
+              "finished_at": "2026-09-11T03:15:57.846476Z",
+              "duration_seconds": 0.382533,
+              "stdout": "AI_TEST_AGENT_HTTP_STATUS=400\nF\n================================== FAILURES ===================================\n___________________________ test_generated_api_case ___________________________\n\n    def test_generated_api_case():\n        method = \"POST\"\n        url = \"http://127.0.0.1:10875/login\"\n        parameters = {}\n        expected_status = 200\n    \n        if method == \"GET\":\n            if parameters:\n                url = f\"{url}?{urlencode(parameters, doseq=True)}\"\n            data = None\n        else:\n            data = urlencode(parameters, doseq=True).encode()\n    \n        request = Request(\n            url=url,\n            data=data,\n            method=method,\n            headers={\n                \"Content-Type\": \"application/x-www-form-urlencoded\",\n            },\n        )\n    \n        try:\n            with urlopen(request, timeout=10) as response:\n                status_code = response.status\n        except HTTPError as exc:\n            status_code = exc.code\n        except URLError as exc:\n            raise RuntimeError(\n                f\"Request failed: {exc.reason}\"\n            ) from exc\n    \n        print(\n            f\"AI_TEST_AGENT_HTTP_STATUS={status_code}\"\n        )\n    \n>       assert status_code == expected_status\nE       assert 400 == 200\n\ntest_generated.py:42: AssertionError\n=========================== short test summary info ===========================\nFAILED test_generated.py::test_generated_api_case - assert 400 == 200\n1 failed in 0.07s\n",
+              "stderr": "",
+              "exit_code": 1,
+              "http_status_code": 400
+            },
+            {
+              "trace_id": "37370b2b-0621-4002-84cf-9251c1ade724",
+              "test_name": "login_boundary_age",
+              "status": "failed",
+              "started_at": "2026-09-11T03:15:57.846476Z",
+              "finished_at": "2026-09-11T03:15:58.235070Z",
+              "duration_seconds": 0.388594,
+              "stdout": "AI_TEST_AGENT_HTTP_STATUS=400\nF\n================================== FAILURES ===================================\n___________________________ test_generated_api_case ___________________________\n\n    def test_generated_api_case():\n        method = \"POST\"\n        url = \"http://127.0.0.1:10875/login\"\n        parameters = {}\n        expected_status = 200\n    \n        if method == \"GET\":\n            if parameters:\n                url = f\"{url}?{urlencode(parameters, doseq=True)}\"\n            data = None\n        else:\n            data = urlencode(parameters, doseq=True).encode()\n    \n        request = Request(\n            url=url,\n            data=data,\n            method=method,\n            headers={\n                \"Content-Type\": \"application/x-www-form-urlencoded\",\n            },\n        )\n    \n        try:\n            with urlopen(request, timeout=10) as response:\n                status_code = response.status\n        except HTTPError as exc:\n            status_code = exc.code\n        except URLError as exc:\n            raise RuntimeError(\n                f\"Request failed: {exc.reason}\"\n            ) from exc\n    \n        print(\n            f\"AI_TEST_AGENT_HTTP_STATUS={status_code}\"\n        )\n    \n>       assert status_code == expected_status\nE       assert 400 == 200\n\ntest_generated.py:42: AssertionError\n=========================== short test summary info ===========================\nFAILED test_generated.py::test_generated_api_case - assert 400 == 200\n1 failed in 0.07s\n",
+              "stderr": "",
+              "exit_code": 1,
+              "http_status_code": 400
+            }
+          ],
+          "healing_outcomes": []
+        },
+        "stdout": "Generated tests: 11\nPassed executions: 0/11\nMarkdown report: C:\\Users\\kaaka\\AppData\\Local\\Temp\\agent-eval-at0jqknp\\agent-report.md\nJSON report: C:\\Users\\kaaka\\AppData\\Local\\Temp\\agent-eval-at0jqknp\\agent-report.json\n",
+        "stderr": "",
+        "exit_code": 0
+      },
+      "trace": {
+        "events": [
+          {
+            "timestamp": "2026-09-11T03:15:53.700810Z",
+            "event_type": "agent_start",
+            "name": "ai_test_agent_started",
+            "data": {
+              "executable": "ai-test-agent",
+              "spec": "E:\\code\\1\\AI-Agent-Portfolio\\AI-Test-Agent1\\examples\\login.md",
+              "base_url": "http://127.0.0.1:10875",
+              "mock": true
+            }
+          },
+          {
+            "timestamp": "2026-09-11T03:15:58.258999Z",
+            "event_type": "message",
+            "name": "login_normal",
+            "data": {
+              "trace_id": "4474fdb9-2c42-43ec-9c80-3363914b9e9f",
+              "status": "failed",
+              "duration_seconds": 0.381628,
+              "exit_code": 1,
+              "http_status_code": 400
+            }
+          },
+          {
+            "timestamp": "2026-09-11T03:15:58.258999Z",
+            "event_type": "message",
+            "name": "login_missing_username",
+            "data": {
+              "trace_id": "2aaa2521-193c-4495-8691-9314d327633a",
+              "status": "failed",
+              "duration_seconds": 0.406875,
+              "exit_code": 1,
+              "http_status_code": 400
+            }
+          },
+          {
+            "timestamp": "2026-09-11T03:15:58.258999Z",
+            "event_type": "message",
+            "name": "login_wrong_type_username",
+            "data": {
+              "trace_id": "bffc0c1d-5240-4e7a-a4dd-9b10cd313725",
+              "status": "failed",
+              "duration_seconds": 0.381524,
+              "exit_code": 1,
+              "http_status_code": 400
+            }
+          },
+          {
+            "timestamp": "2026-09-11T03:15:58.258999Z",
+            "event_type": "message",
+            "name": "login_empty_username",
+            "data": {
+              "trace_id": "49116881-9bf2-46e6-be3e-399b35b4e929",
+              "status": "failed",
+              "duration_seconds": 0.387324,
+              "exit_code": 1,
+              "http_status_code": 400
+            }
+          },
+          {
+            "timestamp": "2026-09-11T03:15:58.258999Z",
+            "event_type": "message",
+            "name": "login_boundary_username",
+            "data": {
+              "trace_id": "87e6c3d7-8eff-4ae7-ae9e-0af758dbf7c9",
+              "status": "failed",
+              "duration_seconds": 0.391119,
+              "exit_code": 1,
+              "http_status_code": 400
+            }
+          },
+          {
+            "timestamp": "2026-09-11T03:15:58.258999Z",
+            "event_type": "message",
+            "name": "login_missing_password",
+            "data": {
+              "trace_id": "c048bd14-05ce-4547-ad66-9cc26e5f0f0c",
+              "status": "failed",
+              "duration_seconds": 0.383668,
+              "exit_code": 1,
+              "http_status_code": 400
+            }
+          },
+          {
+            "timestamp": "2026-09-11T03:15:58.258999Z",
+            "event_type": "message",
+            "name": "login_wrong_type_password",
+            "data": {
+              "trace_id": "850fb462-1cf8-4234-94aa-98cd53f58085",
+              "status": "failed",
+              "duration_seconds": 0.383195,
+              "exit_code": 1,
+              "http_status_code": 400
+            }
+          },
+          {
+            "timestamp": "2026-09-11T03:15:58.258999Z",
+            "event_type": "message",
+            "name": "login_empty_password",
+            "data": {
+              "trace_id": "10231b9f-e5ea-49b1-92c6-e80bf20eac57",
+              "status": "failed",
+              "duration_seconds": 0.449537,
+              "exit_code": 1,
+              "http_status_code": 400
+            }
+          },
+          {
+            "timestamp": "2026-09-11T03:15:58.258999Z",
+            "event_type": "message",
+            "name": "login_boundary_password",
+            "data": {
+              "trace_id": "843c2a5b-af99-46c1-9ca3-e4d0a6313b7f",
+              "status": "failed",
+              "duration_seconds": 0.388319,
+              "exit_code": 1,
+              "http_status_code": 400
+            }
+          },
+          {
+            "timestamp": "2026-09-11T03:15:58.258999Z",
+            "event_type": "message",
+            "name": "login_wrong_type_age",
+            "data": {
+              "trace_id": "14e8b0ac-fa60-4e42-92f6-72cf749df05f",
+              "status": "failed",
+              "duration_seconds": 0.382533,
+              "exit_code": 1,
+              "http_status_code": 400
+            }
+          },
+          {
+            "timestamp": "2026-09-11T03:15:58.258999Z",
+            "event_type": "message",
+            "name": "login_boundary_age",
+            "data": {
+              "trace_id": "37370b2b-0621-4002-84cf-9251c1ade724",
+              "status": "failed",
+              "duration_seconds": 0.388594,
+              "exit_code": 1,
+              "http_status_code": 400
+            }
+          },
+          {
+            "timestamp": "2026-09-11T03:15:58.258999Z",
+            "event_type": "agent_end",
+            "name": "ai_test_agent_finished",
+            "data": {
+              "exit_code": 0,
+              "generated_tests": 11,
+              "executions": 11
+            }
+          }
+        ]
+      },
+      "error": null,
+      "metadata": {}
+    }
+  ],
+  "evaluations": [
+    {
+      "task_id": "ai-test-agent-login-e2e",
+      "run_id": "run-ai-test-agent-login-e2e-001",
+      "passed": true,
+      "score": 1.0,
+      "reason": "Output matches the expected schema.",
+      "metrics": {},
+      "evaluator": "schema"
+    },
+    {
+      "task_id": "ai-test-agent-login-e2e",
+      "run_id": "run-ai-test-agent-login-e2e-002",
+      "passed": true,
+      "score": 1.0,
+      "reason": "Output matches the expected schema.",
+      "metrics": {},
+      "evaluator": "schema"
+    },
+    {
+      "task_id": "ai-test-agent-login-e2e",
+      "run_id": "run-ai-test-agent-login-e2e-003",
+      "passed": true,
+      "score": 1.0,
+      "reason": "Output matches the expected schema.",
+      "metrics": {},
+      "evaluator": "schema"
+    }
+  ],
+  "metrics": {
+    "task_success_rate": 1.0,
+    "average_score": 1.0,
+    "failure_rate": 0.0,
+    "average_latency_ms": 4636.057666666667
+  },
+  "metadata": {}
+}
